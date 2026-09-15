@@ -364,6 +364,7 @@
         }
 
         #submitBtn:hover { background: #efe6d4; }
+        #submitBtn:disabled { opacity: 0.45; cursor: not-allowed; }
 
         .flag {
             font-family: "IBM Plex Mono", monospace;
@@ -535,7 +536,7 @@
 
                 <section class="page" id="page-putusan">
                     <h2>Dakwaan</h2>
-                    <p class="lede">Pilih satu nama. Jika salah, dakwaan ditolak.</p>
+                    <p class="lede">Pilih satu nama. Satu kali. Jika salah, dakwaan ditutup dan tidak dibuka lagi.</p>
                     <div id="accusationForm" style="margin-top:8px">
                         <label class="field" for="suspectSelect">Nama</label>
                         <select id="suspectSelect">
@@ -815,10 +816,42 @@
         notes.value = localStorage.getItem("mtr19b-notes") || "";
         notes.addEventListener("input", () => localStorage.setItem("mtr19b-notes", notes.value));
 
+        const rejectedHtml = `
+                        <div class="doc">
+                            <div class="stamp">Ditolak</div>
+                            <h3>Nama itu salah.</h3>
+                            <p>Dakwaan dari alamat ini sudah ditutup. Tidak dibuka lagi.</p>
+                        </div>
+                    `;
+
+        function showBlocked() {
+            document.getElementById("accusationForm").style.display = "none";
+            const box = document.getElementById("resultBox");
+            box.hidden = false;
+            box.innerHTML = rejectedHtml;
+        }
+
+        function lockDakwa() {
+            localStorage.setItem("mtr19b-dakwa-lock", "1");
+            showBlocked();
+        }
+
+        if (localStorage.getItem("mtr19b-dakwa-lock") === "1") {
+            showBlocked();
+        }
+
+        fetch("/api/dakwa", { method: "GET", cache: "no-store", credentials: "same-origin" })
+            .then((res) => res.json())
+            .then((data) => {
+                if (data.blocked) lockDakwa();
+            })
+            .catch(() => {});
+
         document.getElementById("submitBtn").addEventListener("click", async () => {
             const who = document.getElementById("suspectSelect").value;
             const warn = document.getElementById("formWarn");
             const box = document.getElementById("resultBox");
+            const btn = document.getElementById("submitBtn");
             if (!who) {
                 warn.hidden = false;
                 warn.textContent = "Pilih nama terlebih dahulu.";
@@ -826,9 +859,12 @@
                 return;
             }
             warn.hidden = true;
+            btn.disabled = true;
             try {
                 const res = await fetch("/api/dakwa", {
                     method: "POST",
+                    cache: "no-store",
+                    credentials: "same-origin",
                     headers: { "Content-Type": "application/json" },
                     body: JSON.stringify({ who })
                 });
@@ -838,15 +874,10 @@
                     box.innerHTML = data.html;
                     document.getElementById("accusationForm").style.display = "none";
                 } else {
-                    box.innerHTML = `
-                        <div class="doc">
-                            <div class="stamp">Ditolak</div>
-                            <h3>Nama itu salah.</h3>
-                            <p>Tidak ada yang ditambahkan ke berkas.</p>
-                        </div>
-                    `;
+                    lockDakwa();
                 }
             } catch (err) {
+                btn.disabled = false;
                 warn.hidden = false;
                 warn.textContent = "Berkas tidak terkirim.";
             }
