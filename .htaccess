@@ -1,0 +1,3 @@
+RewriteEngine On
+RewriteRule ^api/dakwa/?$ api/dakwa.php [L]
+DirectoryIndex index.html
