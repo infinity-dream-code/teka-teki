@@ -1,4 +1,5 @@
 RewriteEngine On
-RewriteRule ^data(/|$) - [F,L]
+RewriteRule ^(data|inc|lib)(/|$) - [F,L]
 RewriteRule ^api/dakwa/?$ dakwa.php [L]
+RewriteRule ^api/dakwa2/?$ dakwa2.php [L]
 DirectoryIndex index.html

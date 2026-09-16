@@ -353,7 +353,9 @@
 
         textarea#reasonInput { min-height: 88px; resize: vertical; }
 
-        #submitBtn {
+        #app2 { display: none; min-height: 100vh; }
+
+        #submitBtn, #submitBtn2, .btn-paper {
             background: var(--paper);
             color: var(--bg);
             padding: 11px 16px;
@@ -363,8 +365,9 @@
             text-transform: uppercase;
         }
 
-        #submitBtn:hover { background: #efe6d4; }
-        #submitBtn:disabled { opacity: 0.45; cursor: not-allowed; }
+        #submitBtn:hover, #submitBtn2:hover, .btn-paper:hover { background: #efe6d4; }
+        #submitBtn:disabled, #submitBtn2:disabled { opacity: 0.45; cursor: not-allowed; }
+        .btn-paper { display: inline-block; margin-top: 16px; }
 
         .flag {
             font-family: "IBM Plex Mono", monospace;
@@ -561,6 +564,150 @@
             </main>
     </div>
 
+    <div id="app2">
+        <header class="file">
+            <div class="file-spine">
+                <div>
+                    <small>27/YK/IX/26</small>
+                    <strong>Suryomentaraman 14</strong>
+                </div>
+            </div>
+            <nav>
+                <button class="navbtn active" data-page="laporan" type="button">Laporan</button>
+                <button class="navbtn" data-page="korban" type="button">Korban</button>
+                <button class="navbtn" data-page="keterangan" type="button">Delapan orang</button>
+                <button class="navbtn" data-page="bukti" type="button">Barang bukti</button>
+                <button class="navbtn" data-page="rumah" type="button">Rumah</button>
+                <button class="navbtn" data-page="putusan" type="button">Dakwaan</button>
+            </nav>
+        </header>
+        <main>
+                <section class="page active" id="l2-laporan">
+                    <h2>Laporan awal</h2>
+                    <p class="lede">14 September 2026, 07.20 WIB · Kompol Endah Wibisono · dilimpahkan dari 19/MTR/IX/26</p>
+                    <div class="doc">
+                        <div class="kicker">Kejadian</div>
+                        <p>Dr. Hartono Adiwijaya ditemukan tidak bernyawa di ruang kerja lantai dua pukul 05.52. Yang menemukan jenazah adalah Marni Sulistyowati, asisten rumah. Pintu terkunci dari dalam. Kunci masih di lubang, di sisi dalam. Jendela barat terbuka kira-kira delapan sentimeter. Tidak ada jeruji. Tidak ada tangga di luar.</p>
+                        <p>Tidak ada luka tusuk. Tidak ada tanda paksaan pada pintu. Korban tergeletak di lantai, antara kursi dan meja. Ada muntahan di keranjang sampah dan di pangkuannya. Selembar kertas di alas meja, bolpoin, goyang.</p>
+                        <p>Malam sebelumnya, 13 September, ada slametan empat puluh hari istri pertamanya, lalu bedah buku terjemahan naskah. Delapan orang menginap atau masih di rumah ketika ia naik ke ruang kerja kira-kira pukul 21.15. Ia mengeluh perut sejak kira-kira pukul 19.30. dr. Fajar Mahendra, yang datang sebagai tamu, menyatakan gastroenteritis. Korban menolak ke rumah sakit. Fajar pulang pukul 20.40. Ia bukan tersangka dalam berkas ini.</p>
+                        <p>Penandatanganan akta wasiat baru dijadwalkan Senin 14 September pukul 10.00, di kantor notaris korban sendiri. Redaksi jurnal akan datang pukul 10.30. Berkas Menteng sudah dilimpahkan. Berkas ini terpisah.</p>
+                    </div>
+                </section>
+
+                <section class="page" id="l2-korban">
+                    <h2>Korban</h2>
+                    <p class="lede">Adiwijaya, Hartono · notaris · penyunting naskah Jawa</p>
+                    <div class="doc">
+                        <div class="meta-row">
+                            Lahir 3 Maret 1965, Klaten<br>
+                            Istri pertama meninggal 4 Agustus 2026. Menikah lagi tahun 2019 dengan Wulan Adiwijaya. Anak kandung dua, dari perkawinan pertama: Bagas Adiwijaya dan Dina Prasetya.<br>
+                            Rumah ini milik pribadinya sejak 1994.<br>
+                            Maag lama. Minum jamu kunyit setiap pagi dari kendi di dapur belakang, direbus sendiri atau oleh Marni. Tidak ada resep obat gout. Tidak ada obat jantung golongan glikosida. Tidak merokok.
+                        </div>
+                    </div>
+                    <div class="doc">
+                        <div class="kicker">Buku harian · laci kanan meja, 8–13 September</div>
+                        <p><i>8 September.</i> Intan sudah di kamar tamu. Catatan kaki dulu, naskah utama jangan.</p>
+                        <p><i>10 September.</i> Redaksi Senin. Paragraf dua belas sampai delapan belas itu bukan kebetulan. Saya sudah bandingkan.</p>
+                        <p><i>11 September.</i> Akta baru Senin jam sepuluh. Wulan jangan lihat dulu. Naskah ke UGM. Rumah ke yayasan.</p>
+                        <p><i>12 September.</i> Bagas telepon dari Bandung. Utang itu bukan urusan naskah. Dina marah lagi.</p>
+                        <p><i>13 September, pagi.</i> Jamu pahit. Kunyit tidak seperti kemarin.</p>
+                        <p><i>13 September, sore.</i> Perut. Bukan ikan. Saya kunci. Jangan buka.</p>
+                    </div>
+                </section>
+
+                <section class="page" id="l2-keterangan">
+                    <h2>Delapan orang</h2>
+                    <p class="lede">Wawancara terpisah, 14 September pukul 07.40–14.10. Tidak ada yang membaca keterangan yang lain.</p>
+                    <div id="wawancara2"></div>
+                </section>
+
+                <section class="page" id="l2-bukti">
+                    <h2>Barang bukti</h2>
+                    <p class="lede">Nomor sesuai urutan pencatatan, bukan urutan pentingnya.</p>
+                    <div id="bukti2"></div>
+                </section>
+
+                <section class="page" id="l2-rumah">
+                    <h2>Rumah</h2>
+                    <p class="lede">Lantai dasar, lantai dua, dan paviliun. Tidak ada denah lain di arsip.</p>
+                    <div class="split">
+                        <div class="doc">
+                            <div class="kicker">Lantai dasar</div>
+                            <div class="plan-wrap">
+                                <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="8" y="8" width="304" height="204" fill="none" stroke="#1a1612" stroke-width="1.5"/>
+                                    <rect x="8" y="8" width="110" height="204" fill="none" stroke="#1a1612"/>
+                                    <text x="63" y="90" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#1a1612">FOYER</text>
+                                    <text x="63" y="106" text-anchor="middle" font-size="8" font-family="IBM Plex Mono, monospace" fill="#4a453e">tangga · barat</text>
+                                    <rect x="118" y="8" width="194" height="92" fill="none" stroke="#1a1612"/>
+                                    <text x="215" y="56" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#1a1612">RUANG TAMU</text>
+                                    <rect x="118" y="100" width="110" height="112" fill="none" stroke="#1a1612"/>
+                                    <text x="173" y="154" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#1a1612">DAPUR</text>
+                                    <rect x="228" y="100" width="84" height="112" fill="none" stroke="#1a1612"/>
+                                    <text x="270" y="146" text-anchor="middle" font-size="10" font-family="IBM Plex Mono, monospace" fill="#1a1612">BELAKANG</text>
+                                    <text x="270" y="162" text-anchor="middle" font-size="8" font-family="IBM Plex Mono, monospace" fill="#4a453e">kendi · pagar timur</text>
+                                </svg>
+                            </div>
+                            <p class="plan-cap">Dapur belakang terbuka ke kebun. Kompor tanah dan kendi jamu di situ, bukan di dapur utama. Paviliun Eko di sisi selatan, pintu sendiri.</p>
+                        </div>
+                        <div class="doc">
+                            <div class="kicker">Lantai dua</div>
+                            <div class="plan-wrap">
+                                <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="8" y="8" width="304" height="204" fill="none" stroke="#1a1612" stroke-width="1.5"/>
+                                    <rect x="8" y="8" width="148" height="100" fill="none" stroke="#1a1612"/>
+                                    <text x="82" y="52" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#1a1612">KAMAR</text>
+                                    <text x="82" y="68" text-anchor="middle" font-size="8" font-family="IBM Plex Mono, monospace" fill="#4a453e">selatan · Wulan</text>
+                                    <rect x="8" y="108" width="148" height="104" fill="none" stroke="#1a1612"/>
+                                    <text x="82" y="156" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#1a1612">KAMAR TAMU</text>
+                                    <text x="82" y="172" text-anchor="middle" font-size="8" font-family="IBM Plex Mono, monospace" fill="#4a453e">Intan sejak Jumat</text>
+                                    <rect x="156" y="8" width="156" height="118" fill="none" stroke="#1a1612"/>
+                                    <text x="234" y="58" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#1a1612">RUANG KERJA</text>
+                                    <text x="234" y="74" text-anchor="middle" font-size="8" font-family="IBM Plex Mono, monospace" fill="#4a453e">barat · tanpa jeruji</text>
+                                    <rect x="156" y="126" width="156" height="86" fill="none" stroke="#1a1612"/>
+                                    <text x="234" y="164" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#1a1612">LORONG</text>
+                                    <text x="234" y="180" text-anchor="middle" font-size="8" font-family="IBM Plex Mono, monospace" fill="#4a453e">kamar Bagas</text>
+                                </svg>
+                            </div>
+                            <p class="plan-cap">Satu pintu ke ruang kerja, dari lorong. Kunci utama dipegang korban. Kunci cadangan dipegang Marni.</p>
+                        </div>
+                    </div>
+                    <div class="doc">
+                        <div class="kicker">Tangga dan kebun</div>
+                        <p>Sesudah makan malam yang masih bisa dibaca: selop korban naik kira-kira pukul 21.14. Tidak ada jejak orang naik sesudah itu sampai Marni pukul 05.52. Di pagar timur ada patahan baru, getah masih lengket pukul 06.20. Gunting kebun tergantung di paku dapur belakang.</p>
+                    </div>
+                </section>
+
+                <section class="page" id="l2-putusan">
+                    <h2>Dakwaan</h2>
+                    <p class="lede">Pilih satu nama. Satu kali. Jika salah, dakwaan ditutup dan tidak dibuka lagi.</p>
+                    <div id="accusationForm2" style="margin-top:8px">
+                        <label class="field" for="suspectSelect2">Nama</label>
+                        <select id="suspectSelect2">
+                            <option value="">—</option>
+                            <option value="wulan">Wulan Adiwijaya</option>
+                            <option value="bagas">Bagas Adiwijaya</option>
+                            <option value="dina">Dina Prasetya</option>
+                            <option value="intan">Intan Kusuma</option>
+                            <option value="raka">Raka Prasetya</option>
+                            <option value="marni">Marni Sulistyowati</option>
+                            <option value="eko">Eko Santoso</option>
+                            <option value="galih">Galih Pramono</option>
+                        </select>
+                        <button id="submitBtn2" type="button">Ajukan</button>
+                        <p class="warn" id="formWarn2" hidden></p>
+                    </div>
+                    <div id="resultBox2" hidden style="margin-top:28px"></div>
+                </section>
+
+                <div class="file-notes">
+                    <label for="notes2">Catatan Anda</label>
+                    <textarea id="notes2" placeholder="Tidak masuk berkas."></textarea>
+                </div>
+            </main>
+    </div>
+
     <script>
         const interviews = [
             {
@@ -746,75 +893,352 @@
             }
         ];
 
+        bukti.appendChild(el);
+        });
+
+        const interviews2 = [
+            {
+                nama: "Wulan Adiwijaya",
+                umur: 52,
+                peran: "Istri · tinggal di rumah itu · pernah mengajar piano",
+                qa: [
+                    ["Apa yang Anda kenakan malam itu?", "Kebaya coklat. Saya ganti sebelum ke Taman Budaya. Saya tidak ke kebun."],
+                    ["Di mana Anda sore sampai malam?", "Saya di rumah sampai kira-kira pukul 18.45. Tiket konser piano di Taman Budaya, mulai 19.30. Saya kembali kira-kira pukul 22.10. Pintu ruang kerja sudah terkunci. Saya tidak mengetuk. Ia tidak suka diganggu kalau perutnya sedang kambuh."],
+                    ["Bagaimana dengan wasiat?", "Notaris dijadwalkan Senin jam sepuluh, di kantornya sendiri. Ia tidak menunjukkan drafnya kepada saya. Yang berlaku sekarang: rumah ini untuk saya. Anak-anak disebut atau tidak, saya tidak tahu. Saya masuk ruang kerjanya Minggu sore, mengambil selendang di kursi, kira-kira pukul tujuh kurang."],
+                    ["Siapa yang mengurus jamunya?", "Kendi di dapur belakang. Marni yang biasanya merebus. Minggu pagi Marni ke pasar. Saya tidak merebus. Intan bilang ia merebus air, itu urusannya. Saya tidak minum jamu itu."],
+                    ["Apa yang terjadi sesudah makan malam?", "Hartono sudah pucat. Fajar bilang perut, kasih oralit. Saya berangkat ke konser. Pulang, saya dengar batuk dari lantai dua. Saya tidur di kamar."],
+                    ["Siapa saja yang menginap?", "Bagas dari Bandung. Dina dan Raka. Intan sejak Jumat. Eko di paviliun. Galih di sofa ruang tamu. Fajar pulang."]
+                ]
+            },
+            {
+                nama: "Bagas Adiwijaya",
+                umur: 29,
+                peran: "Anak kandung · arsitek · tinggal di Bandung",
+                qa: [
+                    ["Apa yang Anda kenakan malam itu?", "Kemeja abu-abu. Saya merokok di pagar depan. Kebun belakang gelap. Saya tidak ke pagar timur."],
+                    ["Kapan Anda tiba?", "Saya naik Lodaya siang dari Bandung. Sampai di Tugu kira-kira jam dua kurang. Naik ojek ke sini. Saya tidak singgah ke mana-mana."],
+                    ["Ayah Anda minta Anda datang Senin. Untuk apa?", "Ayah minta saya ke kantornya. Katanya ada yayasan. Kalau ia meninggal sebelum itu, rumah ini bukan urusan saya. Itu bukan rahasia."],
+                    ["Anda ke kebun malam itu?", "Kira-kira jam sembilan. Saya cari sinyal. Bulan cukup untuk melihat pagar. Tidak ada orang. Saya tidak memegang gunting."],
+                    ["Apa yang Anda lakukan sesudah makan malam?", "Ayah naik sendiri. Saya di teras. Dina marah-marah di dapur. Saya tidak naik."],
+                    ["Bagaimana utang di Bandung?", "Ruko. Bukan malam ini. Tiket kereta ada di saku."]
+                ]
+            },
+            {
+                nama: "Dina Prasetya",
+                umur: 33,
+                peran: "Anak kandung · tinggal di Sleman",
+                qa: [
+                    ["Apa yang Anda kenakan malam itu?", "Blus biru. Ada kuah di ujung lengan, dari dapur."],
+                    ["Kapan Anda tiba?", "Siang, kira-kira pukul 12.20, bersama Raka. Saya bantu slametan. Ayah dingin sejak Agustus."],
+                    ["Anda ke dapur?", "Saya di dapur dari sore. Kuah kluwek itu saya yang mengaduk. Ada daun untuk perut, dari kebun depan, saya masukkan sedikit. Ayah selalu bilang masakan saya keras. Itu bukan racun."],
+                    ["Bagaimana dengan naskah dan yayasan?", "Ayah mau naskah ke kampus. Ibu Wulan dapat rumah kalau akta lama yang dipakai. Saya tidak masuk ruang kerja Minggu ini. Saya tidak merebus jamu."],
+                    ["Apa yang Anda lakukan sesudah makan malam?", "Ayah mual. Saya kira kluwek. Saya cuci piring. Saya tidak ke pagar timur."],
+                    ["Raka ke mana sore itu?", "Bolak-balik dapur dan mobil. Keris kakek ada di mobil, saya lihat siang. Saya tidak tanya."]
+                ]
+            },
+            {
+                nama: "Intan Kusuma",
+                umur: 42,
+                peran: "Penerjemah · tamu sejak Jumat · teman Nyonya Wulan",
+                qa: [
+                    ["Apa yang Anda kenakan malam itu?", "Blus krem. Saya tidak ganti dari pagi."],
+                    ["Kapan Anda tiba di rumah ini?", "Jumat sore, dari Gambir. Wulan minta bantuan catatan kaki untuk bedah buku. Saya di kamar tamu lantai dua."],
+                    ["Di mana Anda Minggu siang sampai maghrib?", "Wayang di Sono Budoyo. Tiketnya di tas. Selesai, saya jalan kaki kembali. Adzan waktu saya sampai, kira-kira jam enam lewat. Saya wudhu di kamar. Saya tidak ke masjid. Saya tidak ke kebun. Nyamuk."],
+                    ["Anda ke dapur?", "Minggu pagi Marni belum ada. Saya merebus air untuk jamu beliau, seperti Sabtu. Kunyitnya sudah dipotong di piring. Saya tidak menambah apa-apa. Sore saya ambil air. Ada orang di dapur utama, saya tidak perhatikan siapa."],
+                    ["Naskah yang dikerjakan?", "Catatan kaki, bukan naskah utama. Naskah utama urusan beliau dan Galih. Senin ada orang dari jurnal. Itu bukan urusan saya."],
+                    ["Sesudah makan malam?", "Saya di kamar tamu. Pukul sembilan saya dengar beliau batuk. Saya tidak naik. Saya kirim pesan ke teman di Leiden, soal tenggat terjemahan lain."]
+                ]
+            },
+            {
+                nama: "Raka Prasetya",
+                umur: 36,
+                peran: "Menantu · suami Dina · staf keuangan",
+                qa: [
+                    ["Apa yang Anda kenakan malam itu?", "Kaos berkerah. Ada asap kompor di lengan."],
+                    ["Kapan Anda tiba, dan apa yang Anda kerjakan?", "Siang, bersama Dina. Saya masak. Ikan, kluwek, sambal. Dapur belakang saya masuk sebentar, ambil arang. Kendi jamu jangan dipegang, itu pantangan beliau."],
+                    ["Anda ke kebun?", "Pagar timur saya lewat, cari daun pisang. Gunting saya pakai, saya kembalikan ke paku. Siang, sebelum maghrib."],
+                    ["Keris di mobil?", "Milik keluarga Dina. Saya bawa ke Jogja karena ada orang yang mau lihat. Bukan untuk dijual malam itu. Saya tidak ke pegadaian Minggu."],
+                    ["Apa yang Anda lakukan sesudah makan malam?", "Cuci belanga. Hartono sudah naik. Saya tidak naik. Saya tidur di kamar Dina, lantai dasar, bekas ruang cuci yang dijadikan kamar."],
+                    ["Jamu?", "Saya tidak merebus. Bau kunyit pagi-pagi sudah ada waktu saya bangun."]
+                ]
+            },
+            {
+                nama: "Marni Sulistyowati",
+                umur: 44,
+                peran: "Asisten rumah · yang menemukan jenazah",
+                qa: [
+                    ["Apa yang Anda kenakan malam itu?", "Kemeja putih, apron, sepatu kets. Ada muntahan di bahu waktu saya mengangkat beliau Senin pagi."],
+                    ["Di mana Anda Minggu pagi?", "Saya ke Pasar Beringharjo kira-kira pukul 05.25. Kembali kira-kira pukul 07.10. Dapur belakang sudah hangat. Kendi sudah di atas tungku. Saya kira beliau yang merebus, atau Nyonya. Ubi kayu saya beli, masih di kantong, belum dikupas."],
+                    ["Anda yang menemukan beliau?", "Pukul 19.15 saya angkat kendi ke ruang kerja, atas suruhannya. Tutupnya tidak saya buka. Beliau masih di bawah. Pukul 21.10 saya ketuk, ia sudah di dalam, bilang jangan buka. Pukul 05.52 saya naik lagi. Tidak dijawab. Saya buka dengan kunci cadangan."],
+                    ["Kunci cadangan?", "Di gantungan saya. Gaji Agustus belum dibayar. Beliau bilang sesudah slametan."],
+                    ["Siapa yang ada di dapur belakang Minggu?", "Pagi saya tidak lihat. Sore mbak Dina di dapur utama. Mas Raka ambil arang. Mbak Intan ambil air. Saya tidak ke pagar timur. Gunting itu basah malam-malam, saya tidak basahi."],
+                    ["Kebiasaan jamu beliau?", "Setiap pagi. Kunyit, jahe, sedikit madu. Beliau tidak minum jamu buatan orang yang tidak ia kenal. Tamu sejak Jumat, ia biarkan merebus air, kunyitnya ia yang potong."]
+                ]
+            },
+            {
+                nama: "Eko Santoso",
+                umur: 51,
+                peran: "Asisten arsip · tinggal di paviliun",
+                qa: [
+                    ["Apa yang Anda kenakan malam itu?", "Kemeja cokelat. Debu kertas di lengan."],
+                    ["Di mana Anda Minggu?", "Paviliun. Saya menata folio. Saya tidak ke dapur belakang. Saya tidak ke pagar timur. Anjing tetangga itu kenal saya."],
+                    ["Naskah yang hilang?", "Tidak ada yang hilang. Lembar empat belas ada di meja beliau, untuk bedah buku. Saya tidak mengambil."],
+                    ["Anda naik ke lantai dua?", "Tidak, sejak Jumat malam. Kunci paviliun milik saya. Pukul 21.00 saya dengar batuk dari jendela barat. Saya tidak naik."],
+                    ["Pagi Minggu?", "Saya di paviliun. Kompor belakang bunyi kira-kira jam enam. Saya tidak lihat siapa. Saya tidak memotret dapur."],
+                    ["Galih?", "Ia di ruang arsip sore, memotret. Saya suruh jangan lampu kilat. Itu saja."]
+                ]
+            },
+            {
+                nama: "Galih Pramono",
+                umur: 64,
+                peran: "Kolega filologi · datang dari Solo",
+                qa: [
+                    ["Apa yang Anda kenakan malam itu?", "Batik abu-abu."],
+                    ["Kapan Anda tiba?", "Saya menyetir dari Solo. Sampai kira-kira pukul 16.00. Ada tiket Lodaya di tas, cadangan, tidak terpakai. Saya tidak naik kereta."],
+                    ["Urusan naskah?", "Hartono pelit. Ia bilang paragraf itu akan ia bicarakan dengan jurnal, bukan dengan saya. Saya memotret kolofon, bukan seluruh folio. Saya tidak merebus jamu. Saya tidak ke kebun."],
+                    ["Anda ke dapur?", "Kopi di ruang tamu. Marni yang menuang. Saya tidur di sofa."],
+                    ["Anda naik ke lantai dua?", "Tidak."],
+                    ["Disertasi orang lain?", "Saya tidak baca disertasi Jakarta. Itu urusan redaksi, bukan urusan saya."]
+                ]
+            }
+        ];
+
+        const evidence2 = [
+            {
+                kode: "F-01",
+                judul: "Pemeriksaan luar dan dalam",
+                isi: "Tidak ada luka tusuk, tembak, atau benturan tumpul yang berarti. Muntahan di keranjang, di kemeja, dan di lantai.\nPupil berukuran sedang, kiri dan kanan sama. Lidah tidak hitam.\nIsi lambung: nasi, kluwek, ikan, cairan pahit, rimpang kunyit, dan potongan umbi pucat bercabang dua, panjang kira-kira 4 cm.\nMakan malam kira-kira pukul 18.40. Cairan pahit masuk lebih awal dari makan malam.\nSuhu rektal 32,8 °C pada pukul 06.40 WIB. Suhu ruangan 26,4 °C. Perkiraan waktu kematian: 04.40–05.20.\nSel mukosa lambung: banyak figura metafase. Bukan pola glikosida jantung."
+            },
+            {
+                kode: "F-02",
+                judul: "Kimia klinik · lembar sementara",
+                isi: "Glukosa          92 mg/dL\nKalium (K)       3,4 mmol/L\nNatrium (Na)     133 mmol/L\nLeukosit         2,1 ribu/μL\nTrombosit        88 ribu/μL\nKreatinin        2,4 mg/dL\nAST / ALT        186 / 142 U/L\nTroponin I       tidak terdeteksi\nEtanol           tidak terdeteksi\n\nDigoksin, uji FPIA     tidak terdeteksi\nDigoksin, uji LC-MS    tidak terdeteksi\nSianida, karbon monoksida, fosfida, organofosfat: tidak terdeteksi.\nBenzodiazepin: tidak terdeteksi.\nSenna (senosida): positif di kuah kluwek sisa panci; negatif di kendi jamu dan negatif di darah.\nAlkaloid kendi dan darah: positif, bukan glikosida; spektrum mendekati kerangka tropolon.\nBotol oralit Fajar: utuh.\nRimpang kunyit di piring dapur belakang: negatif alkaloid."
+            },
+            {
+                kode: "F-03",
+                judul: "Kendi tanah di dapur belakang",
+                isi: "Isi: air, kunyit, madu, sisa umbi pucat bercabang.\nUji alkaloid: positif, sama dengan darah (F-02).\nSidik jari luar: Hartono Adiwijaya, Marni Sulistyowati, smearan ketiga tidak lengkap.\nTutup: smearan, tidak teridentifikasi.\nKompor tanah: sisa arang pagi Minggu."
+            },
+            {
+                kode: "F-04",
+                judul: "Kertas di alas meja ruang kerja",
+                isi: "Selembar, bolpoin, tulisan tangan korban, goyang:\n“aja kaget yen ratu tanpa mahkota.”\n\nTinta basah di ujung, kertas sama dengan pad tahun 2026 di laci.\nKalimat itu sama bunyinya dengan folio 14 verso pada F-21, termasuk ejaan lama."
+            },
+            {
+                kode: "F-05",
+                judul: "Halaman rumah · lampiran tukang kebun 2024",
+                isi: "Plumeria rubra — halaman depan\nJasminum sambac — pot teras\nNerium oleander — pagar barat\nMurraya paniculata — sisi utara\nDatura metel — pot dekat gudang; daunnya pada 13 September masih utuh\nPsidium guajava — sisi selatan\nCocos nucifera — sudut tenggara\nMusa paradisiaca — belakang dapur\nCananga odorata — pergola\nGloriosa superba — pagar timur\nCodiaeum variegatum — pagar depan\nSansevieria trifasciata — foyer\n\nCatatan lapangan 14 September, pukul 06.20:\nPagar timur: satu patahan baru pada batang memanjat. Getah masih lengket. Tidak ada bunga. Umbi di permukaan tanah tidak ada yang baru dicabut; satu lubang kecil, basah.\nGunting di paku dapur belakang: basah, getah campur. Sidik jari: Marni Sulistyowati, Raka Prasetya, smearan lain."
+            },
+            {
+                kode: "F-06",
+                judul: "Pakaian yang dikenakan 13 September",
+                isi: "Wulan Adiwijaya — kebaya coklat. Tidak ada getah.\nBagas Adiwijaya — kemeja abu-abu. Abu rokok di manset. Debu jalan di sol.\nDina Prasetya — blus biru. Kuah kluwek di lengan.\nIntan Kusuma — blus krem. Percikan air di ujung lengan kanan, bukan kuah.\nRaka Prasetya — kaos berkerah. Arang di manset. Getah tipis di telapak kanan.\nMarni Sulistyowati — kemeja putih, apron, muntahan, tanah pasar di sepatu.\nEko Santoso — kemeja cokelat. Debu kertas.\nGalih Pramono — batik abu-abu."
+            },
+            {
+                kode: "F-07",
+                judul: "Kartu memori ponsel Intan Kusuma",
+                isi: "Zona waktu WIB. Tidak ada berkas dihapus dalam 72 jam terakhir.\n\nIMG_201  11 Sep 16.40  foyer rumah ini\nIMG_208  13 Sep 14.22  layar wayang, interior\nIMG_209  13 Sep 16.05  penonton, interior\nIMG_211  13 Sep 17.18  gang menuju Suryomentaraman, masih terang\nIMG_214  13 Sep 21.40  jam dinding kamar tamu\nTidak ada foto kebun."
+            },
+            {
+                kode: "F-08",
+                judul: "Tiket dan struk",
+                isi: "Sono Budoyo · 13 September 2026 · wayang · Intan Kusuma · masuk 14.00\nTaman Budaya Yogyakarta · 13 September 2026 · resital piano · Wulan Adiwijaya · 19.30\nPasar Beringharjo · 13 September 2026 · Marni Sulistyowati · ubi kayu, jahe, gula · 06.12"
+            },
+            {
+                kode: "F-09",
+                judul: "Tiket kereta di saku Bagas Adiwijaya",
+                isi: "KA 10 Argo Wilis · 13 September 2026\nBandung 07.35 — Yogyakarta 13.24\nKursi 6C · Bagas Adiwijaya"
+            },
+            {
+                kode: "F-10",
+                judul: "Tiket di tas Galih Pramono",
+                isi: "KA 79 Lodaya · 13 September 2026\nSolo Balapan 19.10 — Yogyakarta 19.50\nTidak ada sobekan kondektur. Status: tidak terpakai."
+            },
+            {
+                kode: "F-11",
+                judul: "Wasiat",
+                isi: "Akta notaris tahun 2019, masih berlaku: seluruh harta kepada Wulan Adiwijaya.\nDraf tahun 2026, belum ditandatangani: naskah dan arsip kepada UGM; rumah kepada Yayasan Adiwijaya; Wulan mendapat rumah di Condongcatur; Bagas dan Dina mendapat bagian uang. Rencana tanda tangan 14 September 2026 pukul 10.00. Draf ini tidak berlaku jika pewaris meninggal sebelumnya."
+            },
+            {
+                kode: "F-12",
+                judul: "Surel jurnal · 11 September 2026, 09.17",
+                isi: "Dari: redaksi@filologi-nusantara.or.id\nKepada: hartono.adiwijaya@notaris.or.id\n\nSenin 14 Sep 10.30, di rumah Bapak, bahas kesamaan paragraf 12–18 naskah suntingan Bapak dengan Kusuma, Intan, Disertasi UI 2019, lampiran 4.\nMohon naskah asli folio 12–18 tersedia."
+            },
+            {
+                kode: "F-13",
+                judul: "WhatsApp Intan Kusuma",
+                isi: "13 September 2026, 20.04 WIB, ke nomor Belanda, nama kontak “Leiden-M”:\n“naskah itu tidak akan ke redaksi.”\nDibaca 20.11. Tidak ada balasan sampai Senin pagi."
+            },
+            {
+                kode: "F-14",
+                judul: "Bank BRI Bandung · surat di tas Bagas",
+                isi: "Surat peringatan ke-2, 2 September 2026.\nKredit ruko. Tunggakan Rp 142.800.000.\nBatas pelunasan sebagian: 18 September 2026."
+            },
+            {
+                kode: "F-15",
+                judul: "Kwitansi pegadaian · Jl. Malioboro",
+                isi: "12 September 2026, pukul 16.05\nAtas nama Raka Prasetya\nKeris, warangka kayon\nPinjaman Rp 18.000.000 · jangka 14 hari"
+            },
+            {
+                kode: "F-16",
+                judul: "Ponsel Wulan Adiwijaya",
+                isi: "Foto 13 September pukul 17.02: draf wasiat di meja ruang kerja. Tidak dihapus.\nFoto 19.48 dan 21.16: panggung Taman Budaya.\nTidak ada foto kebun."
+            },
+            {
+                kode: "F-17",
+                judul: "Ponsel Eko Santoso",
+                isi: "IMG_077  13 Sep 06.08  dapur belakang, uap, kendi, tidak ada wajah. Dihapus 06.11. Dipulihkan dari folder sampah.\nTidak ada foto lain pagi itu."
+            },
+            {
+                kode: "F-18",
+                judul: "Kantong pasar Marni",
+                isi: "Ubi kayu utuh, kulit cokelat, tidak bercabang dua. Uji alkaloid: negatif.\nJahe utuh. Gula."
+            },
+            {
+                kode: "F-19",
+                judul: "Keterangan Ibu Yatmi, rumah di timur",
+                isi: "Anjing saya menyalak kalau orang baru lewat pagar. Minggu kira-kira pukul 13.45 ia menyalak, lama. Kira-kira pukul 16.05 menyalak lagi, sebentar.\nHabis maghrib, masih agak terang, ada orang di pagar timur rumah Adiwijaya, lengan terang. Anjing saya diam. Saya tidak lihat wajahnya.\nKira-kira pukul 21.00 saya ke teras. Gelap. Tidak ada bulan yang cukup untuk melihat pagar. Ada cahaya ponsel di depan rumah Adiwijaya, laki-laki merokok."
+            },
+            {
+                kode: "F-20",
+                judul: "Catatan panggilan",
+                isi: "Bagas Adiwijaya — tidak ada panggilan 13 September sesudah pukul 12.00.\nIntan Kusuma — WhatsApp keluar 20.04, lihat F-13.\nWulan Adiwijaya — tidak ada panggilan antara 18.40 dan 22.20.\nHartono Adiwijaya — tidak ada panggilan 13 September sesudah pukul 10.11.\nEko Santoso — tidak ada panggilan."
+            },
+            {
+                kode: "F-21",
+                judul: "Folio 14 verso · naskah suntingan korban",
+                isi: "Foto tanpa kilat, petugas, 14 September pukul 08.10.\nBaris ketiga: “aja kaget yen ratu tanpa mahkota.”\nKertas abad ke-19. Tinta ferogalus. Bukan pad 2026.\nLembar 14 sempat tidak di map Eko pukul 07.55, ditemukan lagi di bawah tumpukan jam 08.04."
+            }
+        ];
+
+        function bindAccordions(root) {
+            root.addEventListener("click", (e) => {
+                const btn = e.target.closest("[data-acc]");
+                if (!btn) return;
+                const item = btn.parentElement;
+                const open = item.classList.contains("open");
+                root.querySelectorAll(".acc").forEach((n) => n.classList.remove("open"));
+                if (!open) item.classList.add("open");
+            });
+        }
+
+        function renderPeople(wrap, people) {
+            people.forEach((p, i) => {
+                const el = document.createElement("div");
+                el.className = "acc";
+                el.innerHTML = `
+                    <button type="button" data-acc>
+                        <span>
+                            <span class="who">${p.nama}</span>
+                            <span class="role">${String(i + 1).padStart(2, "0")} · ${p.umur} · ${p.peran}</span>
+                        </span>
+                        <span class="chev">▸</span>
+                    </button>
+                    <div class="body">${p.qa.map(([q, a]) => `<p class="q">${q}</p><p class="a">${a}</p>`).join("")}</div>
+                `;
+                wrap.appendChild(el);
+            });
+            bindAccordions(wrap);
+        }
+
+        function renderEvidence(root, items) {
+            items.forEach((ev) => {
+                const el = document.createElement("div");
+                el.className = "doc";
+                el.innerHTML = `
+                    <div class="kicker">${ev.kode}</div>
+                    <h3>${ev.judul}</h3>
+                    <div class="lab">${ev.isi}</div>
+                `;
+                root.appendChild(el);
+            });
+        }
+
         const wrap = document.getElementById("wawancara");
-        interviews.forEach((p, i) => {
-            const el = document.createElement("div");
-            el.className = "acc";
-            el.innerHTML = `
-                <button type="button" data-acc>
-                    <span>
-                        <span class="who">${p.nama}</span>
-                        <span class="role">${String(i + 1).padStart(2, "0")} · ${p.umur} · ${p.peran}</span>
-                    </span>
-                    <span class="chev">▸</span>
-                </button>
-                <div class="body">${p.qa.map(([q, a]) => `<p class="q">${q}</p><p class="a">${a}</p>`).join("")}</div>
-            `;
-            wrap.appendChild(el);
-        });
+        renderPeople(wrap, interviews);
+        renderEvidence(document.getElementById("bukti"), evidence);
+        renderPeople(document.getElementById("wawancara2"), interviews2);
+        renderEvidence(document.getElementById("bukti2"), evidence2);
 
-        wrap.addEventListener("click", (e) => {
-            const btn = e.target.closest("[data-acc]");
+        const app1 = document.getElementById("app");
+        const app2 = document.getElementById("app2");
+        const pages = ["laporan", "korban", "keterangan", "bukti", "rumah", "putusan"];
+
+        function showPageIn(root, prefix, id) {
+            const btn = root.querySelector('.navbtn[data-page="' + id + '"]');
             if (!btn) return;
-            const item = btn.parentElement;
-            const open = item.classList.contains("open");
-            wrap.querySelectorAll(".acc").forEach((n) => n.classList.remove("open"));
-            if (!open) item.classList.add("open");
-        });
-
-        const bukti = document.getElementById("bukti");
-        evidence.forEach((ev) => {
-            const el = document.createElement("div");
-            el.className = "doc";
-            el.innerHTML = `
-                <div class="kicker">${ev.kode}</div>
-                <h3>${ev.judul}</h3>
-                <div class="lab">${ev.isi}</div>
-            `;
-            bukti.appendChild(el);
-        });
-
-        function showPage(id) {
-            const btn = document.querySelector('.navbtn[data-page="' + id + '"]');
-            if (!btn) return;
-            document.querySelectorAll(".navbtn").forEach((b) => b.classList.remove("active"));
-            document.querySelectorAll(".page").forEach((p) => p.classList.remove("active"));
+            root.querySelectorAll(".navbtn").forEach((b) => b.classList.remove("active"));
+            root.querySelectorAll(".page").forEach((p) => p.classList.remove("active"));
             btn.classList.add("active");
-            document.getElementById("page-" + id).classList.add("active");
+            const page = document.getElementById(prefix + id);
+            if (page) page.classList.add("active");
             window.scrollTo({ top: 0, behavior: "smooth" });
         }
 
         function openApp(page) {
             document.getElementById("cover").style.display = "none";
-            document.getElementById("app").style.display = "block";
-            if (page) showPage(page);
+            app2.style.display = "none";
+            app1.style.display = "block";
+            document.title = "19/MTR/IX/26";
+            if (page) showPageIn(app1, "page-", page);
         }
 
-        document.querySelector("nav").addEventListener("click", (e) => {
+        function openLevel2(page) {
+            document.getElementById("cover").style.display = "none";
+            app1.style.display = "none";
+            app2.style.display = "block";
+            document.title = "27/YK/IX/26";
+            localStorage.setItem("mtr19b-level", "2");
+            showPageIn(app2, "l2-", page || "laporan");
+        }
+
+        function addNextButton(box) {
+            if (document.getElementById("toLevel2")) return;
+            const b = document.createElement("button");
+            b.id = "toLevel2";
+            b.type = "button";
+            b.className = "btn-paper";
+            b.textContent = "Lanjut ke berkas berikutnya";
+            b.addEventListener("click", () => openLevel2("laporan"));
+            box.appendChild(b);
+        }
+
+        function showL1Solved(html) {
+            document.getElementById("accusationForm").style.display = "none";
+            const box = document.getElementById("resultBox");
+            box.hidden = false;
+            box.innerHTML = html;
+            addNextButton(box);
+        }
+
+        app1.querySelector("nav").addEventListener("click", (e) => {
             const btn = e.target.closest(".navbtn");
             if (!btn) return;
-            showPage(btn.dataset.page);
+            showPageIn(app1, "page-", btn.dataset.page);
+        });
+
+        app2.querySelector("nav").addEventListener("click", (e) => {
+            const btn = e.target.closest(".navbtn");
+            if (!btn) return;
+            showPageIn(app2, "l2-", btn.dataset.page);
         });
 
         document.getElementById("openBtn").addEventListener("click", () => openApp());
 
-        const pages = ["laporan", "korban", "keterangan", "bukti", "rumah", "putusan"];
         const boot = location.hash.replace("#", "");
-        if (boot) openApp(pages.includes(boot) ? boot : "laporan");
+        if (boot === "l2") {
+            /* opened after status check */
+        } else if (boot && pages.includes(boot)) {
+            openApp(boot);
+        }
 
         const notes = document.getElementById("notes");
         notes.value = localStorage.getItem("mtr19b-notes") || "";
         notes.addEventListener("input", () => localStorage.setItem("mtr19b-notes", notes.value));
+
+        const notes2 = document.getElementById("notes2");
+        notes2.value = localStorage.getItem("mtr27-notes") || "";
+        notes2.addEventListener("input", () => localStorage.setItem("mtr27-notes", notes2.value));
 
         const rejectedHtml = `
                         <div class="doc">
@@ -824,28 +1248,51 @@
                         </div>
                     `;
 
-        function showBlocked() {
-            document.getElementById("accusationForm").style.display = "none";
-            const box = document.getElementById("resultBox");
+        function showBlockedOn(formId, boxId) {
+            document.getElementById(formId).style.display = "none";
+            const box = document.getElementById(boxId);
             box.hidden = false;
             box.innerHTML = rejectedHtml;
         }
 
         function lockDakwa() {
             localStorage.setItem("mtr19b-dakwa-lock", "1");
-            showBlocked();
+            showBlockedOn("accusationForm", "resultBox");
+            showBlockedOn("accusationForm2", "resultBox2");
         }
 
         if (localStorage.getItem("mtr19b-dakwa-lock") === "1") {
-            showBlocked();
+            lockDakwa();
         }
 
-        fetch("/api/dakwa", { method: "GET", cache: "no-store", credentials: "same-origin" })
-            .then((res) => res.json())
-            .then((data) => {
-                if (data.blocked) lockDakwa();
-            })
-            .catch(() => {});
+        (async () => {
+            try {
+                const [r1, r2] = await Promise.all([
+                    fetch("/api/dakwa", { method: "GET", cache: "no-store", credentials: "same-origin" }),
+                    fetch("/api/dakwa2", { method: "GET", cache: "no-store", credentials: "same-origin" })
+                ]);
+                const data = await r1.json();
+                const data2 = await r2.json();
+                if (data.blocked || data2.blocked) lockDakwa();
+                if (data.l1 && data.html) {
+                    localStorage.setItem("mtr19b-l1-ok", "1");
+                    showL1Solved(data.html);
+                }
+                if (data2.l2 && data2.html) {
+                    document.getElementById("accusationForm2").style.display = "none";
+                    const box = document.getElementById("resultBox2");
+                    box.hidden = false;
+                    box.innerHTML = data2.html;
+                    openLevel2("putusan");
+                    return;
+                }
+                const wantL2 = localStorage.getItem("mtr19b-level") === "2" || boot === "l2";
+                if (data.l1 && wantL2) openLevel2("laporan");
+                else if (data.l1) openApp("putusan");
+            } catch (err) {
+                /* berkas status gagal, form tetap */
+            }
+        })();
 
         document.getElementById("submitBtn").addEventListener("click", async () => {
             const who = document.getElementById("suspectSelect").value;
@@ -871,8 +1318,51 @@
                 const data = await res.json();
                 box.hidden = false;
                 if (data.ok) {
+                    localStorage.setItem("mtr19b-l1-ok", "1");
+                    showL1Solved(data.html);
+                } else {
+                    lockDakwa();
+                }
+            } catch (err) {
+                btn.disabled = false;
+                warn.hidden = false;
+                warn.textContent = "Berkas tidak terkirim.";
+            }
+        });
+
+        document.getElementById("submitBtn2").addEventListener("click", async () => {
+            const who = document.getElementById("suspectSelect2").value;
+            const warn = document.getElementById("formWarn2");
+            const box = document.getElementById("resultBox2");
+            const btn = document.getElementById("submitBtn2");
+            if (!who) {
+                warn.hidden = false;
+                warn.textContent = "Pilih nama terlebih dahulu.";
+                box.hidden = true;
+                return;
+            }
+            warn.hidden = true;
+            btn.disabled = true;
+            try {
+                const res = await fetch("/api/dakwa2", {
+                    method: "POST",
+                    cache: "no-store",
+                    credentials: "same-origin",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ who })
+                });
+                const data = await res.json();
+                box.hidden = false;
+                if (data.need) {
+                    btn.disabled = false;
+                    warn.hidden = false;
+                    warn.textContent = "Berkas ini belum dibuka.";
+                    box.hidden = true;
+                    return;
+                }
+                if (data.ok) {
+                    document.getElementById("accusationForm2").style.display = "none";
                     box.innerHTML = data.html;
-                    document.getElementById("accusationForm").style.display = "none";
                 } else {
                     lockDakwa();
                 }
