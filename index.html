@@ -6,6 +6,7 @@
     <title>19/MTR/IX/26</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,400;0,500;1,400&family=IBM+Plex+Sans:ital,wght@0,400;0,500;1,400&family=Newsreader:ital,opsz,wght@0,6..72,400;0,6..72,500;0,6..72,600;1,6..72,400;1,6..72,500&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
     <style>
         :root {
             --bg: #0c0b0a;
@@ -43,9 +44,26 @@
             padding: 40px 22px;
             background:
                 radial-gradient(ellipse at 50% 42%, #161412 0%, #0c0b0a 62%);
+            position: relative;
+            overflow: hidden;
         }
 
-        .cover-card { width: min(420px, 100%); }
+        #cover::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                repeating-linear-gradient(0deg, rgba(228,216,196,0.015) 0px, rgba(228,216,196,0.015) 1px, transparent 1px, transparent 3px);
+            pointer-events: none;
+        }
+
+        .cover-card { width: min(420px, 100%); position: relative; z-index: 1; }
+
+        .cover-icon {
+            font-size: 22px;
+            color: var(--rust);
+            margin-bottom: 18px;
+        }
 
         .cover-rule {
             width: 28px;
@@ -62,6 +80,9 @@
             color: var(--mute);
             margin-bottom: 16px;
             line-height: 1.6;
+            display: flex;
+            align-items: center;
+            gap: 8px;
         }
 
         .cover-title {
@@ -90,6 +111,10 @@
             letter-spacing: 0.18em;
             text-transform: uppercase;
             color: var(--paper);
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            transition: background .18s ease, color .18s ease, border-color .18s ease;
         }
 
         #openBtn:hover {
@@ -98,13 +123,14 @@
             border-color: var(--paper);
         }
 
-        #app { display: none; min-height: 100vh; }
+        #app, #app2, #app3 { display: none; min-height: 100vh; }
 
         .file {
             position: sticky;
             top: 0;
             z-index: 8;
             background: var(--bg);
+            border-bottom: 1px solid transparent;
         }
 
         .file-spine {
@@ -115,6 +141,19 @@
             justify-content: space-between;
             align-items: baseline;
             gap: 16px;
+        }
+
+        .file-spine > div:first-child {
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        .file-spine .spine-icon {
+            font-size: 15px;
+            color: var(--rust);
+            position: relative;
+            top: -1px;
         }
 
         .file-spine small {
@@ -155,7 +194,13 @@
             border-bottom: none;
             position: relative;
             top: 1px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            transition: color .15s ease;
         }
+
+        .navbtn i { font-size: 11px; opacity: .75; }
 
         .navbtn:hover { color: #d4cbb8; }
 
@@ -165,6 +210,8 @@
             border-color: var(--paper);
             border-radius: 3px 3px 0 0;
         }
+
+        .navbtn.active i { opacity: 1; color: var(--rust); }
 
         main {
             width: min(840px, 100%);
@@ -179,7 +226,9 @@
         }
 
         .file-notes label {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 7px;
             font-family: "IBM Plex Mono", monospace;
             font-size: 10px;
             letter-spacing: 0.14em;
@@ -201,7 +250,12 @@
         }
 
         .page { display: none; }
-        .page.active { display: block; }
+        .page.active { display: block; animation: fadein .25s ease; }
+
+        @keyframes fadein {
+            from { opacity: 0; transform: translateY(3px); }
+            to { opacity: 1; transform: translateY(0); }
+        }
 
         h2 {
             font-family: "Newsreader", serif;
@@ -210,6 +264,14 @@
             letter-spacing: -0.02em;
             color: #efe6d4;
             margin-bottom: 6px;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+        }
+
+        h2 i {
+            font-size: 17px;
+            color: var(--rust);
         }
 
         .lede {
@@ -224,7 +286,11 @@
             color: var(--ink);
             padding: 26px 26px 28px;
             margin-bottom: 14px;
+            border-left: 3px solid transparent;
+            transition: border-color .15s ease;
         }
+
+        .doc:hover { border-left-color: var(--rust); }
 
         .doc h3 {
             font-family: "Newsreader", serif;
@@ -250,7 +316,12 @@
             text-transform: uppercase;
             color: var(--rust);
             margin-bottom: 10px;
+            display: flex;
+            align-items: center;
+            gap: 7px;
         }
+
+        .kicker i { font-size: 10px; }
 
         .meta-row {
             font-family: "IBM Plex Mono", monospace;
@@ -288,7 +359,9 @@
 
         .acc > button:hover { color: #efe6d4; }
 
-        .acc .who { font-family: "Newsreader", serif; font-size: 18px; }
+        .acc .who { font-family: "Newsreader", serif; font-size: 18px; display: flex; align-items: center; gap: 10px; }
+
+        .acc .who i { font-size: 13px; color: var(--mute-2); }
 
         .acc .role {
             display: block;
@@ -298,7 +371,9 @@
             margin-top: 3px;
         }
 
-        .acc .chev { color: #5c564f; font-size: 12px; padding-top: 8px; }
+        .acc .chev { color: #5c564f; font-size: 12px; padding-top: 8px; transition: transform .2s ease; }
+
+        .acc.open .chev { transform: rotate(90deg); color: var(--rust); }
 
         .acc .body { display: none; padding: 0 0 20px; }
         .acc.open .body { display: block; }
@@ -308,7 +383,12 @@
             font-size: 12px;
             color: var(--mute);
             margin: 14px 0 6px;
+            display: flex;
+            align-items: baseline;
+            gap: 6px;
         }
+
+        .q i { font-size: 9px; color: var(--rust); }
 
         .a {
             font-family: "Newsreader", serif;
@@ -333,7 +413,9 @@
         }
 
         label.field {
-            display: block;
+            display: flex;
+            align-items: center;
+            gap: 7px;
             font-family: "IBM Plex Mono", monospace;
             font-size: 11px;
             letter-spacing: 0.1em;
@@ -353,8 +435,6 @@
 
         textarea#reasonInput { min-height: 88px; resize: vertical; }
 
-        #app2, #app3 { display: none; min-height: 100vh; }
-
         #submitBtn, #submitBtn2, #submitBtn3, .btn-paper {
             background: var(--paper);
             color: var(--bg);
@@ -363,11 +443,15 @@
             font-size: 11px;
             letter-spacing: 0.12em;
             text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            transition: background .15s ease;
         }
 
         #submitBtn:hover, #submitBtn2:hover, #submitBtn3:hover, .btn-paper:hover { background: #efe6d4; }
         #submitBtn:disabled, #submitBtn2:disabled, #submitBtn3:disabled { opacity: 0.45; cursor: not-allowed; }
-        .btn-paper { display: inline-block; margin-top: 16px; }
+        .btn-paper { display: inline-flex; margin-top: 16px; }
 
         .flag {
             font-family: "IBM Plex Mono", monospace;
@@ -380,7 +464,9 @@
         }
 
         .stamp {
-            display: inline-block;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
             border: 2px solid currentColor;
             padding: 3px 9px;
             font-family: "IBM Plex Mono", monospace;
@@ -390,12 +476,6 @@
             transform: rotate(-2deg);
             margin-bottom: 14px;
             color: var(--rust);
-        }
-
-        .warn {
-            color: #c4a484;
-            font-size: 13px;
-            margin-top: 12px;
         }
 
         @media (max-width: 860px) {
@@ -412,8 +492,9 @@
 <body>
     <div id="cover">
         <div class="cover-card">
+            <i class="fa-solid fa-scale-balanced cover-icon"></i>
             <div class="cover-rule"></div>
-            <p class="cover-kicker">Kepolisian Resor Jakarta Pusat · Unit Pidana</p>
+            <p class="cover-kicker"><i class="fa-solid fa-shield-halved"></i>Kepolisian Resor Jakarta Pusat · Unit Pidana</p>
             <h1 class="cover-title">Berkas 19/MTR/IX/26</h1>
             <p class="cover-meta">
                 Rumah Soerjo, Jl. Teuku Cik Ditiro 31, Gondangdia<br>
@@ -421,7 +502,7 @@
                 Korban: Dr. Arief Soerjo, 64<br>
                 Status: belum dilimpahkan
             </p>
-            <button id="openBtn" type="button">Buka berkas</button>
+            <button id="openBtn" type="button"><i class="fa-solid fa-folder-open"></i>Buka berkas</button>
         </div>
     </div>
 
@@ -429,25 +510,28 @@
         <header class="file">
             <div class="file-spine">
                 <div>
-                    <small>19/MTR/IX/26</small>
-                    <strong>Cik Ditiro 31</strong>
+                    <i class="fa-solid fa-folder spine-icon"></i>
+                    <div>
+                        <small>19/MTR/IX/26</small>
+                        <strong>Cik Ditiro 31</strong>
+                    </div>
                 </div>
             </div>
             <nav>
-                <button class="navbtn active" data-page="laporan" type="button">Laporan</button>
-                <button class="navbtn" data-page="korban" type="button">Korban</button>
-                <button class="navbtn" data-page="keterangan" type="button">Enam orang</button>
-                <button class="navbtn" data-page="bukti" type="button">Barang bukti</button>
-                <button class="navbtn" data-page="rumah" type="button">Rumah</button>
-                <button class="navbtn" data-page="putusan" type="button">Dakwaan</button>
+                <button class="navbtn active" data-page="laporan" type="button"><i class="fa-solid fa-file-lines"></i>Laporan</button>
+                <button class="navbtn" data-page="korban" type="button"><i class="fa-solid fa-user"></i>Korban</button>
+                <button class="navbtn" data-page="keterangan" type="button"><i class="fa-solid fa-users"></i>Enam orang</button>
+                <button class="navbtn" data-page="bukti" type="button"><i class="fa-solid fa-magnifying-glass"></i>Barang bukti</button>
+                <button class="navbtn" data-page="rumah" type="button"><i class="fa-solid fa-house"></i>Rumah</button>
+                <button class="navbtn" data-page="putusan" type="button"><i class="fa-solid fa-gavel"></i>Dakwaan</button>
             </nav>
         </header>
         <main>
                 <section class="page active" id="page-laporan">
-                    <h2>Laporan awal</h2>
+                    <h2><i class="fa-solid fa-file-lines"></i>Laporan awal</h2>
                     <p class="lede">13 September 2026, 00.40 WIB · Kompol R. Siregar</p>
                     <div class="doc">
-                        <div class="kicker">Kejadian</div>
+                        <div class="kicker"><i class="fa-solid fa-circle-exclamation"></i>Kejadian</div>
                         <p>Dr. Arief Soerjo ditemukan tidak bernyawa di ruang kerja lantai dua pukul 22.47. Yang menemukan jenazah adalah Mira Fadli, asisten rumah. Pintu terkunci dari dalam. Kunci masih di lubang, di sisi dalam. Mira membukanya dengan kunci cadangan yang dipegangnya sejak 2022.</p>
                         <p>Tidak ada luka tusuk. Tidak ada tanda paksaan pada pintu atau jendela. Jendela utara berjeruji, kaitannya tertutup, gorden setengah ditarik. Korban tergeletak di lantai, antara kursi dan meja. Ada muntahan di meja dan di pangkuannya. Selembar kertas di tepi alas meja, tulisan tangannya.</p>
                         <p>Enam orang berada di rumah itu malam Sabtu. Tidak ada staf lain. Makan malam diadakan untuk ulang tahunnya yang ke-64. Penandatanganan wasiat baru dijadwalkan Senin, 14 September, pukul 14.00, di kantor notaris.</p>
@@ -456,7 +540,7 @@
                 </section>
 
                 <section class="page" id="page-korban">
-                    <h2>Korban</h2>
+                    <h2><i class="fa-solid fa-user"></i>Korban</h2>
                     <p class="lede">Soerjo, Arief · dokter penyakit dalam · pensiunan RSCM</p>
                     <div class="doc">
                         <div class="meta-row">
@@ -467,7 +551,7 @@
                         </div>
                     </div>
                     <div class="doc">
-                        <div class="kicker">Buku harian · laci kanan meja, 4–12 September</div>
+                        <div class="kicker"><i class="fa-solid fa-book"></i>Buku harian · laci kanan meja, 4–12 September</div>
                         <p><i>4 September.</i> Farhan mengirim hasil laboratorium. Angkanya tujuh koma empat. Insulin malam tetap.</p>
                         <p><i>8 September.</i> Lukman akan membawa kanvas. Saya sudah bilang jangan.</p>
                         <p><i>10 September.</i> Notaris hari Senin. Hana tanya isinya. Saya belum jawab. Yoga harus datang.</p>
@@ -477,23 +561,23 @@
                 </section>
 
                 <section class="page" id="page-keterangan">
-                    <h2>Enam orang</h2>
+                    <h2><i class="fa-solid fa-users"></i>Enam orang</h2>
                     <p class="lede">Wawancara terpisah, 13 September pukul 01.10–06.40. Tidak ada yang membaca keterangan yang lain.</p>
                     <div id="wawancara"></div>
                 </section>
 
                 <section class="page" id="page-bukti">
-                    <h2>Barang bukti</h2>
+                    <h2><i class="fa-solid fa-magnifying-glass"></i>Barang bukti</h2>
                     <p class="lede">Nomor sesuai urutan pencatatan, bukan urutan pentingnya.</p>
                     <div id="bukti"></div>
                 </section>
 
                 <section class="page" id="page-rumah">
-                    <h2>Rumah</h2>
+                    <h2><i class="fa-solid fa-house"></i>Rumah</h2>
                     <p class="lede">Lantai dasar dan lantai dua. Tidak ada denah lain di arsip.</p>
                     <div class="split">
                         <div class="doc">
-                            <div class="kicker">Lantai dasar</div>
+                            <div class="kicker"><i class="fa-solid fa-layer-group"></i>Lantai dasar</div>
                             <div class="plan-wrap">
                                 <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
                                     <rect x="8" y="8" width="304" height="204" fill="none" stroke="#1a1612" stroke-width="1.5"/>
@@ -513,7 +597,7 @@
                             <p class="plan-cap">Ruang makan menyatu dengan ruang tamu, di sisi selatan. Kamar mandi tamu di bawah tangga. Kebun tidak berlampu. Gudang tidak dikunci.</p>
                         </div>
                         <div class="doc">
-                            <div class="kicker">Lantai dua</div>
+                            <div class="kicker"><i class="fa-solid fa-layer-group"></i>Lantai dua</div>
                             <div class="plan-wrap">
                                 <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
                                     <rect x="8" y="8" width="304" height="204" fill="none" stroke="#1a1612" stroke-width="1.5"/>
@@ -532,16 +616,16 @@
                         </div>
                     </div>
                     <div class="doc">
-                        <div class="kicker">Tangga</div>
+                        <div class="kicker"><i class="fa-solid fa-shoe-prints"></i>Tangga</div>
                         <p>Ada debu halus di anak tangga ketiga. Jejak kaki sebelum makan malam tumpang tindih, tidak bisa diurutkan. Sesudah makan malam yang masih bisa dibaca: selop korban naik kira-kira pukul 20.42, dan sepatu kets Mira naik pukul 22.47 dengan tanah dapur di solnya. Tidak ada jejak orang naik di antara kedua waktu itu.</p>
                     </div>
                 </section>
 
                 <section class="page" id="page-putusan">
-                    <h2>Dakwaan</h2>
+                    <h2><i class="fa-solid fa-gavel"></i>Dakwaan</h2>
                     <p class="lede">Pilih satu nama. Satu kali. Jika salah, dakwaan ditutup dan tidak dibuka lagi.</p>
                     <div id="accusationForm" style="margin-top:8px">
-                        <label class="field" for="suspectSelect">Nama</label>
+                        <label class="field" for="suspectSelect"><i class="fa-solid fa-fingerprint"></i>Nama</label>
                         <select id="suspectSelect">
                             <option value="">-</option>
                             <option value="hana">Hana Soerjo</option>
@@ -551,14 +635,14 @@
                             <option value="rina">Rina Kusuma</option>
                             <option value="lukman">Lukman Hakim</option>
                         </select>
-                        <button id="submitBtn" type="button">Ajukan</button>
+                        <button id="submitBtn" type="button"><i class="fa-solid fa-paper-plane"></i>Ajukan</button>
                         <p class="warn" id="formWarn" hidden></p>
                     </div>
                     <div id="resultBox" hidden style="margin-top:28px"></div>
                 </section>
 
                 <div class="file-notes">
-                    <label for="notes">Catatan Anda</label>
+                    <label for="notes"><i class="fa-solid fa-pen"></i>Catatan Anda</label>
                     <textarea id="notes" placeholder="Tidak masuk berkas."></textarea>
                 </div>
             </main>
@@ -568,25 +652,28 @@
         <header class="file">
             <div class="file-spine">
                 <div>
-                    <small>27/YK/IX/26</small>
-                    <strong>Suryomentaraman 14</strong>
+                    <i class="fa-solid fa-folder spine-icon"></i>
+                    <div>
+                        <small>27/YK/IX/26</small>
+                        <strong>Suryomentaraman 14</strong>
+                    </div>
                 </div>
             </div>
             <nav>
-                <button class="navbtn active" data-page="laporan" type="button">Laporan</button>
-                <button class="navbtn" data-page="korban" type="button">Korban</button>
-                <button class="navbtn" data-page="keterangan" type="button">Delapan orang</button>
-                <button class="navbtn" data-page="bukti" type="button">Barang bukti</button>
-                <button class="navbtn" data-page="rumah" type="button">Rumah</button>
-                <button class="navbtn" data-page="putusan" type="button">Dakwaan</button>
+                <button class="navbtn active" data-page="laporan" type="button"><i class="fa-solid fa-file-lines"></i>Laporan</button>
+                <button class="navbtn" data-page="korban" type="button"><i class="fa-solid fa-user"></i>Korban</button>
+                <button class="navbtn" data-page="keterangan" type="button"><i class="fa-solid fa-users"></i>Delapan orang</button>
+                <button class="navbtn" data-page="bukti" type="button"><i class="fa-solid fa-magnifying-glass"></i>Barang bukti</button>
+                <button class="navbtn" data-page="rumah" type="button"><i class="fa-solid fa-house"></i>Rumah</button>
+                <button class="navbtn" data-page="putusan" type="button"><i class="fa-solid fa-gavel"></i>Dakwaan</button>
             </nav>
         </header>
         <main>
                 <section class="page active" id="l2-laporan">
-                    <h2>Laporan awal</h2>
+                    <h2><i class="fa-solid fa-file-lines"></i>Laporan awal</h2>
                     <p class="lede">14 September 2026, 07.20 WIB · Kompol Endah Wibisono · dilimpahkan dari 19/MTR/IX/26</p>
                     <div class="doc">
-                        <div class="kicker">Kejadian</div>
+                        <div class="kicker"><i class="fa-solid fa-circle-exclamation"></i>Kejadian</div>
                         <p>Dr. Hartono Adiwijaya ditemukan tidak bernyawa di ruang kerja lantai dua pukul 05.52. Yang menemukan jenazah adalah Marni Sulistyowati, asisten rumah. Pintu terkunci dari dalam. Kunci masih di lubang, di sisi dalam. Jendela barat terbuka kira-kira delapan sentimeter. Tidak ada jeruji. Tidak ada tangga di luar.</p>
                         <p>Tidak ada luka tusuk. Tidak ada tanda paksaan pada pintu. Korban tergeletak di lantai, antara kursi dan meja. Ada muntahan di keranjang sampah dan di pangkuannya. Selembar kertas di alas meja, bolpoin, goyang.</p>
                         <p>Malam sebelumnya, 13 September, ada slametan empat puluh hari istri pertamanya, lalu bedah buku terjemahan naskah. Delapan orang menginap atau masih di rumah ketika ia naik ke ruang kerja kira-kira pukul 21.15. Ia mengeluh perut sejak kira-kira pukul 19.30. dr. Fajar Mahendra, yang datang sebagai tamu, menyatakan gastroenteritis. Korban menolak ke rumah sakit. Fajar pulang pukul 20.40. Ia bukan tersangka dalam berkas ini.</p>
@@ -595,7 +682,7 @@
                 </section>
 
                 <section class="page" id="l2-korban">
-                    <h2>Korban</h2>
+                    <h2><i class="fa-solid fa-user"></i>Korban</h2>
                     <p class="lede">Adiwijaya, Hartono · notaris · penyunting naskah Jawa</p>
                     <div class="doc">
                         <div class="meta-row">
@@ -606,7 +693,7 @@
                         </div>
                     </div>
                     <div class="doc">
-                        <div class="kicker">Buku harian · laci kanan meja, 8–13 September</div>
+                        <div class="kicker"><i class="fa-solid fa-book"></i>Buku harian · laci kanan meja, 8–13 September</div>
                         <p><i>8 September.</i> Galih telepon dari Solo. Catatan kaki dulu, naskah utama jangan. Redaksi jangan dulu.</p>
                         <p><i>10 September.</i> Redaksi Senin. Paragraf dua belas sampai delapan belas itu bukan kebetulan. Saya sudah bandingkan.</p>
                         <p><i>11 September.</i> Intan di kamar tamu. Akta baru Senin jam sepuluh. Wulan jangan lihat dulu. Naskah ke UGM. Rumah ke yayasan.</p>
@@ -617,23 +704,23 @@
                 </section>
 
                 <section class="page" id="l2-keterangan">
-                    <h2>Delapan orang</h2>
+                    <h2><i class="fa-solid fa-users"></i>Delapan orang</h2>
                     <p class="lede">Wawancara terpisah, 14 September pukul 07.40–14.10. Tidak ada yang membaca keterangan yang lain.</p>
                     <div id="wawancara2"></div>
                 </section>
 
                 <section class="page" id="l2-bukti">
-                    <h2>Barang bukti</h2>
+                    <h2><i class="fa-solid fa-magnifying-glass"></i>Barang bukti</h2>
                     <p class="lede">Nomor sesuai urutan pencatatan, bukan urutan pentingnya.</p>
                     <div id="bukti2"></div>
                 </section>
 
                 <section class="page" id="l2-rumah">
-                    <h2>Rumah</h2>
+                    <h2><i class="fa-solid fa-house"></i>Rumah</h2>
                     <p class="lede">Lantai dasar, lantai dua, dan paviliun. Tidak ada denah lain di arsip.</p>
                     <div class="split">
                         <div class="doc">
-                            <div class="kicker">Lantai dasar</div>
+                            <div class="kicker"><i class="fa-solid fa-layer-group"></i>Lantai dasar</div>
                             <div class="plan-wrap">
                                 <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
                                     <rect x="8" y="8" width="304" height="204" fill="none" stroke="#1a1612" stroke-width="1.5"/>
@@ -652,7 +739,7 @@
                             <p class="plan-cap">Dapur belakang terbuka ke kebun. Kompor tanah dan kendi jamu di situ, bukan di dapur utama. Paviliun Eko di sisi selatan, pintu sendiri.</p>
                         </div>
                         <div class="doc">
-                            <div class="kicker">Lantai dua</div>
+                            <div class="kicker"><i class="fa-solid fa-layer-group"></i>Lantai dua</div>
                             <div class="plan-wrap">
                                 <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
                                     <rect x="8" y="8" width="304" height="204" fill="none" stroke="#1a1612" stroke-width="1.5"/>
@@ -674,16 +761,16 @@
                         </div>
                     </div>
                     <div class="doc">
-                        <div class="kicker">Tangga dan kebun</div>
+                        <div class="kicker"><i class="fa-solid fa-shoe-prints"></i>Tangga dan kebun</div>
                         <p>Sesudah makan malam yang masih bisa dibaca: selop korban naik kira-kira pukul 21.14. Tidak ada jejak orang naik sesudah itu sampai Marni pukul 05.52. Di pagar timur ada patahan baru, getah masih lengket pukul 06.20. Gunting kebun tergantung di paku dapur belakang.</p>
                     </div>
                 </section>
 
                 <section class="page" id="l2-putusan">
-                    <h2>Dakwaan</h2>
+                    <h2><i class="fa-solid fa-gavel"></i>Dakwaan</h2>
                     <p class="lede">Pilih satu nama. Satu kali. Jika salah, dakwaan ditutup dan tidak dibuka lagi.</p>
                     <div id="accusationForm2" style="margin-top:8px">
-                        <label class="field" for="suspectSelect2">Nama</label>
+                        <label class="field" for="suspectSelect2"><i class="fa-solid fa-fingerprint"></i>Nama</label>
                         <select id="suspectSelect2">
                             <option value="">-</option>
                             <option value="wulan">Wulan Adiwijaya</option>
@@ -695,14 +782,14 @@
                             <option value="eko">Eko Santoso</option>
                             <option value="galih">Galih Pramono</option>
                         </select>
-                        <button id="submitBtn2" type="button">Ajukan</button>
+                        <button id="submitBtn2" type="button"><i class="fa-solid fa-paper-plane"></i>Ajukan</button>
                         <p class="warn" id="formWarn2" hidden></p>
                     </div>
                     <div id="resultBox2" hidden style="margin-top:28px"></div>
                 </section>
 
                 <div class="file-notes">
-                    <label for="notes2">Catatan Anda</label>
+                    <label for="notes2"><i class="fa-solid fa-pen"></i>Catatan Anda</label>
                     <textarea id="notes2" placeholder="Tidak masuk berkas."></textarea>
                 </div>
             </main>
@@ -712,25 +799,28 @@
         <header class="file">
             <div class="file-spine">
                 <div>
-                    <small>88/UTR/IX/26</small>
-                    <strong>Pelabuhan Utara</strong>
+                    <i class="fa-solid fa-folder spine-icon"></i>
+                    <div>
+                        <small>88/UTR/IX/26</small>
+                        <strong>Pelabuhan Utara</strong>
+                    </div>
                 </div>
             </div>
             <nav>
-                <button class="navbtn active" data-page="laporan" type="button">Laporan</button>
-                <button class="navbtn" data-page="korban" type="button">Korban</button>
-                <button class="navbtn" data-page="keterangan" type="button">Delapan orang</button>
-                <button class="navbtn" data-page="bukti" type="button">Barang bukti</button>
-                <button class="navbtn" data-page="rumah" type="button">Peta</button>
-                <button class="navbtn" data-page="putusan" type="button">Dakwaan</button>
+                <button class="navbtn active" data-page="laporan" type="button"><i class="fa-solid fa-file-lines"></i>Laporan</button>
+                <button class="navbtn" data-page="korban" type="button"><i class="fa-solid fa-user"></i>Korban</button>
+                <button class="navbtn" data-page="keterangan" type="button"><i class="fa-solid fa-users"></i>Delapan orang</button>
+                <button class="navbtn" data-page="bukti" type="button"><i class="fa-solid fa-magnifying-glass"></i>Barang bukti</button>
+                <button class="navbtn" data-page="rumah" type="button"><i class="fa-solid fa-map"></i>Peta</button>
+                <button class="navbtn" data-page="putusan" type="button"><i class="fa-solid fa-gavel"></i>Dakwaan</button>
             </nav>
         </header>
         <main>
                 <section class="page active" id="l3-laporan">
-                    <h2>Laporan awal</h2>
+                    <h2><i class="fa-solid fa-file-lines"></i>Laporan awal</h2>
                     <p class="lede">16 September 2026, 08.05 WIB · Kombes L. Prasetyo · dilimpahkan dari 27/YK/IX/26</p>
                     <div class="doc">
-                        <div class="kicker">Kejadian</div>
+                        <div class="kicker"><i class="fa-solid fa-circle-exclamation"></i>Kejadian</div>
                         <p>Empat perempuan di kawasan Pelabuhan Utara. Dua yang pertama sempat dianggap terpisah. Malam 15 September menambah dua peristiwa dalam lima puluh dua menit. Yang ketiga hidup. Yang keempat tidak. Surat atas nama Jack the Ripper sudah masuk ke redaksi sejak 12 September. Berkas Menteng dan Yogyakarta sudah dilimpahkan. Ini berkas terakhir.</p>
                         <p>Pola luka sama: dua sayatan dalam di leher, dari kiri. Perut dibuka pada yang pertama, kedua, dan keempat. Yang ketiga hanya leher; ada langkah orang lain di kerikil, lalu pelakunya pergi. Yang keempat kehilangan ginjal kiri. Selembar kain apronnya ditemukan di dinding gudang kapur, dengan kapur tulis.</p>
                         <p>Tidak ada saksi yang melihat wajah. Ada delapan orang yang berulang kali ada di kawasan itu malam hari, atau yang menulis tentang pola ini sebelum malam kelima belas.</p>
@@ -739,51 +829,51 @@
                 </section>
 
                 <section class="page" id="l3-korban">
-                    <h2>Korban</h2>
+                    <h2><i class="fa-solid fa-user"></i>Korban</h2>
                     <p class="lede">Tiga jenazah, satu yang luka, satu alamat yang belum menjadi jenazah.</p>
                     <div class="doc">
-                        <div class="kicker">1 · Ningsih, Mariana · 43</div>
+                        <div class="kicker"><i class="fa-solid fa-hashtag"></i>1 · Ningsih, Mariana · 43</div>
                         <div class="meta-row">Ditemukan 31 Agustus 2026, pukul 03.40 WIB, rel mati Blok Timur. Terakhir terlihat kira-kira pukul 02.40 di Jl. Panti. Tidak ada teriakan. Gerbong tidak lewat sejak 2021.</div>
                         <p>Dua sayatan leher. Perut terbuka. Tidak ada organ yang diambil.</p>
                     </div>
                     <div class="doc">
-                        <div class="kicker">2 · Hartati, Ani · 47</div>
+                        <div class="kicker"><i class="fa-solid fa-hashtag"></i>2 · Hartati, Ani · 47</div>
                         <div class="meta-row">Ditemukan 8 September 2026, pukul 05.55 WIB, halaman belakang rumah petak No. 29, Blok C. Yang menemukan: Laras Fitri, dalam ronda pagi. Terakhir terlihat kira-kira pukul 05.25 di mulut gang.</div>
                         <p>Dua sayatan leher. Usus digeser ke bahu. Rahim tidak ada di tempat.</p>
                     </div>
                     <div class="doc">
-                        <div class="kicker">3 · Sari, Elisabet · 45 · hidup</div>
+                        <div class="kicker"><i class="fa-solid fa-hashtag"></i>3 · Sari, Elisabet · 45 · hidup</div>
                         <div class="meta-row">15 September 2026, kira-kira pukul 00.52, halaman belakang bekas gudang serikat, Gang Kelab. Seorang laki-laki dari klub pulang, mendengar sepatu di kerikil. Pelaku pergi. Luka leher tidak dalam.</div>
                         <p>Ia tidak melihat wajah. Ia ingat angka yang diucapkan pelan, seperti menghitung: “satu, empat, empat.” Ia kira itu jam.</p>
                     </div>
                     <div class="doc">
-                        <div class="kicker">4 · Dewi, Kartika · 46</div>
+                        <div class="kicker"><i class="fa-solid fa-hashtag"></i>4 · Dewi, Kartika · 46</div>
                         <div class="meta-row">Ditemukan 15 September 2026, pukul 01.44 WIB, pelataran tiga sudut Blok Barat, oleh Hanif saat ganti pos. Terakhir terlihat pukul 01.25 di Jl. Timah, sesudah dilepas dari tahanan ringan karena mabuk, pukul 00.40.</div>
                         <p>Dua sayatan leher. Mutilasi luas. Ginjal kiri tidak ada. Sepotong apron hilang, ketemu di dinding gudang kapur.</p>
                     </div>
                     <div class="doc">
-                        <div class="kicker">Alamat yang belum menjadi jenazah</div>
+                        <div class="kicker"><i class="fa-solid fa-house-chimney"></i>Alamat yang belum menjadi jenazah</div>
                         <p>Maryam Julaeha, 25, Gang Palang 13, kamar belakang. Sewa menunggak. Ia tidak di daftar tersangka. Ia masih di kamar itu pagi ini.</p>
                     </div>
                 </section>
 
                 <section class="page" id="l3-keterangan">
-                    <h2>Delapan orang</h2>
+                    <h2><i class="fa-solid fa-users"></i>Delapan orang</h2>
                     <p class="lede">Wawancara terpisah, 16 September pukul 08.40–16.20. Tidak ada yang membaca keterangan yang lain.</p>
                     <div id="wawancara3"></div>
                 </section>
 
                 <section class="page" id="l3-bukti">
-                    <h2>Barang bukti</h2>
+                    <h2><i class="fa-solid fa-magnifying-glass"></i>Barang bukti</h2>
                     <p class="lede">Nomor sesuai urutan pencatatan, bukan urutan pentingnya.</p>
                     <div id="bukti3"></div>
                 </section>
 
                 <section class="page" id="l3-rumah">
-                    <h2>Peta</h2>
+                    <h2><i class="fa-solid fa-map"></i>Peta</h2>
                     <p class="lede">Kertas berpetak. Satu kotak = 100 m. Ke kanan = timur. Ke atas = utara. Pojok kiri bawah = (0,0).</p>
                     <div class="doc">
-                        <div class="kicker">Kawasan Pelabuhan Utara</div>
+                        <div class="kicker"><i class="fa-solid fa-location-dot"></i>Kawasan Pelabuhan Utara</div>
                         <div class="plan-wrap">
                             <svg viewBox="0 0 430 338" xmlns="http://www.w3.org/2000/svg">
                                 <rect x="40" y="16" width="360" height="288" fill="#d8ccb6" stroke="#1a1612" stroke-width="1.2"/>
@@ -838,17 +928,17 @@
                         <p class="plan-cap">Titik cokelat penuh = korban. Titik hitam = bekas menara, awal jalan pamflet. Lingkaran kosong = tempat lain. Nama diikuti (x,y). Jangan mulai hitung dari sudut (0,0).</p>
                     </div>
                     <div class="doc">
-                        <div class="kicker">Catatan skala</div>
+                        <div class="kicker"><i class="fa-solid fa-ruler-combined"></i>Catatan skala</div>
                         <p>Lembar bawah peta, stempel Dinas: “patok 0 = bekas menara. 1 kotak = 100 m.” Awal jalan pamflet = menara (4,10), bukan sudut (0,0). Tidak ada rotasi.</p>
                         <p>Cara hitung: setiap 100 m = satu kotak. Timur tambah x, barat kurang x, utara tambah y, selatan kurang y. Contoh yang sudah jadi: 200 m timur dan 100 m utara dari menara = (4+2, 10+1) = (6, 11), rumah petak No. 29. Baris lain di pamflet G-06 dihitung sendiri.</p>
                     </div>
                 </section>
 
                 <section class="page" id="l3-putusan">
-                    <h2>Dakwaan</h2>
+                    <h2><i class="fa-solid fa-gavel"></i>Dakwaan</h2>
                     <p class="lede">Pilih satu nama. Satu kali. Jika salah, dakwaan ditutup dan tidak dibuka lagi.</p>
                     <div id="accusationForm3" style="margin-top:8px">
-                        <label class="field" for="suspectSelect3">Nama</label>
+                        <label class="field" for="suspectSelect3"><i class="fa-solid fa-fingerprint"></i>Nama</label>
                         <select id="suspectSelect3">
                             <option value="">-</option>
                             <option value="wira">Wira Suryana</option>
@@ -860,14 +950,14 @@
                             <option value="rudi">Rudi Palagan</option>
                             <option value="hanif">Hanif Darma</option>
                         </select>
-                        <button id="submitBtn3" type="button">Ajukan</button>
+                        <button id="submitBtn3" type="button"><i class="fa-solid fa-paper-plane"></i>Ajukan</button>
                         <p class="warn" id="formWarn3" hidden></p>
                     </div>
                     <div id="resultBox3" hidden style="margin-top:28px"></div>
                 </section>
 
                 <div class="file-notes">
-                    <label for="notes3">Catatan Anda</label>
+                    <label for="notes3"><i class="fa-solid fa-pen"></i>Catatan Anda</label>
                     <textarea id="notes3" placeholder="Tidak masuk berkas."></textarea>
                 </div>
             </main>
@@ -1492,12 +1582,12 @@
                 el.innerHTML = `
                     <button type="button" data-acc>
                         <span>
-                            <span class="who">${p.nama}</span>
+                            <span class="who"><i class="fa-solid fa-user"></i>${p.nama}</span>
                             <span class="role">${String(i + 1).padStart(2, "0")} · ${p.umur} · ${p.peran}</span>
                         </span>
-                        <span class="chev">▸</span>
+                        <span class="chev"><i class="fa-solid fa-chevron-right"></i></span>
                     </button>
-                    <div class="body">${p.qa.map(([q, a]) => `<p class="q">${q}</p><p class="a">${a}</p>`).join("")}</div>
+                    <div class="body">${p.qa.map(([q, a]) => `<p class="q"><i class="fa-solid fa-quote-left"></i>${q}</p><p class="a">${a}</p>`).join("")}</div>
                 `;
                 wrap.appendChild(el);
             });
@@ -1509,7 +1599,7 @@
                 const el = document.createElement("div");
                 el.className = "doc";
                 el.innerHTML = `
-                    <div class="kicker">${ev.kode}</div>
+                    <div class="kicker"><i class="fa-solid fa-tag"></i>${ev.kode}</div>
                     <h3>${ev.judul}</h3>
                     <div class="lab">${ev.isi}</div>
                 `;
@@ -1577,7 +1667,7 @@
             b.id = "toLevel2";
             b.type = "button";
             b.className = "btn-paper";
-            b.textContent = "Lanjut ke berkas berikutnya";
+            b.innerHTML = '<i class="fa-solid fa-arrow-right"></i>Lanjut ke berkas berikutnya';
             b.addEventListener("click", () => openLevel2("laporan"));
             box.appendChild(b);
         }
@@ -1588,7 +1678,7 @@
             b.id = "toLevel3";
             b.type = "button";
             b.className = "btn-paper";
-            b.textContent = "Lanjut ke berkas berikutnya";
+            b.innerHTML = '<i class="fa-solid fa-arrow-right"></i>Lanjut ke berkas berikutnya';
             b.addEventListener("click", () => openLevel3("laporan"));
             box.appendChild(b);
         }
@@ -1650,7 +1740,7 @@
 
         const rejectedHtml = `
                         <div class="doc">
-                            <div class="stamp">Ditolak</div>
+                            <div class="stamp"><i class="fa-solid fa-ban"></i>Ditolak</div>
                             <h3>Nama itu salah.</h3>
                             <p>Dakwaan dari alamat ini sudah ditutup. Tidak dibuka lagi.</p>
                         </div>
