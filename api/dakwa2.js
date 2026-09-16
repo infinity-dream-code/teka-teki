@@ -8,7 +8,6 @@ const htmlOk = `<div class="doc">
     <p>Wulan di Taman Budaya. Jika Hartono mati sebelum akta Senin, ia mendapat semua; itu bukan bukti ia menuang. Bagas naik KA 10 Argo Wilis, Bandung 07.35–Yogyakarta 13.24, bukan Lodaya malam. Dina memasukkan daun senna. Raka menggadaikan keris. Marni membeli ubi kayu yang masih utuh. Eko mengambil lembar dari naskah. Galih memotret di ruang arsip.</p>
     <p>Intan bilang adzan kira-kira jam enam lewat. Maghrib Yogyakarta 13 September 2026 sekitar 17.38. Ia bilang tidak ke kebun. Gunting pagar timur basah sesudah maghrib. Anjing tetangga tidak menyalak pada orang yang sudah menginap sejak Jumat. Bulan sabit dua persen terbenam sekitar 19.22; tidak ada cahaya bulan pukul 21.00.</p>
     <p>Senin pukul 10.30 redaksi jurnal akan menanyakan kemiripan paragraf dengan disertasi Intan Kusuma tahun 2019. Pukul 20.04 ia menulis bahwa naskah itu tidak akan ke redaksi.</p>
-    <p class="flag">flag{kamu_detektif_h3b4t}</p>
 </div>`;
 
 export default async function handler(req, res) {
@@ -28,7 +27,8 @@ export default async function handler(req, res) {
             blocked,
             l1,
             l2,
-            html: l2 ? htmlOk : ""
+            html: l2 ? htmlOk : "",
+            next: l2
         });
         return;
     }
@@ -52,7 +52,7 @@ export default async function handler(req, res) {
     const who = parseBody(req).who || "";
     if (who === "intan") {
         setCookies(res, ["mtr19_l2"]);
-        res.status(200).json({ ok: true, blocked: false, html: htmlOk });
+        res.status(200).json({ ok: true, blocked: false, next: true, html: htmlOk });
         return;
     }
 

@@ -77,3 +77,7 @@ function has_l1() {
 function has_l2() {
     return !empty($_COOKIE['mtr19_l2']);
 }
+
+function has_l3() {
+    return !empty($_COOKIE['mtr19_l3']);
+}
