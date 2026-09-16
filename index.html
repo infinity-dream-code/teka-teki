@@ -893,9 +893,6 @@
             }
         ];
 
-        bukti.appendChild(el);
-        });
-
         const interviews2 = [
             {
                 nama: "Wulan Adiwijaya",
@@ -1268,8 +1265,8 @@
         (async () => {
             try {
                 const [r1, r2] = await Promise.all([
-                    fetch("/api/dakwa", { method: "GET", cache: "no-store", credentials: "same-origin" }),
-                    fetch("/api/dakwa2", { method: "GET", cache: "no-store", credentials: "same-origin" })
+                    fetch("api/dakwa", { method: "GET", cache: "no-store", credentials: "same-origin" }),
+                    fetch("api/dakwa2", { method: "GET", cache: "no-store", credentials: "same-origin" })
                 ]);
                 const data = await r1.json();
                 const data2 = await r2.json();
@@ -1308,7 +1305,7 @@
             warn.hidden = true;
             btn.disabled = true;
             try {
-                const res = await fetch("/api/dakwa", {
+                const res = await fetch("api/dakwa", {
                     method: "POST",
                     cache: "no-store",
                     credentials: "same-origin",
@@ -1344,7 +1341,7 @@
             warn.hidden = true;
             btn.disabled = true;
             try {
-                const res = await fetch("/api/dakwa2", {
+                const res = await fetch("api/dakwa2", {
                     method: "POST",
                     cache: "no-store",
                     credentials: "same-origin",
