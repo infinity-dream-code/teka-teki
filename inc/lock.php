@@ -161,3 +161,54 @@ function save_detective_name($ip, $name) {
     fclose($fp);
     return $clean;
 }
+
+function tries_path() {
+    $dir = dirname(__DIR__) . '/data';
+    if (!is_dir($dir)) {
+        @mkdir($dir, 0700, true);
+    }
+    return $dir . '/tries.json';
+}
+
+function get_code_tries($ip, $level) {
+    $key = $level === 'l6' ? 'mtr19_l6_try' : 'mtr19_l5_try';
+    $from_cookie = isset($_COOKIE[$key]) ? (int) $_COOKIE[$key] : 0;
+    $file = tries_path();
+    $from_file = 0;
+    if (is_file($file)) {
+        $data = json_decode(@file_get_contents($file), true);
+        $h = ip_hash($ip);
+        if (is_array($data) && isset($data[$h][$level])) {
+            $from_file = (int) $data[$h][$level];
+        }
+    }
+    return max($from_cookie, $from_file, 0);
+}
+
+function bump_code_try($ip, $level) {
+    $key = $level === 'l6' ? 'mtr19_l6_try' : 'mtr19_l5_try';
+    $next = min(2, get_code_tries($ip, $level) + 1);
+    $file = tries_path();
+    $fp = @fopen($file, 'c+');
+    if ($fp) {
+        flock($fp, LOCK_EX);
+        $raw = stream_get_contents($fp);
+        $data = json_decode($raw, true);
+        if (!is_array($data)) {
+            $data = [];
+        }
+        $h = ip_hash($ip);
+        if (!isset($data[$h]) || !is_array($data[$h])) {
+            $data[$h] = [];
+        }
+        $data[$h][$level] = $next;
+        rewind($fp);
+        ftruncate($fp, 0);
+        fwrite($fp, json_encode($data));
+        fflush($fp);
+        flock($fp, LOCK_UN);
+        fclose($fp);
+    }
+    set_named_cookie($key, (string) $next);
+    return $next;
+}

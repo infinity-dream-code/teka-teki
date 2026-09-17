@@ -1,4 +1,4 @@
-import { blockIp, clientIp, cookieHas, getDetectiveName, isBlocked, parseBody, setCookies } from "../lib/lock.js";
+import { blockIp, bumpCodeTry, clientIp, cookieHas, getCodeTries, getDetectiveName, isBlocked, parseBody, setCookies } from "../lib/lock.js";
 
 const htmlOk = `<div class="doc">
     <div class="stamp">Dilimpahkan</div>
@@ -8,6 +8,7 @@ const htmlOk = `<div class="doc">
 </div>`;
 
 const SECRET = "SEVENFORK";
+const MAX_TRIES = 2;
 
 function normalizeCode(s) {
     return String(s || "")
@@ -45,6 +46,7 @@ export default async function handler(req, res) {
     const l5 = cookieHas(req, "mtr19_l5");
     const l6 = cookieHas(req, "mtr19_l6");
     const name = await getDetectiveName(req, ip);
+    const tries = getCodeTries(req, ip, "l6");
 
     if (req.method === "GET") {
         if (blocked) setCookies(res, ["mtr19_lock"]);
@@ -55,6 +57,8 @@ export default async function handler(req, res) {
             l6,
             name,
             hasName: Boolean(name),
+            tries,
+            left: Math.max(0, MAX_TRIES - tries),
             html: l6 ? htmlOk : ""
         });
         return;
@@ -81,6 +85,20 @@ export default async function handler(req, res) {
     if (codeMatches(code)) {
         setCookies(res, ["mtr19_l6"]);
         res.status(200).json({ ok: true, blocked: false, html: htmlOk, next: true });
+        return;
+    }
+
+    const used = bumpCodeTry(req, res, ip, "l6");
+    const left = Math.max(0, MAX_TRIES - used);
+    if (left > 0) {
+        res.status(200).json({
+            ok: false,
+            blocked: false,
+            retry: true,
+            tries: used,
+            left,
+            msg: "Salah. Sisa " + left + " kesempatan."
+        });
         return;
     }
 

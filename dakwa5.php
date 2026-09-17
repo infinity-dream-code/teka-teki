@@ -13,6 +13,8 @@ $html_ok = <<<'HTML'
 </div>
 HTML;
 
+define('MAX_TRIES', 2);
+
 function normalize_code($s) {
     $s = strtoupper((string) $s);
     return preg_replace('/[^A-Z]/', '', $s);
@@ -37,6 +39,7 @@ $blocked = is_blocked($ip);
 $l4 = has_l4();
 $l5 = has_l5();
 $name = get_detective_name($ip);
+$tries = get_code_tries($ip, 'l5');
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     if ($blocked) {
@@ -49,6 +52,8 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
         'l5' => $l5,
         'name' => $name,
         'hasName' => $name !== '',
+        'tries' => $tries,
+        'left' => max(0, MAX_TRIES - $tries),
         'html' => $l5 ? $html_ok : '',
     ], JSON_UNESCAPED_UNICODE);
     exit;
@@ -76,6 +81,20 @@ $code = normalize_code($in['code'] ?? ($in['who'] ?? ''));
 if (code_matches($code)) {
     set_named_cookie('mtr19_l5');
     echo json_encode(['ok' => true, 'blocked' => false, 'html' => $html_ok, 'next' => true], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
+$used = bump_code_try($ip, 'l5');
+$left = max(0, MAX_TRIES - $used);
+if ($left > 0) {
+    echo json_encode([
+        'ok' => false,
+        'blocked' => false,
+        'retry' => true,
+        'tries' => $used,
+        'left' => $left,
+        'msg' => 'Salah. Sisa ' . $left . ' kesempatan.',
+    ], JSON_UNESCAPED_UNICODE);
     exit;
 }
 

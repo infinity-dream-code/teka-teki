@@ -1627,7 +1627,7 @@
 
                 <section class="page" id="l5-putusan">
                     <h2><i class="fa-solid fa-key"></i>Kode</h2>
-                    <p class="lede">Masukkan nama panggung dari rekaman. Bukan memilih dari daftar. Satu kali. Salah = ditutup.</p>
+                    <p class="lede">Masukkan nama panggung dari rekaman. Bukan memilih dari daftar. Dua kesempatan. Salah dua kali = ditutup.</p>
                     <div id="accusationForm5" style="margin-top:8px">
                         <label class="field" for="codeInput5"><i class="fa-solid fa-keyboard"></i>Nama panggung</label>
                         <input id="codeInput5" type="text" maxlength="64" autocomplete="off" placeholder="-">
@@ -1669,7 +1669,7 @@
                         <div class="kicker"><i class="fa-solid fa-network-wired"></i>Keadaan</div>
                         <p>Nama panggung RED JOHN sudah terdengar. Itu bukan KTP. Cain menolak menyebut wajah di baliknya. Ia hanya mengaku ada “titik serah”, tempat jaringan menaruh pesan dan barang. Bukan rumah. Bukan kantor.</p>
                         <p>Seksi forensik menyerahkan dump tinta dari kertas terbakar di tas Cain (tersembunyi di jahitan dalam, baru ketemu siang ini). Ada juga cuplikan CCTV blur dekat dermaga tua, dan peta gang yang sudah diganti nama resmi sejak 2019.</p>
-                        <p>Yang dibutuhkan di berkas ini: <em>kode titik serah</em>, bukan nama orang. Nama orang menunggu berkas berikutnya. Satu kali salah di kode: ditutup.</p>
+                        <p>Yang dibutuhkan di berkas ini: <em>kode titik serah</em>, bukan nama orang. Nama orang menunggu berkas berikutnya. Dua kali salah di kode: ditutup.</p>
                     </div>
                 </section>
 
@@ -1736,7 +1736,7 @@ meta=vig_key!=GOLDARCH</div>
 
                 <section class="page" id="l6-putusan">
                     <h2><i class="fa-solid fa-key"></i>Kode</h2>
-                    <p class="lede">Masukkan kode titik serah. Bukan nama orang. Satu kali. Salah = ditutup.</p>
+                    <p class="lede">Masukkan kode titik serah. Bukan nama orang. Dua kesempatan. Salah dua kali = ditutup.</p>
                     <div id="accusationForm6" style="margin-top:8px">
                         <label class="field" for="codeInput6"><i class="fa-solid fa-keyboard"></i>Kode</label>
                         <input id="codeInput6" type="text" maxlength="64" autocomplete="off" placeholder="-">
@@ -3754,6 +3754,11 @@ meta=vig_key!=GOLDARCH</div>
                 if (data.ok) {
                     localStorage.setItem("mtr19b-l5-ok", "1");
                     showL5Solved(data.html);
+                } else if (data.retry) {
+                    btn.disabled = false;
+                    warn.hidden = false;
+                    warn.textContent = data.msg || ("Salah. Sisa " + (data.left || 1) + " kesempatan.");
+                    box.hidden = true;
                 } else {
                     lockDakwa();
                 }
@@ -3797,6 +3802,11 @@ meta=vig_key!=GOLDARCH</div>
                 if (data.ok) {
                     localStorage.setItem("mtr19b-l6-ok", "1");
                     showL6Solved(data.html);
+                } else if (data.retry) {
+                    btn.disabled = false;
+                    warn.hidden = false;
+                    warn.textContent = data.msg || ("Salah. Sisa " + (data.left || 1) + " kesempatan.");
+                    box.hidden = true;
                 } else {
                     lockDakwa();
                 }
