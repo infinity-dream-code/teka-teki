@@ -123,7 +123,7 @@
             border-color: var(--paper);
         }
 
-        #app, #app2, #app3, #app4 { display: none; min-height: 100vh; }
+        #app, #app2, #app3, #app4, #app5 { display: none; min-height: 100vh; }
 
         .file {
             position: sticky;
@@ -412,6 +412,120 @@
             margin-top: 8px;
         }
 
+        .drawer-panel {
+            margin-top: 16px;
+            padding-top: 16px;
+            border-top: 1px dashed rgba(26,22,18,.22);
+        }
+
+        .drawer-row {
+            display: flex;
+            flex-wrap: wrap;
+            align-items: stretch;
+            gap: 10px;
+            margin-top: 4px;
+        }
+
+        .drawer-row #drawerInput5 {
+            flex: 1 1 140px;
+            max-width: 200px;
+            margin: 0;
+            background: #cfc4ae;
+            border: 1px solid rgba(26,22,18,.35);
+            color: var(--ink);
+            font-size: 18px;
+            letter-spacing: 0.12em;
+            text-align: center;
+            padding: 12px 14px;
+        }
+
+        .drawer-row #drawerInput5::placeholder { color: rgba(26,22,18,.35); }
+        .drawer-row #drawerInput5:focus {
+            outline: none;
+            border-color: var(--rust);
+            background: #d8ccb6;
+        }
+
+        #drawerBtn5 {
+            background: var(--ink);
+            color: var(--paper);
+            padding: 12px 18px;
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 11px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            display: inline-flex;
+            align-items: center;
+            gap: 9px;
+            transition: background .15s ease, opacity .15s ease;
+        }
+
+        #drawerBtn5:hover { background: #2a241e; }
+        #drawerBtn5:disabled { opacity: 0.4; cursor: not-allowed; }
+
+        .drawer-status {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 12px;
+            margin-top: 12px;
+            padding: 10px 12px;
+            border: 1px solid rgba(26,22,18,.18);
+            background: var(--paper-2);
+            color: var(--ink);
+        }
+
+        .drawer-status.is-ok {
+            border-color: rgba(106,61,54,.35);
+            color: var(--rust);
+        }
+
+        .drawer-status.is-bad {
+            border-color: rgba(106,61,54,.45);
+            color: var(--rust);
+        }
+
+        .cabinet-legend {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 10px 16px;
+            margin-top: 10px;
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 11px;
+            color: var(--ink-2);
+        }
+
+        .cabinet-legend span {
+            display: inline-flex;
+            align-items: center;
+            gap: 7px;
+        }
+
+        .cabinet-legend i {
+            width: 12px;
+            height: 12px;
+            display: inline-block;
+            border: 1px solid rgba(26,22,18,.4);
+        }
+
+        .cabinet-legend .lg-a { background: #cfc4ae; }
+        .cabinet-legend .lg-b { background: #b9a78a; }
+        .cabinet-legend .lg-c { background: #a89a86; opacity: .7; }
+
+        .rekaman-lock {
+            text-align: center;
+            padding: 28px 16px 20px;
+        }
+
+        .rekaman-lock .lock-mark {
+            font-size: 28px;
+            color: var(--rust);
+            margin-bottom: 12px;
+        }
+
+        .rekaman-lock p {
+            max-width: 28em;
+            margin: 0 auto;
+        }
+
         label.field {
             display: flex;
             align-items: center;
@@ -435,7 +549,7 @@
 
         textarea#reasonInput { min-height: 88px; resize: vertical; }
 
-        #submitBtn, #submitBtn2, #submitBtn3, #submitBtn4, #saveNameBtn, .btn-paper {
+        #submitBtn, #submitBtn2, #submitBtn3, #submitBtn4, #submitBtn5, #saveNameBtn, .btn-paper {
             background: var(--paper);
             color: var(--bg);
             padding: 11px 16px;
@@ -449,8 +563,8 @@
             transition: background .15s ease;
         }
 
-        #submitBtn:hover, #submitBtn2:hover, #submitBtn3:hover, #submitBtn4:hover, #saveNameBtn:hover, .btn-paper:hover { background: #efe6d4; }
-        #submitBtn:disabled, #submitBtn2:disabled, #submitBtn3:disabled, #submitBtn4:disabled, #saveNameBtn:disabled { opacity: 0.45; cursor: not-allowed; }
+        #submitBtn:hover, #submitBtn2:hover, #submitBtn3:hover, #submitBtn4:hover, #submitBtn5:hover, #saveNameBtn:hover, .btn-paper:hover { background: #efe6d4; }
+        #submitBtn:disabled, #submitBtn2:disabled, #submitBtn3:disabled, #submitBtn4:disabled, #submitBtn5:disabled, #saveNameBtn:disabled { opacity: 0.45; cursor: not-allowed; }
         .btn-paper { display: inline-flex; margin-top: 16px; }
 
         .photo-frame {
@@ -468,7 +582,7 @@
 
         .promo-block { margin-top: 20px; }
         .promo-block .field { margin-top: 12px; }
-        #detectiveNameInput {
+        #detectiveNameInput, #codeInput5 {
             width: 100%;
             max-width: 320px;
             background: var(--bg-2);
@@ -478,6 +592,14 @@
             margin: 8px 0 12px;
             font-family: "IBM Plex Mono", monospace;
         }
+
+        .audio-wrap {
+            background: var(--paper-2);
+            border: 1px solid rgba(26,22,18,.18);
+            padding: 16px;
+        }
+
+        .audio-wrap audio { width: 100%; display: block; }
 
         .flag {
             font-family: "IBM Plex Mono", monospace;
@@ -1123,6 +1245,144 @@
                 <div class="file-notes">
                     <label for="notes4"><i class="fa-solid fa-pen"></i>Catatan Anda</label>
                     <textarea id="notes4" placeholder="Tidak masuk berkas."></textarea>
+                </div>
+            </main>
+    </div>
+
+    <div id="app5">
+        <header class="file">
+            <div class="file-spine">
+                <div>
+                    <small>52/INT/IX/26</small>
+                    <strong>Ruang Interogasi B</strong>
+                </div>
+            </div>
+            <nav>
+                <button class="navbtn active" data-page="laporan" type="button">Laporan</button>
+                <button class="navbtn" data-page="keterangan" type="button">Cain</button>
+                <button class="navbtn" data-page="bukti" type="button">Barang bukti</button>
+                <button class="navbtn" data-page="hitung" type="button">Laci suara</button>
+                <button class="navbtn" data-page="rekaman" type="button">Rekaman</button>
+                <button class="navbtn" data-page="putusan" type="button">Kode</button>
+            </nav>
+        </header>
+        <main>
+                <section class="page active" id="l5-laporan">
+                    <h2><i class="fa-solid fa-file-lines"></i>Laporan awal</h2>
+                    <p class="lede">19 September 2026, 08.20 WIB · Kombes L. Prasetyo · dilimpahkan dari 41/GLD/IX/26</p>
+                    <div class="doc">
+                        <div class="kicker"><i class="fa-solid fa-handcuffs"></i>Keadaan</div>
+                        <p>Cain Wibowo ditahan di Ruang Interogasi B sejak kemarin sore. Ia mengakui masuk Gudang Emas. Ia menolak menyebut siapa yang mengirim surat audit palsu. Pengacara belum datang. Ia hanya bilang: “Hitung dulu, baru dengar.”</p>
+                        <p>Di tas Cain ada kunci logam kecil tanpa angka. Di markas lama seksi logam ditemukan lemari “laci suara” berisi gulungan pita. Satu gulungan cocok dengan kunci itu—jika nomor lacinya benar.</p>
+                        <p>Ini bukan dakwaan nama tersangka baru. Yang dibutuhkan: nama panggung yang tersimpan di rekaman. Cain tahu. Ia tidak mau mengucapkannya.</p>
+                    </div>
+                </section>
+
+                <section class="page" id="l5-keterangan">
+                    <h2><i class="fa-solid fa-user-lock"></i>Cain Wibowo</h2>
+                    <p class="lede">Interogasi 18–19 September. Ia membaca berkas Gudang Emas. Ia tetap pendek.</p>
+                    <div id="wawancara5"></div>
+                </section>
+
+                <section class="page" id="l5-bukti">
+                    <h2><i class="fa-solid fa-magnifying-glass"></i>Barang bukti</h2>
+                    <p class="lede">Nomor sesuai urutan pencatatan.</p>
+                    <div id="bukti5"></div>
+                </section>
+
+                <section class="page" id="l5-hitung">
+                    <h2><i class="fa-solid fa-calculator"></i>Laci suara</h2>
+                    <p class="lede">Lemari pita di gudang bawah seksi logam. Satu kunci. Banyak laci. Salah nomor, pita tidak terbuka.</p>
+                    <div class="doc">
+                        <div class="kicker"><i class="fa-solid fa-table-cells"></i>Denah lemari</div>
+                        <div class="plan-wrap">
+                            <svg viewBox="0 0 360 220" xmlns="http://www.w3.org/2000/svg" aria-label="Denah laci suara">
+                                <rect x="12" y="12" width="336" height="196" fill="#b9ae98" stroke="#1a1612" stroke-width="2"/>
+                                <text x="180" y="36" text-anchor="middle" font-size="12" font-family="IBM Plex Mono, monospace" fill="#1a1612" letter-spacing="2">LACI SUARA</text>
+                                <!-- Blok A -->
+                                <rect x="28" y="52" width="96" height="120" fill="#cfc4ae" stroke="#1a1612" stroke-width="1.2"/>
+                                <line x1="28" y1="76" x2="124" y2="76" stroke="#1a1612" stroke-width="0.8" opacity="0.45"/>
+                                <line x1="28" y1="100" x2="124" y2="100" stroke="#1a1612" stroke-width="0.8" opacity="0.45"/>
+                                <line x1="28" y1="124" x2="124" y2="124" stroke="#1a1612" stroke-width="0.8" opacity="0.45"/>
+                                <line x1="28" y1="148" x2="124" y2="148" stroke="#1a1612" stroke-width="0.8" opacity="0.45"/>
+                                <text x="76" y="118" text-anchor="middle" font-size="13" font-family="IBM Plex Mono, monospace" fill="#1a1612">A</text>
+                                <text x="76" y="136" text-anchor="middle" font-size="10" font-family="IBM Plex Mono, monospace" fill="#4a453e">01–12</text>
+                                <!-- Blok B -->
+                                <rect x="132" y="52" width="96" height="120" fill="#a8926e" stroke="#1a1612" stroke-width="1.8"/>
+                                <line x1="132" y1="76" x2="228" y2="76" stroke="#1a1612" stroke-width="0.8" opacity="0.5"/>
+                                <line x1="132" y1="100" x2="228" y2="100" stroke="#1a1612" stroke-width="0.8" opacity="0.5"/>
+                                <line x1="132" y1="124" x2="228" y2="124" stroke="#1a1612" stroke-width="0.8" opacity="0.5"/>
+                                <line x1="132" y1="148" x2="228" y2="148" stroke="#1a1612" stroke-width="0.8" opacity="0.5"/>
+                                <text x="180" y="112" text-anchor="middle" font-size="13" font-family="IBM Plex Mono, monospace" fill="#1a1612">B</text>
+                                <text x="180" y="130" text-anchor="middle" font-size="10" font-family="IBM Plex Mono, monospace" fill="#1a1612">13–24</text>
+                                <text x="180" y="148" text-anchor="middle" font-size="9" font-family="IBM Plex Mono, monospace" fill="#6a3d36">kunci Cain</text>
+                                <!-- Blok C -->
+                                <rect x="236" y="52" width="96" height="120" fill="#9e9280" stroke="#1a1612" stroke-width="1.2" opacity="0.85"/>
+                                <line x1="236" y1="76" x2="332" y2="76" stroke="#1a1612" stroke-width="0.8" opacity="0.35"/>
+                                <line x1="236" y1="100" x2="332" y2="100" stroke="#1a1612" stroke-width="0.8" opacity="0.35"/>
+                                <line x1="236" y1="124" x2="332" y2="124" stroke="#1a1612" stroke-width="0.8" opacity="0.35"/>
+                                <line x1="236" y1="148" x2="332" y2="148" stroke="#1a1612" stroke-width="0.8" opacity="0.35"/>
+                                <text x="284" y="118" text-anchor="middle" font-size="13" font-family="IBM Plex Mono, monospace" fill="#1a1612">C</text>
+                                <text x="284" y="136" text-anchor="middle" font-size="10" font-family="IBM Plex Mono, monospace" fill="#4a453e">25–36</text>
+                                <text x="180" y="192" text-anchor="middle" font-size="10" font-family="IBM Plex Mono, monospace" fill="#4a453e">masukkan nomor laci di bawah</text>
+                            </svg>
+                        </div>
+                        <div class="cabinet-legend">
+                            <span><i class="lg-a"></i>A · arsip dinas</span>
+                            <span><i class="lg-b"></i>B · titik-garis</span>
+                            <span><i class="lg-c"></i>C · rusak / kosong</span>
+                        </div>
+                        <p class="plan-cap">Nomor dihitung dari I-05. Kunci Cain hanya untuk Blok B.</p>
+
+                        <div class="drawer-panel">
+                            <div class="kicker"><i class="fa-solid fa-key"></i>Buka laci</div>
+                            <label class="field" for="drawerInput5" style="color:var(--ink-2)"><i class="fa-solid fa-hashtag"></i>Nomor laci</label>
+                            <div class="drawer-row">
+                                <input id="drawerInput5" type="text" inputmode="numeric" maxlength="4" autocomplete="off" placeholder="00">
+                                <button id="drawerBtn5" type="button"><i class="fa-solid fa-lock-open"></i>Buka</button>
+                            </div>
+                            <p class="drawer-status is-bad" id="drawerWarn5" hidden></p>
+                            <p class="drawer-status is-ok" id="drawerOk5" hidden>Laci terbuka. Pita ada di tab Rekaman.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="page" id="l5-rekaman">
+                    <h2><i class="fa-solid fa-headphones"></i>Rekaman</h2>
+                    <p class="lede">Hanya muncul setelah laci yang benar dibuka.</p>
+                    <div class="doc" id="rekamanLocked5">
+                        <div class="rekaman-lock">
+                            <div class="lock-mark"><i class="fa-solid fa-lock"></i></div>
+                            <div class="kicker" style="justify-content:center"><i class="fa-solid fa-ban"></i>Terkunci</div>
+                            <p>Belum ada pita. Hitung nomor laci, lalu buka di tab Laci suara.</p>
+                        </div>
+                    </div>
+                    <div class="doc" id="rekamanOpen5" hidden>
+                        <div class="kicker"><i class="fa-solid fa-waveform-lines"></i>I-09 · gulungan laci 19</div>
+                        <div class="audio-wrap">
+                            <audio id="audio5" controls preload="none" src="assets/l5-morse.wav">
+                                Peramban Anda tidak memutar audio.
+                            </audio>
+                        </div>
+                        <p class="plan-cap">Unduh jika perlu. Bunyi pendek dan panjang. Ada jeda antar huruf dan antar kata. Tulis yang Anda dengar di tab Kode.</p>
+                    </div>
+                </section>
+
+                <section class="page" id="l5-putusan">
+                    <h2><i class="fa-solid fa-key"></i>Kode</h2>
+                    <p class="lede">Masukkan nama panggung dari rekaman. Bukan memilih dari daftar. Satu kali. Salah = ditutup.</p>
+                    <div id="accusationForm5" style="margin-top:8px">
+                        <label class="field" for="codeInput5"><i class="fa-solid fa-keyboard"></i>Nama panggung</label>
+                        <input id="codeInput5" type="text" maxlength="64" autocomplete="off" placeholder="-">
+                        <button id="submitBtn5" type="button"><i class="fa-solid fa-paper-plane"></i>Ajukan</button>
+                        <p class="warn" id="formWarn5" hidden></p>
+                    </div>
+                    <div id="resultBox5" hidden style="margin-top:28px"></div>
+                </section>
+
+                <div class="file-notes">
+                    <label for="notes5"><i class="fa-solid fa-pen"></i>Catatan Anda</label>
+                    <textarea id="notes5" placeholder="Tidak masuk berkas."></textarea>
                 </div>
             </main>
     </div>
@@ -1908,6 +2168,97 @@
             }
         ];
 
+        const interviews5 = [
+            {
+                nama: "Cain Wibowo",
+                umur: 46,
+                peran: "Tahanan · Ruang Interogasi B",
+                qa: [
+                    ["Siapa yang mengirim surat audit palsu?", "Saya tidak menyebut nama. Pengacara belum datang."],
+                    ["Apa arti ‘hitung dulu, baru dengar’?", "Ada laci. Ada angka. Salah angka, pita salah. Saya tidak membimbing Anda."],
+                    ["Apakah Anda membunuh Ren?", "Saya sudah bilang di berkas gudang. Saya keluar pukul 05.55. Itu saja yang saya ulang."],
+                    ["Nama panggung orang di atas Anda?", "Saya tidak mengucapkannya di ruangan ini. Ia mendengar lebih dari yang Anda kira."],
+                    ["Kunci logam di tas Anda untuk apa?", "Laci suara. Nomornya bukan tertulis di kunci. Nomornya dihitung."],
+                    ["Apakah rekaman itu suara Anda?", "Bukan. Saya hanya dititipi kunci. Isi pita bukan urusan saya untuk dibacakan."]
+                ]
+            },
+            {
+                nama: "Laras Fitri",
+                umur: 44,
+                peran: "Bidan · dipanggil sebagai saksi luar",
+                qa: [
+                    ["Mengapa Anda di sini?", "Komandan bilang jaringan yang sama. Saya tidak kenal Cain sebelum kemarin."],
+                    ["Pernah dengar nama panggung?", "Di klinik pernah ada pasien bergurau soal ‘orang merah’. Saya kira lelucon film."],
+                    ["Cain bicara apa ke Anda di koridor?", "Ia bilang: jangan tebak. Hitung. Lalu pasang telinga."],
+                    ["Rekaman pita?", "Saya tidak memegang. Saya bidan, bukan arsip suara."]
+                ]
+            },
+            {
+                nama: "Joko Hartono",
+                umur: 41,
+                peran: "Wartawan · Pos Utara",
+                qa: [
+                    ["Ada kolom tentang nama merah?", "Saya pernah tulis teori penonton soal tokoh fiksi. Bukan berita. Komandan marah."],
+                    ["Cain memberi tip?", "Tidak. Ia diam. Lebih diam dari Ren."],
+                    ["Pita suara?", "Saya ingin merekam wawancara. Dilarang. Yang ada di lemari itu milik seksi logam."],
+                    ["Angka di kunci Cain?", "Tidak ada angka. Hanya gigi logam. Nomornya di kertas, katanya."]
+                ]
+            }
+        ];
+
+        const evidence5 = [
+            {
+                kode: "I-01",
+                judul: "Berita acara penahanan",
+                isi: "Cain Wibowo, ditahan 18 September 16.40.\nBarang sitaan: kunci logam tanpa angka, clipboard kosong, surat audit palsu (sama H-12).\nIa menolak menyebut pemberi perintah."
+            },
+            {
+                kode: "I-02",
+                judul: "Catatan pengawal koridor",
+                isi: "18 Sep 21.05: Cain bilang ke Laras, terdengar samar: ‘hitung dulu, baru dengar.’\n21.12: Cain diminta mengulang. Ia menggeleng."
+            },
+            {
+                kode: "I-03",
+                judul: "Lemari laci suara · inventaris",
+                isi: "Blok A 01–12: pita rapat, label tanggal dinas.\nBlok B 13–24: pita ‘titik-garis’, segel lama.\nBlok C 25–36: kosong / rusak.\nKunci Cain membuka satu laci di Blok B jika nomornya tepat."
+            },
+            {
+                kode: "I-04",
+                judul: "Kunci sitaan · uji",
+                isi: "Tidak ada angka terukir.\nGigi cocok pola Blok B.\nTanpa nomor, uji satu per satu dilarang komandan—risiko rusak pita."
+            },
+            {
+                kode: "I-05",
+                judul: "Sobekan di lining tas Cain",
+                isi: "Pensil, tulisan Cain:\n‘Empat dikuadratkan.’\n‘Tambah tiga.’\n‘Itu laciku.’\n\nPinggir kertas: ‘bukan umur. bukan tanggal mati Ren.’"
+            },
+            {
+                kode: "I-06",
+                judul: "Catatan seksi logam · 2019",
+                isi: "Blok B dipakai untuk latihan telegraf pelabuhan.\nIsi: bunyi pendek dan panjang, bukan percakapan.\nSiapa pun yang membuka laci salah mendapat pita latihan kosong atau derau."
+            },
+            {
+                kode: "I-07",
+                judul: "Buku tipis di dalam laci yang cocok kunci",
+                isi: "Judul pudar: sandi kapal.\nHalaman dalam: titik = pendek, garis = panjang.\nJeda antar huruf lebih lama dari jeda dalam huruf.\nJeda antar kata lebih lama lagi.\nTidak ada tabel huruf di buku ini—hapalan atau cari sendiri."
+            },
+            {
+                kode: "I-08",
+                judul: "Label gulungan · laci yang terbuka",
+                isi: "Tinta: ‘untuk yang bisa menghitung.’\nTidak ada nama.\nPita digulung ulang baru-baru ini."
+            },
+            {
+                kode: "I-09",
+                judul: "Berkas audio · tab Rekaman",
+                isi: "Muncul hanya setelah nomor laci benar dimasukkan.\nFormat WAV. Mono.\nTidak ada suara manusia yang berbicara.\nHanya nada pendek dan panjang."
+            },
+            {
+                kode: "I-10",
+                judul: "Umpan angka",
+                isi: "Selembar di lantai interogasi: 138 dan 18°.\nCain tertawa sekali. ‘Itu berkas lama. Bukan laci ini.’"
+            }
+        ];
+
         function bindAccordions(root) {
             root.addEventListener("click", (e) => {
                 const btn = e.target.closest("[data-acc]");
@@ -1960,11 +2311,14 @@
         renderEvidence(document.getElementById("bukti3"), evidence3);
         renderPeople(document.getElementById("wawancara4"), interviews4);
         renderEvidence(document.getElementById("bukti4"), evidence4);
+        renderPeople(document.getElementById("wawancara5"), interviews5);
+        renderEvidence(document.getElementById("bukti5"), evidence5);
 
         const app1 = document.getElementById("app");
         const app2 = document.getElementById("app2");
         const app3 = document.getElementById("app3");
         const app4 = document.getElementById("app4");
+        const app5 = document.getElementById("app5");
         const pages = ["laporan", "korban", "keterangan", "bukti", "rumah", "putusan"];
         let detectiveName = "";
 
@@ -1985,6 +2339,7 @@
             app2.style.display = "none";
             app3.style.display = "none";
             app4.style.display = "none";
+            app5.style.display = "none";
         }
 
         function openApp(page) {
@@ -2016,6 +2371,14 @@
             document.title = "41/GLD/IX/26";
             localStorage.setItem("mtr19b-level", "4");
             showPageIn(app4, "l4-", page || "laporan");
+        }
+
+        function openLevel5(page) {
+            hideApps();
+            app5.style.display = "block";
+            document.title = "52/INT/IX/26";
+            localStorage.setItem("mtr19b-level", "5");
+            showPageIn(app5, "l5-", page || "laporan");
         }
 
         function addNextButton(box) {
@@ -2139,6 +2502,21 @@
             const box = document.getElementById("resultBox4");
             box.hidden = false;
             box.innerHTML = html;
+            if (document.getElementById("toLevel5")) return;
+            const b = document.createElement("button");
+            b.id = "toLevel5";
+            b.type = "button";
+            b.className = "btn-paper";
+            b.innerHTML = '<i class="fa-solid fa-arrow-right"></i>Lanjut ke berkas berikutnya';
+            b.addEventListener("click", () => openLevel5("laporan"));
+            box.appendChild(b);
+        }
+
+        function showL5Solved(html) {
+            document.getElementById("accusationForm5").style.display = "none";
+            const box = document.getElementById("resultBox5");
+            box.hidden = false;
+            box.innerHTML = html;
         }
 
         app1.querySelector("nav").addEventListener("click", (e) => {
@@ -2165,10 +2543,16 @@
             showPageIn(app4, "l4-", btn.dataset.page);
         });
 
+        app5.querySelector("nav").addEventListener("click", (e) => {
+            const btn = e.target.closest(".navbtn");
+            if (!btn) return;
+            showPageIn(app5, "l5-", btn.dataset.page);
+        });
+
         document.getElementById("openBtn").addEventListener("click", () => openApp());
 
         const boot = location.hash.replace("#", "");
-        if (boot === "l2" || boot === "l3" || boot === "l4") {
+        if (boot === "l2" || boot === "l3" || boot === "l4" || boot === "l5") {
             /* dibuka sesudah cek status */
         } else if (boot && pages.includes(boot)) {
             openApp(boot);
@@ -2189,6 +2573,60 @@
         const notes4 = document.getElementById("notes4");
         notes4.value = localStorage.getItem("mtr41-notes") || "";
         notes4.addEventListener("input", () => localStorage.setItem("mtr41-notes", notes4.value));
+
+        const notes5 = document.getElementById("notes5");
+        notes5.value = localStorage.getItem("mtr52-notes") || "";
+        notes5.addEventListener("input", () => localStorage.setItem("mtr52-notes", notes5.value));
+
+        function setDrawerUnlocked5(ok) {
+            document.getElementById("rekamanLocked5").hidden = ok;
+            document.getElementById("rekamanOpen5").hidden = !ok;
+            document.getElementById("drawerOk5").hidden = !ok;
+            document.getElementById("drawerBtn5").disabled = ok;
+            if (ok) {
+                document.getElementById("drawerWarn5").hidden = true;
+                document.getElementById("drawerInput5").value = "19";
+            }
+        }
+
+        if (localStorage.getItem("mtr52-drawer") === "1") {
+            setDrawerUnlocked5(true);
+        }
+
+        document.getElementById("drawerBtn5").addEventListener("click", () => {
+            const raw = document.getElementById("drawerInput5").value.trim();
+            const warn = document.getElementById("drawerWarn5");
+            const num = parseInt(raw.replace(/\D/g, ""), 10);
+            if (!raw || Number.isNaN(num)) {
+                warn.hidden = false;
+                warn.textContent = "Isi nomor laci.";
+                return;
+            }
+            if (num === 19) {
+                localStorage.setItem("mtr52-drawer", "1");
+                setDrawerUnlocked5(true);
+                return;
+            }
+            warn.hidden = false;
+            if (num >= 13 && num <= 24) {
+                warn.textContent = "Laci terbuka. Isinya pita latihan kosong / derau. Bukan yang dicari.";
+            } else if (num < 1 || num > 36) {
+                warn.textContent = "Nomor di luar lemari (01–36).";
+            } else {
+                warn.hidden = true;
+            }
+            setDrawerUnlocked5(false);
+            localStorage.removeItem("mtr52-drawer");
+            const audio = document.getElementById("audio5");
+            if (audio) {
+                audio.pause();
+                audio.currentTime = 0;
+            }
+        });
+
+        document.getElementById("drawerInput5").addEventListener("keydown", (e) => {
+            if (e.key === "Enter") document.getElementById("drawerBtn5").click();
+        });
 
         const rejectedHtml = `
                         <div class="doc">
@@ -2211,6 +2649,7 @@
             showBlockedOn("accusationForm2", "resultBox2");
             showBlockedOn("accusationForm3", "resultBox3");
             showBlockedOn("accusationForm4", "resultBox4");
+            showBlockedOn("accusationForm5", "resultBox5");
         }
 
         if (localStorage.getItem("mtr19b-dakwa-lock") === "1") {
@@ -2275,25 +2714,70 @@
             showL4Solved(data.html);
         });
 
+        document.getElementById("submitBtn5").addEventListener("click", async () => {
+            const code = document.getElementById("codeInput5").value.trim();
+            const warn = document.getElementById("formWarn5");
+            const box = document.getElementById("resultBox5");
+            const btn = document.getElementById("submitBtn5");
+            if (!code) {
+                warn.hidden = false;
+                warn.textContent = "Isi nama panggung terlebih dahulu.";
+                box.hidden = true;
+                return;
+            }
+            warn.hidden = true;
+            btn.disabled = true;
+            try {
+                const res = await fetch("api/dakwa5", {
+                    method: "POST",
+                    cache: "no-store",
+                    credentials: "same-origin",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ code })
+                });
+                const data = await res.json();
+                box.hidden = false;
+                if (data.need) {
+                    btn.disabled = false;
+                    warn.hidden = false;
+                    warn.textContent = "Berkas ini belum dibuka.";
+                    box.hidden = true;
+                    return;
+                }
+                if (data.ok) {
+                    localStorage.setItem("mtr19b-l5-ok", "1");
+                    showL5Solved(data.html);
+                } else {
+                    lockDakwa();
+                }
+            } catch (err) {
+                btn.disabled = false;
+                warn.hidden = false;
+                warn.textContent = "Berkas tidak terkirim.";
+            }
+        });
+
         (async () => {
             try {
-                const [r1, r2, r3, r4, rn] = await Promise.all([
+                const [r1, r2, r3, r4, r5, rn] = await Promise.all([
                     fetch("api/dakwa", { method: "GET", cache: "no-store", credentials: "same-origin" }),
                     fetch("api/dakwa2", { method: "GET", cache: "no-store", credentials: "same-origin" }),
                     fetch("api/dakwa3", { method: "GET", cache: "no-store", credentials: "same-origin" }),
                     fetch("api/dakwa4", { method: "GET", cache: "no-store", credentials: "same-origin" }),
+                    fetch("api/dakwa5", { method: "GET", cache: "no-store", credentials: "same-origin" }),
                     fetch("api/nama", { method: "GET", cache: "no-store", credentials: "same-origin" })
                 ]);
                 const data = await r1.json();
                 const data2 = await r2.json();
                 const data3 = await r3.json();
                 const data4 = await r4.json();
+                const data5 = await r5.json();
                 const dataN = await rn.json();
                 if (dataN.name) {
                     detectiveName = dataN.name;
                     localStorage.setItem("mtr19b-det-name", detectiveName);
                 }
-                if (data.blocked || data2.blocked || data3.blocked || data4.blocked || dataN.blocked) lockDakwa();
+                if (data.blocked || data2.blocked || data3.blocked || data4.blocked || data5.blocked || dataN.blocked) lockDakwa();
                 if (data.l1 && data.html) {
                     localStorage.setItem("mtr19b-l1-ok", "1");
                     showL1Solved(data.html);
@@ -2302,8 +2786,17 @@
                     localStorage.setItem("mtr19b-l2-ok", "1");
                     showL2Solved(data2.html);
                 }
+                if (data5.l5 && data5.html) {
+                    showL5Solved(data5.html);
+                    openLevel5("putusan");
+                    return;
+                }
                 if (data4.l4 && data4.html) {
                     showL4Solved(data4.html);
+                    if (localStorage.getItem("mtr19b-level") === "5" || boot === "l5") {
+                        openLevel5("laporan");
+                        return;
+                    }
                     openLevel4("putusan");
                     return;
                 }
@@ -2317,7 +2810,8 @@
                     return;
                 }
                 const lvl = localStorage.getItem("mtr19b-level");
-                if (data3.l3 && detectiveName && (lvl === "4" || boot === "l4")) openLevel4("laporan");
+                if (data4.l4 && (lvl === "5" || boot === "l5")) openLevel5("laporan");
+                else if (data3.l3 && detectiveName && (lvl === "4" || boot === "l4")) openLevel4("laporan");
                 else if (data2.l2 && (lvl === "3" || boot === "l3")) openLevel3("laporan");
                 else if (data2.l2 && (lvl === "2" || boot === "l2")) openLevel2("laporan");
                 else if (data2.l2) openLevel2("putusan");

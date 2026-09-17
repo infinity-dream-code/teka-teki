@@ -86,6 +86,10 @@ function has_l4() {
     return !empty($_COOKIE['mtr19_l4']);
 }
 
+function has_l5() {
+    return !empty($_COOKIE['mtr19_l5']);
+}
+
 function names_path() {
     $dir = dirname(__DIR__) . '/data';
     if (!is_dir($dir)) {
