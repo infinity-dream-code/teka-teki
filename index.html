@@ -123,7 +123,7 @@
             border-color: var(--paper);
         }
 
-        #app, #app2, #app3 { display: none; min-height: 100vh; }
+        #app, #app2, #app3, #app4 { display: none; min-height: 100vh; }
 
         .file {
             position: sticky;
@@ -435,7 +435,7 @@
 
         textarea#reasonInput { min-height: 88px; resize: vertical; }
 
-        #submitBtn, #submitBtn2, #submitBtn3, .btn-paper {
+        #submitBtn, #submitBtn2, #submitBtn3, #submitBtn4, #saveNameBtn, .btn-paper {
             background: var(--paper);
             color: var(--bg);
             padding: 11px 16px;
@@ -449,9 +449,35 @@
             transition: background .15s ease;
         }
 
-        #submitBtn:hover, #submitBtn2:hover, #submitBtn3:hover, .btn-paper:hover { background: #efe6d4; }
-        #submitBtn:disabled, #submitBtn2:disabled, #submitBtn3:disabled { opacity: 0.45; cursor: not-allowed; }
+        #submitBtn:hover, #submitBtn2:hover, #submitBtn3:hover, #submitBtn4:hover, #saveNameBtn:hover, .btn-paper:hover { background: #efe6d4; }
+        #submitBtn:disabled, #submitBtn2:disabled, #submitBtn3:disabled, #submitBtn4:disabled, #saveNameBtn:disabled { opacity: 0.45; cursor: not-allowed; }
         .btn-paper { display: inline-flex; margin-top: 16px; }
+
+        .photo-frame {
+            background: var(--paper-2);
+            padding: 12px;
+            border: 1px solid rgba(26,22,18,.18);
+        }
+
+        .photo-frame img {
+            display: block;
+            width: 100%;
+            height: auto;
+            filter: sepia(0.25) contrast(1.05);
+        }
+
+        .promo-block { margin-top: 20px; }
+        .promo-block .field { margin-top: 12px; }
+        #detectiveNameInput {
+            width: 100%;
+            max-width: 320px;
+            background: var(--bg-2);
+            border: 1px solid var(--line);
+            color: var(--paper);
+            padding: 11px 12px;
+            margin: 8px 0 12px;
+            font-family: "IBM Plex Mono", monospace;
+        }
 
         .flag {
             font-family: "IBM Plex Mono", monospace;
@@ -959,6 +985,144 @@
                 <div class="file-notes">
                     <label for="notes3"><i class="fa-solid fa-pen"></i>Catatan Anda</label>
                     <textarea id="notes3" placeholder="Tidak masuk berkas."></textarea>
+                </div>
+            </main>
+    </div>
+
+    <div id="app4">
+        <header class="file">
+            <div class="file-spine">
+                <div>
+                    <small>41/GLD/IX/26</small>
+                    <strong>Gudang Emas Utara</strong>
+                </div>
+            </div>
+            <nav>
+                <button class="navbtn active" data-page="laporan" type="button">Laporan</button>
+                <button class="navbtn" data-page="korban" type="button">Korban</button>
+                <button class="navbtn" data-page="keterangan" type="button">Delapan orang</button>
+                <button class="navbtn" data-page="bukti" type="button">Barang bukti</button>
+                <button class="navbtn" data-page="rumah" type="button">Ruang arsip</button>
+                <button class="navbtn" data-page="foto" type="button">Foto</button>
+                <button class="navbtn" data-page="putusan" type="button">Dakwaan</button>
+            </nav>
+        </header>
+        <main>
+                <section class="page active" id="l4-laporan">
+                    <h2><i class="fa-solid fa-file-lines"></i>Laporan awal</h2>
+                    <p class="lede">18 September 2026, 09.10 WIB · Kombes L. Prasetyo · dilimpahkan dari 88/UTR/IX/26 · Detektif Tetap</p>
+                    <div class="doc">
+                        <div class="kicker"><i class="fa-solid fa-skull"></i>Kejadian</div>
+                        <p>Rendra Halim, 51, arsiparis Gudang Emas Utara, ditemukan digantung di ruang arsip lantai dua pukul 06.18. Pintu terkunci dari dalam. Kunci di lubang, sisi dalam. Surat pendek di meja. Polisi lokal menulis bunuh diri. Berkas Pelabuhan Utara sudah dilimpahkan. Ini berkas baru.</p>
+                        <p>Ren mengurus inventaris logam dan folio lama. Pukul 01.12 tanggal 17 ia menelepon satpam: “jangan tutup laci delapan.” Panggilan terputus. Tidak ada TS-07 di sini. Tidak ada grid Whitechapel. Siapa pun yang mengulang pola pelabuhan akan tersesat.</p>
+                        <p>Delapan orang ada di kawasan itu dini hari atau datang pagi untuk “audit.” Satu di antara mereka memegang utas ke jaringan yang lebih besar. Ren hampir berbicara. Seseorang memutusnya.</p>
+                    </div>
+                </section>
+
+                <section class="page" id="l4-korban">
+                    <h2><i class="fa-solid fa-user-injured"></i>Korban</h2>
+                    <p class="lede">Halim, Rendra · arsiparis · “Ren”</p>
+                    <div class="doc">
+                        <div class="meta-row">
+                            Lahir 4 Januari 1975, Tanjung Priok<br>
+                            Istri: Sari Halim. Tidak ada anak.<br>
+                            Bekerja di Gudang Emas sejak 2009. Kunci master ruang arsip atas namanya.<br>
+                            Tidak ada riwayat depresi di rekam klinik perusahaan. Tidak ada racun di toksikologi awal.
+                        </div>
+                    </div>
+                    <div class="doc">
+                        <div class="kicker"><i class="fa-solid fa-book"></i>Buku saku · 14–17 September</div>
+                        <p><i>14 September.</i> Surat audit masuk. Nama dan tanggal di lembar kabur. Jangan serahkan buku hitam.</p>
+                        <p><i>15 September.</i> Kabar pelabuhan. Bukan urusanku. Laci 08 dikunci ganda.</p>
+                        <p><i>16 September.</i> Seseorang minta foto lemari. Saya ambil siang. Metadata jangan dihapus, katanya. Aneh.</p>
+                        <p><i>16 September, malam.</i> Ada yang di laci. Ada yang di pintu. Foto jangan dilupakan.</p>
+                        <p><i>17 September, pagi.</i> Kalau aku tidak pulang: tanya yang memegang buku. Bukan yang di koran.</p>
+                    </div>
+                </section>
+
+                <section class="page" id="l4-keterangan">
+                    <h2><i class="fa-solid fa-users"></i>Delapan orang</h2>
+                    <p class="lede">Wawancara terpisah, 18 September pukul 09.40–17.05. Tidak ada yang membaca keterangan yang lain.</p>
+                    <div id="wawancara4"></div>
+                </section>
+
+                <section class="page" id="l4-bukti">
+                    <h2><i class="fa-solid fa-magnifying-glass"></i>Barang bukti</h2>
+                    <p class="lede">Nomor sesuai urutan pencatatan, bukan urutan pentingnya.</p>
+                    <div id="bukti4"></div>
+                </section>
+
+                <section class="page" id="l4-rumah">
+                    <h2><i class="fa-solid fa-warehouse"></i>Ruang arsip</h2>
+                    <p class="lede">Lantai dua gudang. Satu pintu. Jendela tinggi berjeruji.</p>
+                    <div class="split">
+                        <div class="doc">
+                            <div class="kicker"><i class="fa-solid fa-door-closed"></i>Denah</div>
+                            <div class="plan-wrap">
+                                <svg viewBox="0 0 320 220" xmlns="http://www.w3.org/2000/svg">
+                                    <rect x="8" y="8" width="304" height="204" fill="none" stroke="#1a1612" stroke-width="1.5"/>
+                                    <rect x="8" y="8" width="90" height="204" fill="none" stroke="#1a1612"/>
+                                    <text x="53" y="100" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#1a1612">PINTU</text>
+                                    <text x="53" y="116" text-anchor="middle" font-size="8" font-family="IBM Plex Mono, monospace" fill="#4a453e">kunci dalam</text>
+                                    <rect x="98" y="8" width="214" height="100" fill="none" stroke="#1a1612"/>
+                                    <text x="205" y="55" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#1a1612">LEMARI FOLIO</text>
+                                    <text x="205" y="72" text-anchor="middle" font-size="8" font-family="IBM Plex Mono, monospace" fill="#4a453e">laci 01–12</text>
+                                    <rect x="98" y="108" width="120" height="104" fill="none" stroke="#1a1612"/>
+                                    <text x="158" y="160" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#1a1612">MEJA</text>
+                                    <rect x="218" y="108" width="94" height="104" fill="none" stroke="#1a1612"/>
+                                    <text x="265" y="155" text-anchor="middle" font-size="10" font-family="IBM Plex Mono, monospace" fill="#1a1612">JENDELA</text>
+                                    <text x="265" y="172" text-anchor="middle" font-size="8" font-family="IBM Plex Mono, monospace" fill="#4a453e">jeruji</text>
+                                </svg>
+                            </div>
+                            <p class="plan-cap">Stempel kayu di atas kusen dalam: empat huruf kapital, diakhiri titik. Bukan kata penuh. Tali di balok atap, bukan di kisi jendela.</p>
+                        </div>
+                        <div class="doc">
+                            <div class="kicker"><i class="fa-solid fa-shoe-prints"></i>Debu dan kunci</div>
+                            <p>Anak tangga kayu ke lantai dua: jejak turun sesudah pukul 05.50, sol karet, bukan sepatu Ren. Di dalam ruangan jejak saling tumpang tindih dekat meja; yang masih jelas hanya selop Ren ke arah balok. Jejak sol karet tidak ada di dalam—hanya di tangga turun.</p>
+                            <p>Kunci di lubang dari dalam. Engsel bawah longgar kira-kira tiga milimeter. Pintu bisa ditutup dari luar tanpa memutar kunci lagi, jika daunnya sudah dikunci sebelumnya. Agus menemukan pintu terkunci pukul 06.05.</p>
+                        </div>
+                    </div>
+                </section>
+
+                <section class="page" id="l4-foto">
+                    <h2><i class="fa-solid fa-camera"></i>Foto</h2>
+                    <p class="lede">Berkas JPEG dari kamera dinas Ren. Unduh dulu, lalu buka properti berkasnya. Jangan hanya melihat gambarnya.</p>
+                    <div class="doc">
+                        <div class="kicker"><i class="fa-solid fa-image"></i>H-09 · foto laci 08</div>
+                        <div class="photo-frame">
+                            <a href="assets/l4-foto.jpg" download="l4-foto.jpg">
+                                <img src="assets/l4-foto.jpg" alt="Foto laci 08 ruang arsip">
+                            </a>
+                        </div>
+                        <p class="plan-cap">Klik gambar untuk mengunduh. Ada yang tersimpan di properti berkas, bukan di gambarnya.</p>
+                    </div>
+                </section>
+
+                <section class="page" id="l4-putusan">
+                    <h2><i class="fa-solid fa-gavel"></i>Dakwaan</h2>
+                    <p class="lede">Pilih satu nama—orang yang memegang utas, bukan dalang. Satu kali. Jika salah, dakwaan ditutup.</p>
+                    <div id="accusationForm4" style="margin-top:8px">
+                        <label class="field" for="suspectSelect4"><i class="fa-solid fa-fingerprint"></i>Nama</label>
+                        <select id="suspectSelect4">
+                            <option value="">-</option>
+                            <option value="sari">Sari Halim</option>
+                            <option value="doni">Doni Prasetya</option>
+                            <option value="budi">Budi Santoso</option>
+                            <option value="joko">Joko Hartono</option>
+                            <option value="agus">Agus Mahendra</option>
+                            <option value="nina">Nina Kartika</option>
+                            <option value="hendra">Hendra Gunawan</option>
+                            <option value="cain">Cain Wibowo</option>
+                        </select>
+                        <button id="submitBtn4" type="button"><i class="fa-solid fa-paper-plane"></i>Ajukan</button>
+                        <p class="warn" id="formWarn4" hidden></p>
+                    </div>
+                    <div id="resultBox4" hidden style="margin-top:28px"></div>
+                </section>
+
+                <div class="file-notes">
+                    <label for="notes4"><i class="fa-solid fa-pen"></i>Catatan Anda</label>
+                    <textarea id="notes4" placeholder="Tidak masuk berkas."></textarea>
                 </div>
             </main>
     </div>
@@ -1564,6 +1728,186 @@
             }
         ];
 
+        const interviews4 = [
+            {
+                nama: "Sari Halim",
+                umur: 48,
+                peran: "Istri · tinggal di Pluit",
+                qa: [
+                    ["Apa yang terjadi malam 16 September di rumah Anda?", "Ren pulang kira-kira pukul 21.00. Ia gelisah. Bilang ada orang yang akan audit gudang. Saya tidur. Pagi-pagi sekali ia sudah berangkat, seperti biasa kalau lembur."],
+                    ["Surat pendek di meja ruang arsip, apakah tulisan suami Anda?", "Itu bukan tulisannya minggu ini. Bentuk huruf r-nya beda. Saya tidak membunuh suami saya."],
+                    ["Apakah Anda pernah melihat buku inventaris hitam yang disebut Ren?", "Tidak pernah. Ia bilang itu urusan dinas, bukan urusan rumah."],
+                    ["Apa yang Anda tahu tentang Cain Wibowo?", "Namanya ada di surat yang ia bawa pulang. Ren bilang itu auditor. Saya tidak pernah bertemu wajahnya."],
+                    ["Di mana Anda dini hari 17 September?", "Di rumah, Pluit. Tetangga mendengar radio saya. Saya tidak ke gudang."],
+                    ["Siapa yang memegang kamera dinas suami Anda?", "Bukan saya. Saya tidak memotret laci mana pun."]
+                ]
+            },
+            {
+                nama: "Doni Prasetya",
+                umur: 39,
+                peran: "Rekan arsip · shift malam",
+                qa: [
+                    ["Sampai jam berapa shift Anda malam 16 ke 17 September?", "Sampai pukul 01.00. Ren bilang ia akan lembur sendiri. Saya pulang. Kunci cadangan ada pada saya, tapi saya tidak naik lagi ke lantai dua."],
+                    ["Apa isi laci nomor 08, sejauh yang Anda tahu?", "Folio lama dan cap ekspor. Ren tidak suka orang lain membuka. Saya tidak membuka."],
+                    ["Apakah jejak sol karet di tangga milik Anda?", "Bukan. Sepatu saya kets putih. Laporan menyebutkan sol karet hitam."],
+                    ["Apakah Anda yang menelepon satpam pukul 01.12?", "Bukan. Suaranya suara Ren."],
+                    ["Apakah Anda terlibat kasus Pelabuhan Utara?", "Saya hanya baca koran. Itu bukan pekerjaan saya."],
+                    ["Apakah Anda bertemu Cain Wibowo dini hari itu?", "Tidak. Saya sudah pulang. Agus yang bilang ada orang berjas abu-abu membawa clipboard."]
+                ]
+            },
+            {
+                nama: "Budi Santoso",
+                umur: 39,
+                peran: "Jagal · kios pelabuhan · dipanggil ulang",
+                qa: [
+                    ["Mengapa Anda dipanggil ke berkas gudang ini?", "Polisi bilang polanya mirip kasus pelabuhan. Saya tidak pernah ke Gudang Emas. Darah di apron saya darah sapi. Pisau saya terkunci di kios."],
+                    ["Apakah Anda kenal Rendra Halim?", "Tidak. Ia bukan langganan saya. Saya tidak kenal arsiparis."],
+                    ["Apakah nama Jack the Ripper ada urusan dengan Anda?", "Itu nama koran. Saya bosan ditanya itu."],
+                    ["Di mana Anda dini hari 17 September?", "Tidur di atas kios. Tetangga mendengar saya mendengkur."],
+                    ["Apakah Anda memegang buku catatan rahasia milik Ren?", "Saya hanya punya buku dagang biasa. Bukan rahasia siapa-siapa."],
+                    ["Apakah Anda kenal Cain Wibowo?", "Tidak kenal."]
+                ]
+            },
+            {
+                nama: "Joko Hartono",
+                umur: 41,
+                peran: "Wartawan · Pos Utara",
+                qa: [
+                    ["Kapan Anda tiba di Gudang Emas?", "Pagi 17 September, sesudah ada telepon anonim. Saya memotret pintu dari luar. Saya tidak masuk sebelum polisi membuka."],
+                    ["Ada surat baru atas nama Jack the Ripper ke redaksi Anda?", "Masuk malam 17. Cap palsu. Saya kira peniru kasus pelabuhan. Saya siapkan draf berita; polisi menyuruh menahan terbit."],
+                    ["Apakah Ren pernah memberi tip berita kepada Anda?", "Sesekali. Biasanya soal inventaris yang bocor. Bukan nama besar."],
+                    ["Mengapa angka 138 disebut di sekitar berkas ini?", "Itu dari surat lama kasus pelabuhan. Di surat baru ke redaksi, angka itu tidak ada."],
+                    ["Dari mana Anda tahu nama Cain Wibowo?", "Saya baca di buku catatan satpam. Saya tidak mewawancarainya pagi itu."],
+                    ["Apakah Anda sudah menemukan siapa pemegang buku hitam?", "Belum. Saya ingin mewawancarai orang itu. Belum ketemu."]
+                ]
+            },
+            {
+                nama: "Agus Mahendra",
+                umur: 52,
+                peran: "Satpam gerbang gudang",
+                qa: [
+                    ["Apa isi telepon Ren pukul 01.12?", "Ia bilang jangan tutup laci delapan. Lalu putus. Saya naik ke lantai dua pukul 06.05; pintu terkunci; saya panggil dinas."],
+                    ["Siapa saja yang masuk lewat gerbang dini hari 17 September?", "Ren pukul 04.40. Satu orang lagi pukul 05.20, berjas, bilang audit dini. Saya catat namanya Cain Wibowo. Ia keluar sendirian pukul 05.55."],
+                    ["Siapa yang memegang kunci ruang arsip lantai dua?", "Kunci master milik Ren. Kunci cadangan milik Doni. Saya tidak punya."],
+                    ["Apa yang Anda ingat tentang stempel di atas kusen pintu?", "Empat huruf kapital lalu titik. Ren pernah bilang hubungannya dengan kata ARCHIVE. Saya lupa huruf mana saja yang ia maksud."],
+                    ["Apakah Budi Santoso lewat gerbang Anda malam itu?", "Tidak."],
+                    ["Kapan Joko Hartono datang?", "Pagi, sesudah saya menemukan pintu terkunci."]
+                ]
+            },
+            {
+                nama: "Nina Kartika",
+                umur: 44,
+                peran: "Dokter forensik · laporan awal",
+                qa: [
+                    ["Apakah Anda yakin ini bunuh diri?", "Saya menulis sementara begitu. Alur tali di leher naik ke balok. Tapi ada memar genggaman di lengan yang tidak cocok. Saya minta otopsi penuh. Komandan lokal menekan supaya berkas ditutup."],
+                    ["Berapa perkiraan waktu kematiannya?", "Antara pukul 05.40 dan 06.00. Saat ditemukan pukul 06.18, kaku mayat belum penuh."],
+                    ["Apakah alat ukur TS-07 dari berkas pelabuhan relevan di sini?", "Tidak. Itu urusan pelabuhan, bukan gudang ini."],
+                    ["Apakah ada racun?", "Uji cepat negatif. Menunggu hasil laboratorium."],
+                    ["Apa kesan Anda saat memeriksa Cain Wibowo?", "Sekitar pukul delapan pagi. Ia tenang. Tidak ada darah di jasnya."],
+                    ["Apakah Anda menandatangani laporan akhir bunuh diri?", "Belum. Saya menolak tanpa otopsi penuh."]
+                ]
+            },
+            {
+                nama: "Hendra Gunawan",
+                umur: 55,
+                peran: "Pedagang logam · langganan gudang",
+                qa: [
+                    ["Apakah Anda berhutang kepada Ren?", "Ada urusan emas rongsokan. Ren mencatat di buku dinas, bukan buku hitam. Saya sudah bayar minggu lalu."],
+                    ["Di mana Anda dini hari 17 September?", "Di Cakung. Struk bensin ada."],
+                    ["Apa yang Anda tahu tentang isi laci 08?", "Ren pernah bilang isinya cap ekspor lama. Kalau ia mengode nama logam, ia suka pakai bahasa Inggris. Saya tidak punya kuncinya."],
+                    ["Siapa yang menulis deretan angka di dinding dalam laci?", "Bukan saya. Ren yang suka bermain angka. Katanya deret itu belum selesai kalau belum buka daftar."],
+                    ["Apa urusan Anda dengan Cain Wibowo?", "Ia mengaku auditor. Ia menanyakan stok saya. Saya beri faktur."],
+                    ["Apa alasan Anda ingin Ren tetap hidup?", "Ia yang mengurus catatan langganan saya. Saya rugi kalau ia mati."]
+                ]
+            },
+            {
+                nama: "Cain Wibowo",
+                umur: 46,
+                peran: "Konsultan inventaris · datang untuk audit",
+                qa: [
+                    ["Siapa yang mengirim Anda ke Gudang Emas?", "Surat dinas seksi logam. Parafnya kabur. Saya bilang itu audit rutin."],
+                    ["Mengapa Anda masuk pukul 05.20 dini hari?", "Ren sudah di dalam. Kami bicara singkat. Ia terlihat gelisah. Saya keluar pukul 05.55. Saya tidak mengunci dia di dalam."],
+                    ["Apakah Anda membawa pulang buku inventaris hitam?", "Saya hanya melihat buku resmi di rak. Saya tidak membawa pulang apa pun."],
+                    ["Apakah Anda memegang kamera dinas Ren atau mengubah fotonya?", "Saya tidak memegang kameranya. Saya tidak tahu isi berkas fotonya."],
+                    ["Apakah ada sandi atau kode yang Ren tunjukkan kepada Anda?", "Saya tidak mengerti kode. Saya konsultan barang, bukan sandi."],
+                    ["Siapa atasan Anda dalam audit ini?", "Di surat tidak ada nama orang. Hanya nomor berkas. Saya tidak mengaku apa pun tanpa pengacara."]
+                ]
+            }
+        ];
+
+        const evidence4 = [
+            {
+                kode: "H-01",
+                judul: "Pemeriksaan luar",
+                isi: "Ligatur di leher, alur naik ke balok. Memar genggaman pada lengan kiri. Tidak ada tinju di wajah.\nDebu sol karet di anak tangga, arah turun, sesudah jejak Ren naik. Di dalam ruangan jejak tumpang tindih; yang jelas selop Ren ke balok.\nKunci di dalam. Engsel bawah longgar.\nWaktu kematian perkiraan 05.40–06.00 WIB, 17 September 2026."
+            },
+            {
+                kode: "H-02",
+                judul: "Surat di meja",
+                isi: "‘Maaf Sari. Saya lelah. Jangan salahkan siapa-siapa.’\nKertas fotokopi. Toner kira-kira tahun 2023. Tinta bolpoin di atas toner, goyang dipaksakan.\nPerbandingan dengan buku saku: huruf r dan k tidak cocok."
+            },
+            {
+                kode: "H-03",
+                judul: "Surat ‘Dear Boss’ · redaksi Pos Utara",
+                isi: "Masuk 17 September malam. Ejaan terlalu rapi. Cap pos Menteng palsu.\nIsi meniru kasus pelabuhan. Angka 138 tidak ada.\nJoko menyiapkan draf; polisi menyuruh menahan terbit. Bukan bukti gudang—umpan."
+            },
+            {
+                kode: "H-04",
+                judul: "Log satpam · 17 September",
+                isi: "04.40  Rendra Halim masuk, master key\n05.20  Cain Wibowo masuk, surat audit, clipboard\n05.55  Cain Wibowo keluar, sendirian\n06.05  Agus Mahendra naik cek lantai dua\n06.18  Pintu diketuk, tidak dijawab, dinas dipanggil"
+            },
+            {
+                kode: "H-05",
+                judul: "Laci 08 · isi",
+                isi: "Folio cap ekspor 1990-an.\nDi dinding dalam laci, kapur:\n3, 9, 27, 81, ?\n\nKertas saku Ren:\n‘Setiap suku ×3. Tulis angka di tanda tanya.’\n‘Jumlah digit angka itu = nomor di daftar.’\n\nMargin, contoh latihan (bukan kasus ini):\n2, 4, 8, ? → 16 → 1+6 = 7.\nHanya cara hitung."
+            },
+            {
+                kode: "H-06",
+                judul: "Daftar kata di balik papan inventaris",
+                isi: "Tulisan tangan Ren, nomor 1–12:\n1 SILVER\n2 IRON\n3 LEAD\n4 TIN\n5 BRASS\n6 COPPER\n7 BRONZE\n8 STEEL\n9 GOLD\n10 ZINC\n11 NICKEL\n12 CHROME\n\nPensil di pinggir, goyang:\n‘Kalau deret macet, pakai tanggal. Jumlahkan angkanya sampai satu digit. Harus sama dengan hasil deret.’"
+            },
+            {
+                kode: "H-07",
+                judul: "Stempel kusen pintu arsip",
+                isi: "Catatan petugas di bawah stempel:\nEmpat huruf kapital lalu titik. Cat tua.\nBukan kata ARCHIVE yang ditulis penuh.\nDi kertas kecil menempel di bawah stempel, tulisan Ren pudar: ‘ambil depan ARCHIVE.’"
+            },
+            {
+                kode: "H-08",
+                judul: "Catatan sandi Ren · sobekan",
+                isi: "Sobekan di tempat sampah bawah meja. Banyak yang luntur.\n\n‘…bukan geser satu. Kata yang diulang.’\n‘Daftar dulu. Pintu belakangan.’\n\nDi balik sobekan, stempel perpustakaan kecil: VIGENERE, 1883, hlm. 12.\nSisa teks tidak terbaca."
+            },
+            {
+                kode: "H-09",
+                judul: "Foto JPEG · lihat tab Foto",
+                isi: "Kamera GLD-CAM.\nBuku saku Ren: foto diambil 16 September siang.\nTanggal di dalam berkas foto: 2026:09:17 06:22:00 — tidak cocok; bisa diubah orang lain, atau jam kamera salah.\n\nDi properti berkas (deskripsi / komentar pengguna) ada deretan huruf kapital tanpa spasi.\nBukan Base64. Bukan rot13."
+            },
+            {
+                kode: "H-10",
+                judul: "CCTV gerbang · cuplikan",
+                isi: "Cain masuk 05.20, keluar 05.55. Wajah jelas.\nTidak ada Budi. Tidak ada Hendra.\nJoko muncul 07.02 dengan tas kamera."
+            },
+            {
+                kode: "H-11",
+                judul: "Ponsel Ren",
+                isi: "Telepon ke Agus 17 Sep 01.12. Tidak ada panggilan ke Sari sesudah pukul 22.00 tanggal 16.\nWhatsApp ke kontak ‘C.’ 16 Sep 21.40: ‘foto sudah. kunci seperti biasa.’ Dibaca 21.41. Tidak ada balasan teks."
+            },
+            {
+                kode: "H-12",
+                judul: "Surat tugas audit · fotokopi",
+                isi: "Atas nama seksi logam. Paraf tidak terbaca. Nama petugas: Cain Wibowo.\nTidak ada nomor register di dinas pusat. Surat mungkin dibuat hanya untuk masuk."
+            },
+            {
+                kode: "H-13",
+                judul: "Buku inventaris resmi",
+                isi: "Entri sampai 16 September. Tidak ada ‘buku hitam’ di rak terbuka.\nCain bilang ia hanya melihat yang resmi. Kunci laci 08 hanya milik Ren."
+            },
+            {
+                kode: "H-14",
+                judul: "Umpan grid",
+                isi: "Selembar fotokopi pamflet yard menempel di lantai dekat pintu. Tinta masih agak basah saat Joko datang.\nKoordinat tidak cocok dengan gudang. Jangan dihitung seperti berkas pelabuhan. Itu umpan."
+            }
+        ];
+
         function bindAccordions(root) {
             root.addEventListener("click", (e) => {
                 const btn = e.target.closest("[data-acc]");
@@ -1614,11 +1958,15 @@
         renderEvidence(document.getElementById("bukti2"), evidence2);
         renderPeople(document.getElementById("wawancara3"), interviews3);
         renderEvidence(document.getElementById("bukti3"), evidence3);
+        renderPeople(document.getElementById("wawancara4"), interviews4);
+        renderEvidence(document.getElementById("bukti4"), evidence4);
 
         const app1 = document.getElementById("app");
         const app2 = document.getElementById("app2");
         const app3 = document.getElementById("app3");
+        const app4 = document.getElementById("app4");
         const pages = ["laporan", "korban", "keterangan", "bukti", "rumah", "putusan"];
+        let detectiveName = "";
 
         function showPageIn(root, prefix, id) {
             const btn = root.querySelector('.navbtn[data-page="' + id + '"]');
@@ -1636,6 +1984,7 @@
             app1.style.display = "none";
             app2.style.display = "none";
             app3.style.display = "none";
+            app4.style.display = "none";
         }
 
         function openApp(page) {
@@ -1661,6 +2010,14 @@
             showPageIn(app3, "l3-", page || "laporan");
         }
 
+        function openLevel4(page) {
+            hideApps();
+            app4.style.display = "block";
+            document.title = "41/GLD/IX/26";
+            localStorage.setItem("mtr19b-level", "4");
+            showPageIn(app4, "l4-", page || "laporan");
+        }
+
         function addNextButton(box) {
             if (document.getElementById("toLevel2")) return;
             const b = document.createElement("button");
@@ -1683,6 +2040,76 @@
             box.appendChild(b);
         }
 
+        function addPromoAfterL3(box) {
+            if (document.getElementById("promoBlock")) return;
+            const wrap = document.createElement("div");
+            wrap.id = "promoBlock";
+            wrap.className = "doc promo-block";
+            if (detectiveName) {
+                wrap.innerHTML = `
+                    <div class="stamp"><i class="fa-solid fa-id-badge"></i>Surat tugas</div>
+                    <h3>${detectiveName}</h3>
+                    <p>Komandan mencoret status magang Anda pagi ini. Mulai sekarang Anda detektif tetap. Berkas Gudang Emas Utara sudah menunggu di meja.</p>
+                    <button type="button" class="btn-paper" id="toLevel4"><i class="fa-solid fa-arrow-right"></i>Buka berkas 41/GLD</button>
+                `;
+                box.appendChild(wrap);
+                document.getElementById("toLevel4").addEventListener("click", () => openLevel4("laporan"));
+                return;
+            }
+            wrap.innerHTML = `
+                <div class="stamp"><i class="fa-solid fa-id-badge"></i>Surat tugas</div>
+                <h3>Anda diangkat detektif tetap</h3>
+                <p>Berkas Pelabuhan Utara selesai. Komandan tidak lagi menyebut Anda magang. Tulis nama yang akan dipakai di laporan berikutnya. Nama ini tersimpan; jangan salah ketik.</p>
+                <label class="field" for="detectiveNameInput">Nama</label>
+                <input id="detectiveNameInput" type="text" maxlength="64" autocomplete="off" placeholder="Nama lengkap Anda">
+                <button type="button" id="saveNameBtn"><i class="fa-solid fa-floppy-disk"></i>Simpan, buka berkas berikutnya</button>
+                <p class="warn" id="nameWarn" hidden></p>
+            `;
+            box.appendChild(wrap);
+            document.getElementById("saveNameBtn").addEventListener("click", submitDetectiveName);
+        }
+
+        async function submitDetectiveName() {
+            const input = document.getElementById("detectiveNameInput");
+            const warn = document.getElementById("nameWarn");
+            const btn = document.getElementById("saveNameBtn");
+            const name = (input && input.value || "").trim();
+            if (!name) {
+                warn.hidden = false;
+                warn.textContent = "Isi nama terlebih dahulu.";
+                return;
+            }
+            btn.disabled = true;
+            warn.hidden = true;
+            try {
+                const res = await fetch("api/nama", {
+                    method: "POST",
+                    cache: "no-store",
+                    credentials: "same-origin",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ name })
+                });
+                const data = await res.json();
+                if (data.blocked) {
+                    lockDakwa();
+                    return;
+                }
+                if (!data.ok || !data.name) {
+                    btn.disabled = false;
+                    warn.hidden = false;
+                    warn.textContent = data.need ? "Selesaikan berkas sebelumnya." : "Nama tidak diterima.";
+                    return;
+                }
+                detectiveName = data.name;
+                localStorage.setItem("mtr19b-det-name", detectiveName);
+                openLevel4("laporan");
+            } catch (err) {
+                btn.disabled = false;
+                warn.hidden = false;
+                warn.textContent = "Berkas tidak terkirim.";
+            }
+        }
+
         function showL1Solved(html) {
             document.getElementById("accusationForm").style.display = "none";
             const box = document.getElementById("resultBox");
@@ -1697,6 +2124,21 @@
             box.hidden = false;
             box.innerHTML = html;
             addNextButton3(box);
+        }
+
+        function showL3Solved(html) {
+            document.getElementById("accusationForm3").style.display = "none";
+            const box = document.getElementById("resultBox3");
+            box.hidden = false;
+            box.innerHTML = html;
+            addPromoAfterL3(box);
+        }
+
+        function showL4Solved(html) {
+            document.getElementById("accusationForm4").style.display = "none";
+            const box = document.getElementById("resultBox4");
+            box.hidden = false;
+            box.innerHTML = html;
         }
 
         app1.querySelector("nav").addEventListener("click", (e) => {
@@ -1717,10 +2159,16 @@
             showPageIn(app3, "l3-", btn.dataset.page);
         });
 
+        app4.querySelector("nav").addEventListener("click", (e) => {
+            const btn = e.target.closest(".navbtn");
+            if (!btn) return;
+            showPageIn(app4, "l4-", btn.dataset.page);
+        });
+
         document.getElementById("openBtn").addEventListener("click", () => openApp());
 
         const boot = location.hash.replace("#", "");
-        if (boot === "l2" || boot === "l3") {
+        if (boot === "l2" || boot === "l3" || boot === "l4") {
             /* dibuka sesudah cek status */
         } else if (boot && pages.includes(boot)) {
             openApp(boot);
@@ -1737,6 +2185,10 @@
         const notes3 = document.getElementById("notes3");
         notes3.value = localStorage.getItem("mtr88-notes") || "";
         notes3.addEventListener("input", () => localStorage.setItem("mtr88-notes", notes3.value));
+
+        const notes4 = document.getElementById("notes4");
+        notes4.value = localStorage.getItem("mtr41-notes") || "";
+        notes4.addEventListener("input", () => localStorage.setItem("mtr41-notes", notes4.value));
 
         const rejectedHtml = `
                         <div class="doc">
@@ -1758,6 +2210,7 @@
             showBlockedOn("accusationForm", "resultBox");
             showBlockedOn("accusationForm2", "resultBox2");
             showBlockedOn("accusationForm3", "resultBox3");
+            showBlockedOn("accusationForm4", "resultBox4");
         }
 
         if (localStorage.getItem("mtr19b-dakwa-lock") === "1") {
@@ -1814,23 +2267,33 @@
             showL2Solved(data.html);
         });
         bindSubmit("submitBtn3", "suspectSelect3", "formWarn3", "resultBox3", "accusationForm3", "api/dakwa3", (data) => {
-            document.getElementById("accusationForm3").style.display = "none";
-            const box = document.getElementById("resultBox3");
-            box.hidden = false;
-            box.innerHTML = data.html;
+            localStorage.setItem("mtr19b-l3-ok", "1");
+            showL3Solved(data.html);
+        });
+        bindSubmit("submitBtn4", "suspectSelect4", "formWarn4", "resultBox4", "accusationForm4", "api/dakwa4", (data) => {
+            localStorage.setItem("mtr19b-l4-ok", "1");
+            showL4Solved(data.html);
         });
 
         (async () => {
             try {
-                const [r1, r2, r3] = await Promise.all([
+                const [r1, r2, r3, r4, rn] = await Promise.all([
                     fetch("api/dakwa", { method: "GET", cache: "no-store", credentials: "same-origin" }),
                     fetch("api/dakwa2", { method: "GET", cache: "no-store", credentials: "same-origin" }),
-                    fetch("api/dakwa3", { method: "GET", cache: "no-store", credentials: "same-origin" })
+                    fetch("api/dakwa3", { method: "GET", cache: "no-store", credentials: "same-origin" }),
+                    fetch("api/dakwa4", { method: "GET", cache: "no-store", credentials: "same-origin" }),
+                    fetch("api/nama", { method: "GET", cache: "no-store", credentials: "same-origin" })
                 ]);
                 const data = await r1.json();
                 const data2 = await r2.json();
                 const data3 = await r3.json();
-                if (data.blocked || data2.blocked || data3.blocked) lockDakwa();
+                const data4 = await r4.json();
+                const dataN = await rn.json();
+                if (dataN.name) {
+                    detectiveName = dataN.name;
+                    localStorage.setItem("mtr19b-det-name", detectiveName);
+                }
+                if (data.blocked || data2.blocked || data3.blocked || data4.blocked || dataN.blocked) lockDakwa();
                 if (data.l1 && data.html) {
                     localStorage.setItem("mtr19b-l1-ok", "1");
                     showL1Solved(data.html);
@@ -1839,16 +2302,23 @@
                     localStorage.setItem("mtr19b-l2-ok", "1");
                     showL2Solved(data2.html);
                 }
+                if (data4.l4 && data4.html) {
+                    showL4Solved(data4.html);
+                    openLevel4("putusan");
+                    return;
+                }
                 if (data3.l3 && data3.html) {
-                    document.getElementById("accusationForm3").style.display = "none";
-                    const box = document.getElementById("resultBox3");
-                    box.hidden = false;
-                    box.innerHTML = data3.html;
+                    showL3Solved(data3.html);
+                    if (detectiveName && (localStorage.getItem("mtr19b-level") === "4" || boot === "l4")) {
+                        openLevel4("laporan");
+                        return;
+                    }
                     openLevel3("putusan");
                     return;
                 }
                 const lvl = localStorage.getItem("mtr19b-level");
-                if (data2.l2 && (lvl === "3" || boot === "l3")) openLevel3("laporan");
+                if (data3.l3 && detectiveName && (lvl === "4" || boot === "l4")) openLevel4("laporan");
+                else if (data2.l2 && (lvl === "3" || boot === "l3")) openLevel3("laporan");
                 else if (data2.l2 && (lvl === "2" || boot === "l2")) openLevel2("laporan");
                 else if (data2.l2) openLevel2("putusan");
                 else if (data.l1 && (lvl === "2" || boot === "l2")) openLevel2("laporan");
