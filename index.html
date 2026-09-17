@@ -1809,6 +1809,7 @@ meta=vig_key!=GOLDARCH</div>
                 </div>
             </main>
             <audio id="rjAudio" preload="auto" src="assets/audio.mp3"></audio>
+            <audio id="ketikAudio" preload="auto" src="assets/ketik.mp3" loop></audio>
     </div>
 
     <script>
@@ -3247,32 +3248,45 @@ meta=vig_key!=GOLDARCH</div>
             } catch (err) { /* autoplay block */ }
         }
 
-        let typeAudioCtx = null;
         function unlockTypeAudio() {
+            const a = document.getElementById("ketikAudio");
+            if (!a) return;
             try {
-                const AC = window.AudioContext || window.webkitAudioContext;
-                if (!AC) return;
-                if (!typeAudioCtx) typeAudioCtx = new AC();
-                if (typeAudioCtx.state === "suspended") typeAudioCtx.resume();
-            } catch (err) { /* ignore */ }
+                a.muted = true;
+                const p = a.play();
+                if (p && typeof p.then === "function") {
+                    p.then(() => {
+                        a.pause();
+                        a.currentTime = 0;
+                        a.muted = false;
+                    }).catch(() => { a.muted = false; });
+                } else {
+                    a.pause();
+                    a.currentTime = 0;
+                    a.muted = false;
+                }
+            } catch (err) { a.muted = false; }
         }
 
-        function playTypeTick() {
+        function startTypeSound() {
+            const a = document.getElementById("ketikAudio");
+            if (!a) return;
             try {
-                unlockTypeAudio();
-                if (!typeAudioCtx) return;
-                const t = typeAudioCtx.currentTime;
-                const o = typeAudioCtx.createOscillator();
-                const g = typeAudioCtx.createGain();
-                o.type = "triangle";
-                o.frequency.setValueAtTime(920, t);
-                o.frequency.exponentialRampToValueAtTime(420, t + 0.028);
-                g.gain.setValueAtTime(0.09, t);
-                g.gain.linearRampToValueAtTime(0.0001, t + 0.03);
-                o.connect(g);
-                g.connect(typeAudioCtx.destination);
-                o.start(t);
-                o.stop(t + 0.032);
+                a.loop = true;
+                a.muted = false;
+                a.volume = 0.55;
+                a.currentTime = 0;
+                const p = a.play();
+                if (p && typeof p.catch === "function") p.catch(() => {});
+            } catch (err) { /* autoplay block */ }
+        }
+
+        function stopTypeSound() {
+            const a = document.getElementById("ketikAudio");
+            if (!a) return;
+            try {
+                a.pause();
+                a.currentTime = 0;
             } catch (err) { /* ignore */ }
         }
 
@@ -3283,11 +3297,9 @@ meta=vig_key!=GOLDARCH</div>
         async function typeLine(el, text, speed) {
             el.classList.add("drama-cursor");
             el.textContent = "";
-            unlockTypeAudio();
             for (let i = 0; i < text.length; i++) {
                 el.textContent += text[i];
                 const ch = text[i];
-                if (ch.trim()) playTypeTick();
                 let delay = speed;
                 if (ch === "." || ch === "!" || ch === "?") delay = speed * 7;
                 else if (ch === "," || ch === ";" || ch === "—" || ch === ":") delay = speed * 3.5;
@@ -3298,11 +3310,16 @@ meta=vig_key!=GOLDARCH</div>
         }
 
         async function typeParagraphs(wrap, lines, speed) {
-            for (const line of lines) {
-                const p = document.createElement("p");
-                wrap.appendChild(p);
-                await typeLine(p, line, speed);
-                await waitMs(380);
+            startTypeSound();
+            try {
+                for (const line of lines) {
+                    const p = document.createElement("p");
+                    wrap.appendChild(p);
+                    await typeLine(p, line, speed);
+                    await waitMs(380);
+                }
+            } finally {
+                stopTypeSound();
             }
         }
 
