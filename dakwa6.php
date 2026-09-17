@@ -7,9 +7,9 @@ header('Cache-Control: no-store');
 $html_ok = <<<'HTML'
 <div class="doc">
     <div class="stamp">Dilimpahkan</div>
-    <h3>Nama panggung terdengar.</h3>
-    <p>Cain tetap diam di ruang interogasi. Ia bukan dalang. Rekaman di laci suara memuat sandi titik-garis. Setelah dibaca: RED JOHN.</p>
-    <p>Itu nama panggung orang di balik jaringan. Bukan nama di KTP. Cain menolak menyebutnya. Berkas berikutnya menelusuri titik serahnya.</p>
+    <h3>Titik serah ketemu.</h3>
+    <p>SEVEN FORK. Bukan nama orang. Itu kode gang tempat jaringan menaruh barang dan pesan. Cain hanya kurir. Nama panggung RED JOHN masih menutup wajah di KTP.</p>
+    <p>Komandan membuka berkas dakwaan akhir. Satu nama. Satu kali. Salah: ditutup selamanya.</p>
 </div>
 HTML;
 
@@ -19,7 +19,7 @@ function normalize_code($s) {
 }
 
 function code_matches($code) {
-    $secret = 'REDJOHN';
+    $secret = 'SEVENFORK';
     if ($code === '') {
         return false;
     }
@@ -34,8 +34,8 @@ function code_matches($code) {
 
 $ip = client_ip();
 $blocked = is_blocked($ip);
-$l4 = has_l4();
 $l5 = has_l5();
+$l6 = has_l6();
 $name = get_detective_name($ip);
 
 if ($_SERVER['REQUEST_METHOD'] === 'GET') {
@@ -45,18 +45,18 @@ if ($_SERVER['REQUEST_METHOD'] === 'GET') {
     echo json_encode([
         'ok' => false,
         'blocked' => $blocked,
-        'l4' => $l4,
         'l5' => $l5,
+        'l6' => $l6,
         'name' => $name,
         'hasName' => $name !== '',
-        'html' => $l5 ? $html_ok : '',
+        'html' => $l6 ? $html_ok : '',
     ], JSON_UNESCAPED_UNICODE);
     exit;
 }
 
 if ($_SERVER['REQUEST_METHOD'] !== 'POST') {
     http_response_code(405);
-    echo json_encode(['ok' => false, 'blocked' => $blocked, 'l4' => $l4]);
+    echo json_encode(['ok' => false, 'blocked' => $blocked, 'l5' => $l5]);
     exit;
 }
 
@@ -66,7 +66,7 @@ if ($blocked) {
     exit;
 }
 
-if (!$l4 || $name === '') {
+if (!$l5 || $name === '') {
     echo json_encode(['ok' => false, 'blocked' => false, 'need' => true, 'html' => '']);
     exit;
 }
@@ -74,7 +74,7 @@ if (!$l4 || $name === '') {
 $in = json_decode(file_get_contents('php://input'), true) ?: [];
 $code = normalize_code($in['code'] ?? ($in['who'] ?? ''));
 if (code_matches($code)) {
-    set_named_cookie('mtr19_l5');
+    set_named_cookie('mtr19_l6');
     echo json_encode(['ok' => true, 'blocked' => false, 'html' => $html_ok, 'next' => true], JSON_UNESCAPED_UNICODE);
     exit;
 }

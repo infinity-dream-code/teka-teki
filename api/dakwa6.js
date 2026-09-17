@@ -2,12 +2,12 @@ import { blockIp, clientIp, cookieHas, getDetectiveName, isBlocked, parseBody, s
 
 const htmlOk = `<div class="doc">
     <div class="stamp">Dilimpahkan</div>
-    <h3>Nama panggung terdengar.</h3>
-    <p>Cain tetap diam di ruang interogasi. Ia bukan dalang. Rekaman di laci suara memuat sandi titik-garis. Setelah dibaca: RED JOHN.</p>
-    <p>Itu nama panggung orang di balik jaringan. Bukan nama di KTP. Cain menolak menyebutnya. Berkas berikutnya menelusuri titik serahnya.</p>
+    <h3>Titik serah ketemu.</h3>
+    <p>SEVEN FORK. Bukan nama orang. Itu kode gang tempat jaringan menaruh barang dan pesan. Cain hanya kurir. Nama panggung RED JOHN masih menutup wajah di KTP.</p>
+    <p>Komandan membuka berkas dakwaan akhir. Satu nama. Satu kali. Salah: ditutup selamanya.</p>
 </div>`;
 
-const SECRET = "REDJOHN";
+const SECRET = "SEVENFORK";
 
 function normalizeCode(s) {
     return String(s || "")
@@ -42,8 +42,8 @@ export default async function handler(req, res) {
 
     const ip = clientIp(req);
     const blocked = await isBlocked(req, ip);
-    const l4 = cookieHas(req, "mtr19_l4");
     const l5 = cookieHas(req, "mtr19_l5");
+    const l6 = cookieHas(req, "mtr19_l6");
     const name = await getDetectiveName(req, ip);
 
     if (req.method === "GET") {
@@ -51,17 +51,17 @@ export default async function handler(req, res) {
         res.status(200).json({
             ok: false,
             blocked,
-            l4,
             l5,
+            l6,
             name,
             hasName: Boolean(name),
-            html: l5 ? htmlOk : ""
+            html: l6 ? htmlOk : ""
         });
         return;
     }
 
     if (req.method !== "POST") {
-        res.status(405).json({ ok: false, blocked, l4 });
+        res.status(405).json({ ok: false, blocked, l5 });
         return;
     }
 
@@ -71,7 +71,7 @@ export default async function handler(req, res) {
         return;
     }
 
-    if (!l4 || !name) {
+    if (!l5 || !name) {
         res.status(200).json({ ok: false, blocked: false, need: true, html: "" });
         return;
     }
@@ -79,7 +79,7 @@ export default async function handler(req, res) {
     const body = parseBody(req);
     const code = normalizeCode(body.code || body.who || "");
     if (codeMatches(code)) {
-        setCookies(res, ["mtr19_l5"]);
+        setCookies(res, ["mtr19_l6"]);
         res.status(200).json({ ok: true, blocked: false, html: htmlOk, next: true });
         return;
     }

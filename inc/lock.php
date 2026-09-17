@@ -90,6 +90,14 @@ function has_l5() {
     return !empty($_COOKIE['mtr19_l5']);
 }
 
+function has_l6() {
+    return !empty($_COOKIE['mtr19_l6']);
+}
+
+function has_l7() {
+    return !empty($_COOKIE['mtr19_l7']);
+}
+
 function names_path() {
     $dir = dirname(__DIR__) . '/data';
     if (!is_dir($dir)) {

@@ -1,0 +1,17 @@
+# dump recovery · seksi forensik · 19 Sep 2026
+# chunk corrupt / partial — jangan percaya urutan baris
+
+00:01A2 ERR align
+00:01B0 pad=ff
+00:0111 frag=OIB note=ink-a
+00:0204 noise=QkFTRTY0LVRSQVA=
+00:02A0 frag=MBN note=ink-b
+00:0318 junk=138|18|GOLDARCH
+00:04F1 frag=YIJ note=ink-c
+00:0502 meta=addr_sort_asc|join|rev
+00:0510 meta=vig_key!=GOLDARCH
+00:0600 decoy=Rk9SS1NFVkVO
+00:0612 decoy2=U0VWRU4=
+00:0700 end
+
+# checksum invalid

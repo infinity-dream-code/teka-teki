@@ -123,12 +123,12 @@
             border-color: var(--paper);
         }
 
-        #app, #app2, #app3, #app4, #app5 { display: none; min-height: 100vh; }
+        #app, #app2, #app3, #app4, #app5, #app6, #app7 { display: none; min-height: 100vh; }
 
         .file {
             position: sticky;
             top: 0;
-            z-index: 8;
+            z-index: 40;
             background: var(--bg);
             border-bottom: 1px solid transparent;
         }
@@ -549,7 +549,7 @@
 
         textarea#reasonInput { min-height: 88px; resize: vertical; }
 
-        #submitBtn, #submitBtn2, #submitBtn3, #submitBtn4, #submitBtn5, #saveNameBtn, .btn-paper {
+        #submitBtn, #submitBtn2, #submitBtn3, #submitBtn4, #submitBtn5, #submitBtn6, #submitBtn7, #saveNameBtn, .btn-paper {
             background: var(--paper);
             color: var(--bg);
             padding: 11px 16px;
@@ -563,8 +563,8 @@
             transition: background .15s ease;
         }
 
-        #submitBtn:hover, #submitBtn2:hover, #submitBtn3:hover, #submitBtn4:hover, #submitBtn5:hover, #saveNameBtn:hover, .btn-paper:hover { background: #efe6d4; }
-        #submitBtn:disabled, #submitBtn2:disabled, #submitBtn3:disabled, #submitBtn4:disabled, #submitBtn5:disabled, #saveNameBtn:disabled { opacity: 0.45; cursor: not-allowed; }
+        #submitBtn:hover, #submitBtn2:hover, #submitBtn3:hover, #submitBtn4:hover, #submitBtn5:hover, #submitBtn6:hover, #submitBtn7:hover, #saveNameBtn:hover, .btn-paper:hover { background: #efe6d4; }
+        #submitBtn:disabled, #submitBtn2:disabled, #submitBtn3:disabled, #submitBtn4:disabled, #submitBtn5:disabled, #submitBtn6:disabled, #submitBtn7:disabled, #saveNameBtn:disabled { opacity: 0.45; cursor: not-allowed; }
         .btn-paper { display: inline-flex; margin-top: 16px; }
 
         .photo-frame {
@@ -582,7 +582,7 @@
 
         .promo-block { margin-top: 20px; }
         .promo-block .field { margin-top: 12px; }
-        #detectiveNameInput, #codeInput5 {
+        #detectiveNameInput, #codeInput5, #codeInput6 {
             width: 100%;
             max-width: 320px;
             background: var(--bg-2);
@@ -593,13 +593,254 @@
             font-family: "IBM Plex Mono", monospace;
         }
 
-        .audio-wrap {
-            background: var(--paper-2);
-            border: 1px solid rgba(26,22,18,.18);
-            padding: 16px;
+        .drama-doc {
+            min-height: 200px;
         }
 
-        .audio-wrap audio { width: 100%; display: block; }
+        .drama-doc .drama-lines h3 {
+            font-family: "Newsreader", serif;
+            font-size: 26px;
+            margin: 8px 0 14px;
+            min-height: 1.2em;
+        }
+
+        .drama-doc .drama-lines p {
+            min-height: 1.4em;
+            margin-top: 12px;
+        }
+
+        .drama-cursor::after {
+            content: "▮";
+            margin-left: 2px;
+            animation: drama-blink 0.7s step-end infinite;
+            color: var(--rust);
+        }
+
+        @keyframes drama-blink {
+            50% { opacity: 0; }
+        }
+
+        .rj-note {
+            margin-top: 8px;
+            background: #efe6d4;
+            border: 1px solid rgba(26,22,18,.2);
+            padding: 28px 24px;
+            text-align: center;
+            opacity: 0;
+            transform: translateY(10px);
+            transition: opacity .9s ease, transform .9s ease;
+        }
+
+        .rj-note.is-shown {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .rj-note .note-label {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: var(--rust);
+            margin-bottom: 18px;
+        }
+
+        .rj-note .note-text {
+            font-family: "Newsreader", serif;
+            font-size: 22px;
+            font-style: italic;
+            line-height: 1.45;
+            color: var(--ink);
+            margin-bottom: 22px;
+        }
+
+        .rj-note .rj-reveal {
+            margin-top: 8px;
+        }
+
+        .rj-reveal {
+            margin-top: 22px;
+            text-align: center;
+            opacity: 0;
+            transform: scale(0.94);
+            transition: opacity 1s ease, transform 1s ease;
+        }
+
+        .rj-reveal.is-shown {
+            opacity: 1;
+            transform: scale(1);
+        }
+
+        .rj-reveal img {
+            display: block;
+            width: min(260px, 100%);
+            margin: 0 auto;
+            background: #000;
+            border: 1px solid rgba(26,22,18,.35);
+        }
+
+        .rj-reveal .rj-cap {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--rust);
+            margin-top: 12px;
+        }
+
+        .flag-wrap {
+            margin-top: 20px;
+            text-align: center;
+        }
+
+        .flag-wrap .flag {
+            display: inline-block;
+            margin-top: 14px;
+            opacity: 0;
+            transform: translateY(6px);
+            transition: opacity .7s ease, transform .7s ease;
+        }
+
+        .flag-wrap .flag.is-shown {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .drama-clear {
+            transition: opacity .7s ease;
+        }
+
+        .drama-clear.is-out {
+            opacity: 0;
+        }
+
+        .suspect-grid {
+            display: grid;
+            grid-template-columns: repeat(2, minmax(0, 1fr));
+            gap: 12px;
+            margin: 16px 0 22px;
+        }
+
+        .suspect-card {
+            display: grid;
+            grid-template-columns: 96px 1fr;
+            grid-template-rows: auto auto;
+            column-gap: 0;
+            text-align: left;
+            background: var(--paper);
+            color: var(--ink);
+            border: 1px solid rgba(228, 216, 196, 0.28);
+            padding: 0;
+            cursor: pointer;
+            transition: border-color .15s ease, background .15s ease;
+            overflow: hidden;
+            min-width: 0;
+        }
+
+        .suspect-card:hover {
+            border-color: rgba(228, 216, 196, 0.7);
+        }
+
+        .suspect-card.is-selected {
+            border-color: var(--paper);
+            background: #efe6d4;
+            outline: 1px solid var(--rust);
+            outline-offset: 0;
+        }
+
+        .suspect-card .sc-photo {
+            grid-row: 1 / 3;
+            position: relative;
+            width: 96px;
+            align-self: stretch;
+            background: #1a1612;
+            border-right: 1px solid rgba(26,22,18,.14);
+            min-height: 120px;
+        }
+
+        .suspect-card .sc-photo img {
+            position: absolute;
+            inset: 0;
+            display: block;
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            object-position: center 20%;
+            filter: sepia(0.28) contrast(1.05) saturate(0.8);
+        }
+
+        .suspect-card .sc-tag {
+            position: absolute;
+            left: 6px;
+            top: 6px;
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 8px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            background: rgba(12,11,10,.85);
+            color: var(--paper);
+            padding: 2px 5px;
+        }
+
+        .suspect-card.is-selected .sc-tag {
+            background: var(--rust);
+            color: #efe6d4;
+        }
+
+        .suspect-card .sc-body {
+            display: block;
+            padding: 10px 12px 6px;
+            min-width: 0;
+        }
+
+        .suspect-card .sc-name {
+            display: block;
+            font-family: "Newsreader", serif;
+            font-size: 16px;
+            line-height: 1.2;
+            margin-bottom: 3px;
+            color: var(--ink);
+        }
+
+        .suspect-card .sc-meta {
+            display: block;
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 9px;
+            letter-spacing: 0.08em;
+            text-transform: uppercase;
+            color: var(--rust);
+            margin-bottom: 6px;
+        }
+
+        .suspect-card .sc-sum {
+            display: block;
+            font-size: 12px;
+            line-height: 1.4;
+            color: var(--ink-2);
+        }
+
+        .suspect-card .sc-pick {
+            display: block;
+            grid-column: 2;
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 9px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--mute-2);
+            padding: 0 12px 10px;
+        }
+
+        .suspect-card.is-selected .sc-pick {
+            color: var(--rust);
+        }
+
+        #accusationForm7 #submitBtn7 {
+            margin-top: 4px;
+        }
+
+        @media (max-width: 720px) {
+            .suspect-grid { grid-template-columns: 1fr; }
+        }
 
         .flag {
             font-family: "IBM Plex Mono", monospace;
@@ -1385,6 +1626,173 @@
                     <textarea id="notes5" placeholder="Tidak masuk berkas."></textarea>
                 </div>
             </main>
+    </div>
+
+    <div id="app6">
+        <header class="file">
+            <div class="file-spine">
+                <div>
+                    <small>67/RJ/IX/26</small>
+                    <strong>Cabang Tujuh</strong>
+                </div>
+            </div>
+            <nav>
+                <button class="navbtn active" data-page="laporan" type="button">Laporan</button>
+                <button class="navbtn" data-page="keterangan" type="button">Keterangan</button>
+                <button class="navbtn" data-page="bukti" type="button">Barang bukti</button>
+                <button class="navbtn" data-page="sandi" type="button">Dump</button>
+                <button class="navbtn" data-page="peta" type="button">Peta</button>
+                <button class="navbtn" data-page="putusan" type="button">Kode</button>
+            </nav>
+        </header>
+        <main>
+                <section class="page active" id="l6-laporan">
+                    <h2><i class="fa-solid fa-file-lines"></i>Laporan awal</h2>
+                    <p class="lede">19 September 2026, 14.10 WIB · Kombes L. Prasetyo · dilimpahkan dari 52/INT/IX/26</p>
+                    <div class="doc">
+                        <div class="kicker"><i class="fa-solid fa-network-wired"></i>Keadaan</div>
+                        <p>Nama panggung RED JOHN sudah terdengar. Itu bukan KTP. Cain menolak menyebut wajah di baliknya. Ia hanya mengaku ada “titik serah”—tempat jaringan menaruh pesan dan barang. Bukan rumah. Bukan kantor.</p>
+                        <p>Seksi forensik menyerahkan dump tinta dari kertas terbakar di tas Cain (tersembunyi di jahitan dalam, baru ketemu siang ini). Ada juga cuplikan CCTV blur dekat dermaga tua, dan peta gang yang sudah diganti nama resmi sejak 2019.</p>
+                        <p>Yang dibutuhkan di berkas ini: <em>kode titik serah</em>, bukan nama orang. Nama orang menunggu berkas berikutnya. Satu kali salah di kode: ditutup.</p>
+                    </div>
+                </section>
+
+                <section class="page" id="l6-keterangan">
+                    <h2><i class="fa-solid fa-comments"></i>Keterangan</h2>
+                    <p class="lede">Mereka tahu sebagian. Tidak ada yang mengucapkan kode lengkap dengan sukarela.</p>
+                    <div id="wawancara6"></div>
+                </section>
+
+                <section class="page" id="l6-bukti">
+                    <h2><i class="fa-solid fa-magnifying-glass"></i>Barang bukti</h2>
+                    <p class="lede">R-01 sampai R-12. Beberapa umpan. Beberapa saling mengunci.</p>
+                    <div id="bukti6"></div>
+                </section>
+
+                <section class="page" id="l6-sandi">
+                    <h2><i class="fa-solid fa-terminal"></i>Dump tinta</h2>
+                    <p class="lede">Pemulihan parsial. Urutan baris tidak dijamin. Unduh, baca pelan.</p>
+                    <div class="doc">
+                        <div class="kicker"><i class="fa-solid fa-file-code"></i>R-08 · recover_19sep.dump</div>
+                        <div class="lab" style="overflow-x:auto;font-size:11px">00:0111 frag=OIB note=ink-a
+00:02A0 frag=MBN note=ink-b
+00:04F1 frag=YIJ note=ink-c
+…
+meta=addr_sort_asc|join|rev
+meta=vig_key!=GOLDARCH</div>
+                        <p class="plan-cap" style="margin-top:12px"><a href="assets/l6-dump.txt" download="l6-dump.txt" style="color:var(--rust)">Unduh berkas penuh</a> · banyak baris sampah</p>
+                    </div>
+                </section>
+
+                <section class="page" id="l6-peta">
+                    <h2><i class="fa-solid fa-map"></i>Peta gang</h2>
+                    <p class="lede">Bukan peta kota. Hanya sketsa persimpangan tempat titip barang.</p>
+                    <div class="doc">
+                        <div class="kicker"><i class="fa-solid fa-road"></i>Dermaga lama · sketsa 2018</div>
+                        <div class="plan-wrap">
+                            <svg viewBox="0 0 360 280" xmlns="http://www.w3.org/2000/svg" aria-label="Sketsa persimpangan tujuh jalan">
+                                <rect x="8" y="8" width="344" height="264" fill="#cfc4ae" stroke="#1a1612" stroke-width="2"/>
+                                <text x="180" y="32" text-anchor="middle" font-size="11" font-family="IBM Plex Mono, monospace" fill="#1a1612">PERSIMPANGAN GANG</text>
+                                <!-- tepat 7 jalan dari titik tengah -->
+                                <line x1="180" y1="140" x2="180" y2="52" stroke="#8a7d68" stroke-width="16"/>
+                                <line x1="180" y1="140" x2="70" y2="78" stroke="#8a7d68" stroke-width="14"/>
+                                <line x1="180" y1="140" x2="290" y2="78" stroke="#8a7d68" stroke-width="14"/>
+                                <line x1="180" y1="140" x2="48" y2="140" stroke="#8a7d68" stroke-width="14"/>
+                                <line x1="180" y1="140" x2="312" y2="140" stroke="#8a7d68" stroke-width="14"/>
+                                <line x1="180" y1="140" x2="70" y2="210" stroke="#8a7d68" stroke-width="14"/>
+                                <line x1="180" y1="140" x2="290" y2="210" stroke="#8a7d68" stroke-width="14"/>
+                                <circle cx="180" cy="140" r="16" fill="#a8926e" stroke="#1a1612" stroke-width="1.5"/>
+                                <text x="180" y="144" text-anchor="middle" font-size="9" font-family="IBM Plex Mono, monospace" fill="#1a1612">titik</text>
+                                <text x="180" y="48" text-anchor="middle" font-size="10" font-family="IBM Plex Mono, monospace" fill="#1a1612">1</text>
+                                <text x="58" y="74" text-anchor="middle" font-size="10" font-family="IBM Plex Mono, monospace" fill="#1a1612">2</text>
+                                <text x="302" y="74" text-anchor="middle" font-size="10" font-family="IBM Plex Mono, monospace" fill="#1a1612">3</text>
+                                <text x="36" y="144" text-anchor="middle" font-size="10" font-family="IBM Plex Mono, monospace" fill="#1a1612">4</text>
+                                <text x="324" y="144" text-anchor="middle" font-size="10" font-family="IBM Plex Mono, monospace" fill="#1a1612">5</text>
+                                <text x="58" y="220" text-anchor="middle" font-size="10" font-family="IBM Plex Mono, monospace" fill="#1a1612">6</text>
+                                <text x="302" y="220" text-anchor="middle" font-size="10" font-family="IBM Plex Mono, monospace" fill="#1a1612">7</text>
+                                <text x="180" y="252" text-anchor="middle" font-size="10" font-family="IBM Plex Mono, monospace" fill="#4a453e">7 jalan bertemu di satu titik</text>
+                                <text x="180" y="268" text-anchor="middle" font-size="9" font-family="IBM Plex Mono, monospace" fill="#4a453e">nama kode Inggris: dari sandi dump, bukan dari gambar</text>
+                            </svg>
+                        </div>
+                        <p class="plan-cap">Plang dinas 2019: “Jl. Sungai Mati Raya”. Orang jalanan masih bilang nama Inggris dua kata. Peta hanya konfirmasi bentuk tempat—kode diketik di tab Kode.</p>
+                    </div>
+                </section>
+
+                <section class="page" id="l6-putusan">
+                    <h2><i class="fa-solid fa-key"></i>Kode</h2>
+                    <p class="lede">Masukkan kode titik serah. Bukan nama orang. Satu kali. Salah = ditutup.</p>
+                    <div id="accusationForm6" style="margin-top:8px">
+                        <label class="field" for="codeInput6"><i class="fa-solid fa-keyboard"></i>Kode</label>
+                        <input id="codeInput6" type="text" maxlength="64" autocomplete="off" placeholder="-">
+                        <button id="submitBtn6" type="button"><i class="fa-solid fa-paper-plane"></i>Ajukan</button>
+                        <p class="warn" id="formWarn6" hidden></p>
+                    </div>
+                    <div id="resultBox6" hidden style="margin-top:28px"></div>
+                </section>
+
+                <div class="file-notes">
+                    <label for="notes6"><i class="fa-solid fa-pen"></i>Catatan Anda</label>
+                    <textarea id="notes6" placeholder="Tidak masuk berkas."></textarea>
+                </div>
+            </main>
+    </div>
+
+    <div id="app7">
+        <header class="file">
+            <div class="file-spine">
+                <div>
+                    <small>88/RJ/IX/26</small>
+                    <strong>Dakwaan Akhir</strong>
+                </div>
+            </div>
+            <nav>
+                <button class="navbtn active" data-page="laporan" type="button">Laporan</button>
+                <button class="navbtn" data-page="ringkas" type="button">Ringkas</button>
+                <button class="navbtn" data-page="putusan" type="button">Dakwaan</button>
+            </nav>
+        </header>
+        <main>
+                <section class="page active" id="l7-laporan">
+                    <h2><i class="fa-solid fa-file-lines"></i>Laporan akhir</h2>
+                    <p class="lede">19 September 2026, 18.40 WIB · Kombes L. Prasetyo</p>
+                    <div class="doc">
+                        <div class="kicker"><i class="fa-solid fa-gavel"></i>Perintah</div>
+                        <p>Titik serah SEVEN FORK sudah dipetakan. Nama panggung RED JOHN sudah terdengar. Cain kurir. Ren korban yang hampir bicara.</p>
+                        <p>Sekarang Anda menunjuk orang. Satu nama dari daftar. Orang yang memakai nama panggung itu—yang berdiri di jaringan, bukan yang hanya menulis berita atau membuka pintu.</p>
+                        <p>Satu kali. Salah: seluruh dakwaan dari alamat ini ditutup.</p>
+                    </div>
+                </section>
+
+                <section class="page" id="l7-ringkas">
+                    <h2><i class="fa-solid fa-clipboard-list"></i>Ringkas jejak</h2>
+                    <p class="lede">Bukan bukti baru. Hanya yang sudah Anda pegang, disusun ulang.</p>
+                    <div class="doc">
+                        <div class="kicker"><i class="fa-solid fa-link"></i>Rantai</div>
+                        <p>Foto laci 08 → Cain. Laci suara → RED JOHN. Dump tinta → SEVEN FORK.</p>
+                        <p>CCTV blur di simpul gang: mantel lab, tinggi ~167 cm, rambut diikat. Van forensik tercatat lewat 90 detik kemudian (R-12 di berkas 67).</p>
+                        <p>Yang punya akses membersihkan sampel, mengatur rantai barang bukti, dan “rutin” ke gang itu tanpa perintah tertulis: bukan satpam, bukan wartawan, bukan tahanan.</p>
+                        <p>Cain: “Ia yang bilang kapan saya boleh bicara.” Ia tidak menyebut nama. Ia menunjuk profesi dengan mata ke koridor lab.</p>
+                    </div>
+                </section>
+
+                <section class="page" id="l7-putusan">
+                    <h2><i class="fa-solid fa-gavel"></i>Dakwaan</h2>
+                    <p class="lede">Siapa RED JOHN. Pilih satu berkas. Satu kali.</p>
+                    <div id="accusationForm7" style="margin-top:8px">
+                        <div class="suspect-grid" id="suspectGrid7" role="listbox" aria-label="Daftar tersangka"></div>
+                        <input type="hidden" id="suspectSelect7" value="">
+                        <button id="submitBtn7" type="button"><i class="fa-solid fa-paper-plane"></i>Ajukan</button>
+                        <p class="warn" id="formWarn7" hidden></p>
+                    </div>
+                    <div id="resultBox7" hidden style="margin-top:28px"></div>
+                </section>
+
+                <div class="file-notes">
+                    <label for="notes7"><i class="fa-solid fa-pen"></i>Catatan Anda</label>
+                    <textarea id="notes7" placeholder="Tidak masuk berkas."></textarea>
+                </div>
+            </main>
+            <audio id="rjAudio" preload="auto" src="assets/audio.mp3"></audio>
     </div>
 
     <script>
@@ -2259,6 +2667,181 @@
             }
         ];
 
+        const interviews6 = [
+            {
+                nama: "Cain Wibowo",
+                umur: 46,
+                peran: "Tahanan · kurir",
+                qa: [
+                    ["Di mana titik serah?", "Bukan alamat dinas. Nama Inggris. Dua kata. Saya hanya menghafal bunyinya, bukan ejaan di plang."],
+                    ["Siapa RED JOHN?", "Saya tidak menyebut nama KTP. Ia yang menentukan kapan saya boleh bicara."],
+                    ["Kertas terbakar di jahitan?", "Dari dia. Saya tidak baca. Saya hanya bawa."],
+                    ["Tujuh apa?", "Cabang. Simpul. Saya pernah menunggu di tengah. Tujuh arah. Itu saja."]
+                ]
+            },
+            {
+                nama: "Joko Hartono",
+                umur: 41,
+                peran: "Wartawan · Pos Utara",
+                qa: [
+                    ["Pernah tulis soal gang itu?", "Saya tulis legenda urban ‘Cabang Tujuh’ tahun 2022. Nama Inggris muncul di komentar anonim. Saya tidak verifikasi."],
+                    ["RED JOHN?", "Tokoh fiksi di kepala penonton. Kalau Anda tanya siapa orangnya, itu bukan berita saya."],
+                    ["Nina Kartika?", "Forensik. Ia melarang saya dekat CCTV blur. Alasan: kontaminasi."],
+                    ["Cain kasih tip lokasi?", "Tidak. Ia bilang ‘hitung’ kemarin. Hari ini ia bilang ‘bukan rumah’."]
+                ]
+            },
+            {
+                nama: "Nina Kartika",
+                umur: 44,
+                peran: "Kepala forensik",
+                qa: [
+                    ["Mengapa Anda di gang itu 16 September?", "Ambil sampel rutin. Ada laporan tumpahan oli. Bukan perintah berkas ini."],
+                    ["Van forensik pukul 21.12?", "Shift malam. Saya tidak ingat setiap menit."],
+                    ["Dump tinta dari tas Cain?", "Tim saya pulihkan. Fragmen acak. Jangan tebak dari satu baris."],
+                    ["RED JOHN?", "Nama panggung. Saya forensik, bukan rumor."]
+                ]
+            },
+            {
+                nama: "Agus Mahendra",
+                umur: 52,
+                peran: "Satpam Gudang Emas",
+                qa: [
+                    ["Van lab lewat dermaga?", "Saya dengar dari teman satpam dermaga. Mantel putih. Perempuan. Malam."],
+                    ["Cain bilang apa soal titik serah?", "Tidak ke saya. Ia diam sejak ditahan."],
+                    ["Hendra?", "Di gudang. Bukan di gang."]
+                ]
+            }
+        ];
+
+        const evidence6 = [
+            {
+                kode: "R-01",
+                judul: "Jahitan dalam tas Cain",
+                isi: "Sobekan tipis, arang kertas.\nTidak terbaca mata telanjang.\nDiberikan ke forensik tinta (lihat dump)."
+            },
+            {
+                kode: "R-02",
+                judul: "Base64 di margin clipboard Cain",
+                isi: "Rk9SS1NFVkVO\nCain: ‘itu umpan. Saya disuruh menulis kalau ketangkap.’\nJangan anggap jawaban akhir."
+            },
+            {
+                kode: "R-03",
+                judul: "Plang dinas 2019",
+                isi: "Jl. Sungai Mati Raya.\nMenggantikan nama lokal yang dihapus dari peta resmi.\nNama lokal tidak dicantumkan di surat keputusan—hanya ‘gang liar dermaga’."
+            },
+            {
+                kode: "R-04",
+                judul: "Catatan anonim Pos Utara · 2022",
+                isi: "Komentar di artikel Joko:\n‘jangan pakai nama dinas. jaringan cuma dengar nama Inggris dua kata di simpang tujuh.’\nAkun dihapus. Log tidak lengkap. Ejaan tidak ditulis."
+            },
+            {
+                kode: "R-05",
+                judul: "Coretan tembok 2024",
+                isi: "Foto buram: huruf Latin, dua kata, cat merah pudar.\nHuruf tengah rusak.\nSaksi hanya ingat bunyi mirip ‘sev… fork’—bukan ejaan resmi."
+            },
+            {
+                kode: "R-06",
+                judul: "Umpan A1Z26",
+                isi: "18-5-4 / 10-15-8-14\n= RED / JOHN\nSudah Anda punya. Bukan kode titik serah."
+            },
+            {
+                kode: "R-07",
+                judul: "Catatan teknis forensik",
+                isi: "Tiga noda tinta masih ‘hidup’ di dump. Sisanya derau atau umpan.\nYang hidup ditandai ink—dan berdiri di baris frag.\nAlamat di kiri bukan hiasan.\nMeta di berkas dibaca seperti perintah singkat."
+            },
+            {
+                kode: "R-08",
+                judul: "Berkas dump",
+                isi: "Tab Dump / unduhan assets.\nFragmen tinta: cari frag= … note=ink-…\nTepat tiga. Selain itu buang.\nGOLDARCH dan decoy di sini sampah, bukan kunci."
+            },
+            {
+                kode: "R-09",
+                judul: "Catatan Cain di interogasi · bisik",
+                isi: "‘Kuncinya… yang kemarin di telinga. Jadi huruf. Rapikan jadi satu.’\nIa menggeleng saat diminta mengulang."
+            },
+            {
+                kode: "R-10",
+                judul: "Jam van forensik · log gerbang dermaga",
+                isi: "16 Sep 21.12 masuk.\n21.19 keluar.\nSupir di buku manual satpam: inisial N.K. — coretan tergesa. Sistem elektronik kosong."
+            },
+            {
+                kode: "R-11",
+                judul: "Sketsa tujuh cabang",
+                isi: "Tab Peta.\nTujuh jalan bertemu di satu titik.\nNama Inggris dua kata = kode titik serah yang dicari berkas ini.\nEjaan pasti dari sandi, bukan dari coretan tembok."
+            },
+            {
+                kode: "R-12",
+                judul: "CCTV blur · simpul gang",
+                isi: "16 Sep 21.14.\nFigur mantel lab, tinggi perkiraan 165–170.\nWajah tidak kebaca.\n90 detik kemudian van forensik lewat frame berikutnya.\nIni untuk berkas dakwaan orang—bukan untuk kode."
+            }
+        ];
+
+        const suspects7 = [
+            {
+                id: "sari",
+                nama: "Sari Halim",
+                meta: "48 · Istri Ren",
+                foto: "assets/l7/sari.jpg",
+                ringkas: "Janda Ren. Tinggal di Pluit. Tidak ada jejak di gang Cabang Tujuh."
+            },
+            {
+                id: "doni",
+                nama: "Doni Prasetya",
+                meta: "39 · Rekan arsip",
+                foto: "assets/l7/doni.jpg",
+                ringkas: "Shift malam Gudang Emas. Punya kunci cadangan. Pulang sebelum fajar."
+            },
+            {
+                id: "budi",
+                nama: "Budi Santoso",
+                meta: "39 · Jagal",
+                foto: "assets/l7/budi.jpg",
+                ringkas: "Kios daging pelabuhan. Dipanggil ulang; tidak muncul di CCTV gudang."
+            },
+            {
+                id: "joko",
+                nama: "Joko Hartono",
+                meta: "41 · Wartawan",
+                foto: "assets/l7/joko.jpg",
+                ringkas: "Pos Utara. Menulis legenda Cabang Tujuh; dilarang dekat CCTV blur."
+            },
+            {
+                id: "agus",
+                nama: "Agus Mahendra",
+                meta: "52 · Satpam",
+                foto: "assets/l7/agus.jpg",
+                ringkas: "Gerbang Gudang Emas. Mencatat Cain masuk-keluar. Bukan di lab."
+            },
+            {
+                id: "nina",
+                nama: "Nina Kartika",
+                meta: "44 · Kepala forensik",
+                foto: "assets/l7/nina.jpg",
+                ringkas: "Mengurus sampel dan dump tinta. Van lab di simpang; inisial N.K. di buku satpam."
+            },
+            {
+                id: "hendra",
+                nama: "Hendra Gunawan",
+                meta: "55 · Pedagang logam",
+                foto: "assets/l7/hendra.jpg",
+                ringkas: "Langganan gudang. Tahu kode logam Inggris; tidak ada di gang malam itu."
+            },
+            {
+                id: "cain",
+                nama: "Cain Wibowo",
+                meta: "46 · Kurir · tahanan",
+                foto: "assets/l7/cain.jpg",
+                ringkas: "Audit palsu. Membawa kunci laci suara. Menolak menyebut nama panggung."
+            },
+            {
+                id: "laras",
+                nama: "Laras Fitri",
+                meta: "44 · Bidan",
+                foto: "assets/l7/laras.jpg",
+                ringkas: "Saksi luar di interogasi Cain. Klinik pelabuhan; bukan forensik dinas."
+            }
+        ];
+
         function bindAccordions(root) {
             root.addEventListener("click", (e) => {
                 const btn = e.target.closest("[data-acc]");
@@ -2313,12 +2896,56 @@
         renderEvidence(document.getElementById("bukti4"), evidence4);
         renderPeople(document.getElementById("wawancara5"), interviews5);
         renderEvidence(document.getElementById("bukti5"), evidence5);
+        renderPeople(document.getElementById("wawancara6"), interviews6);
+        renderEvidence(document.getElementById("bukti6"), evidence6);
+
+        (function renderSuspects7() {
+            const grid = document.getElementById("suspectGrid7");
+            const hidden = document.getElementById("suspectSelect7");
+            suspects7.forEach((s, i) => {
+                const btn = document.createElement("button");
+                btn.type = "button";
+                btn.className = "suspect-card";
+                btn.setAttribute("role", "option");
+                btn.dataset.id = s.id;
+                const no = String(i + 1).padStart(2, "0");
+                btn.innerHTML = `
+                    <span class="sc-photo">
+                        <img src="${s.foto}" alt="${s.nama}" width="480" height="300" loading="lazy">
+                        <span class="sc-tag">Berkas ${no}</span>
+                    </span>
+                    <span class="sc-body">
+                        <span class="sc-name">${s.nama}</span>
+                        <span class="sc-meta">${s.meta}</span>
+                        <span class="sc-sum">${s.ringkas}</span>
+                    </span>
+                    <span class="sc-pick">Ketuk untuk memilih</span>
+                `;
+                btn.addEventListener("click", () => {
+                    unlockTypeAudio();
+                    grid.querySelectorAll(".suspect-card").forEach((c) => {
+                        c.classList.remove("is-selected");
+                        const pick = c.querySelector(".sc-pick");
+                        if (pick) pick.textContent = "Ketuk untuk memilih";
+                    });
+                    btn.classList.add("is-selected");
+                    const pick = btn.querySelector(".sc-pick");
+                    if (pick) pick.textContent = "Dipilih";
+                    hidden.value = s.id;
+                    const warn = document.getElementById("formWarn7");
+                    if (warn) warn.hidden = true;
+                });
+                grid.appendChild(btn);
+            });
+        })();
 
         const app1 = document.getElementById("app");
         const app2 = document.getElementById("app2");
         const app3 = document.getElementById("app3");
         const app4 = document.getElementById("app4");
         const app5 = document.getElementById("app5");
+        const app6 = document.getElementById("app6");
+        const app7 = document.getElementById("app7");
         const pages = ["laporan", "korban", "keterangan", "bukti", "rumah", "putusan"];
         let detectiveName = "";
 
@@ -2340,6 +2967,8 @@
             app3.style.display = "none";
             app4.style.display = "none";
             app5.style.display = "none";
+            app6.style.display = "none";
+            app7.style.display = "none";
         }
 
         function openApp(page) {
@@ -2379,6 +3008,22 @@
             document.title = "52/INT/IX/26";
             localStorage.setItem("mtr19b-level", "5");
             showPageIn(app5, "l5-", page || "laporan");
+        }
+
+        function openLevel6(page) {
+            hideApps();
+            app6.style.display = "block";
+            document.title = "67/RJ/IX/26";
+            localStorage.setItem("mtr19b-level", "6");
+            showPageIn(app6, "l6-", page || "laporan");
+        }
+
+        function openLevel7(page) {
+            hideApps();
+            app7.style.display = "block";
+            document.title = "88/RJ/IX/26";
+            localStorage.setItem("mtr19b-level", "7");
+            showPageIn(app7, "l7-", page || "laporan");
         }
 
         function addNextButton(box) {
@@ -2517,6 +3162,233 @@
             const box = document.getElementById("resultBox5");
             box.hidden = false;
             box.innerHTML = html;
+            if (document.getElementById("toLevel6")) return;
+            const b = document.createElement("button");
+            b.id = "toLevel6";
+            b.type = "button";
+            b.className = "btn-paper";
+            b.innerHTML = '<i class="fa-solid fa-arrow-right"></i>Lanjut ke berkas berikutnya';
+            b.addEventListener("click", () => openLevel6("laporan"));
+            box.appendChild(b);
+        }
+
+        function showL6Solved(html) {
+            document.getElementById("accusationForm6").style.display = "none";
+            const box = document.getElementById("resultBox6");
+            box.hidden = false;
+            box.innerHTML = html;
+            if (document.getElementById("toLevel7")) return;
+            const b = document.createElement("button");
+            b.id = "toLevel7";
+            b.type = "button";
+            b.className = "btn-paper";
+            b.innerHTML = '<i class="fa-solid fa-arrow-right"></i>Lanjut ke dakwaan akhir';
+            b.addEventListener("click", () => openLevel7("laporan"));
+            box.appendChild(b);
+        }
+
+        function showL7Solved(html, opts) {
+            document.getElementById("accusationForm7").style.display = "none";
+            const box = document.getElementById("resultBox7");
+            box.hidden = false;
+            const flag = (opts && opts.flag) || localStorage.getItem("mtr19b-l7-flag") || "";
+            if (flag) localStorage.setItem("mtr19b-l7-flag", flag);
+            if (opts && opts.instant) {
+                renderL7WinFinal(box, flag, true);
+                localStorage.setItem("mtr19b-rj-ending", "1");
+                return;
+            }
+            runL7WinDrama(box, flag);
+        }
+
+        function detName() {
+            return detectiveName || localStorage.getItem("mtr19b-det-name") || "Detective";
+        }
+
+        function appendRjFace(host, instant) {
+            if (host.querySelector(".rj-reveal")) return null;
+            const wrap = document.createElement("div");
+            wrap.className = "rj-reveal" + (instant ? " is-shown" : "");
+            wrap.innerHTML = `
+                <img src="assets/Red-John-Smiley-Face.png" alt="Red John">
+                <p class="rj-cap">Red John</p>
+            `;
+            host.appendChild(wrap);
+            if (!instant) {
+                requestAnimationFrame(() => wrap.classList.add("is-shown"));
+            }
+            return wrap;
+        }
+
+        function playRjAudio() {
+            const audio = document.getElementById("rjAudio");
+            if (!audio) return;
+            try {
+                audio.volume = 0.9;
+                audio.currentTime = 0;
+                const p = audio.play();
+                if (p && typeof p.catch === "function") p.catch(() => {});
+            } catch (err) { /* autoplay block */ }
+        }
+
+        let typeAudioCtx = null;
+        function unlockTypeAudio() {
+            try {
+                const AC = window.AudioContext || window.webkitAudioContext;
+                if (!AC) return;
+                if (!typeAudioCtx) typeAudioCtx = new AC();
+                if (typeAudioCtx.state === "suspended") typeAudioCtx.resume();
+            } catch (err) { /* ignore */ }
+        }
+
+        function playTypeTick() {
+            try {
+                unlockTypeAudio();
+                if (!typeAudioCtx) return;
+                const t = typeAudioCtx.currentTime;
+                const o = typeAudioCtx.createOscillator();
+                const g = typeAudioCtx.createGain();
+                o.type = "triangle";
+                o.frequency.setValueAtTime(920, t);
+                o.frequency.exponentialRampToValueAtTime(420, t + 0.028);
+                g.gain.setValueAtTime(0.09, t);
+                g.gain.linearRampToValueAtTime(0.0001, t + 0.03);
+                o.connect(g);
+                g.connect(typeAudioCtx.destination);
+                o.start(t);
+                o.stop(t + 0.032);
+            } catch (err) { /* ignore */ }
+        }
+
+        function waitMs(ms) {
+            return new Promise((resolve) => setTimeout(resolve, ms));
+        }
+
+        async function typeLine(el, text, speed) {
+            el.classList.add("drama-cursor");
+            el.textContent = "";
+            unlockTypeAudio();
+            for (let i = 0; i < text.length; i++) {
+                el.textContent += text[i];
+                const ch = text[i];
+                if (ch.trim()) playTypeTick();
+                let delay = speed;
+                if (ch === "." || ch === "!" || ch === "?") delay = speed * 7;
+                else if (ch === "," || ch === ";" || ch === "—" || ch === ":") delay = speed * 3.5;
+                else if (ch === " ") delay = speed * 1.15;
+                await waitMs(delay);
+            }
+            el.classList.remove("drama-cursor");
+        }
+
+        async function typeParagraphs(wrap, lines, speed) {
+            for (const line of lines) {
+                const p = document.createElement("p");
+                wrap.appendChild(p);
+                await typeLine(p, line, speed);
+                await waitMs(380);
+            }
+        }
+
+        function renderL7WinFinal(box, flag, instant) {
+            const name = detName();
+            box.innerHTML = `
+                <div class="rj-note${instant ? " is-shown" : ""}" id="rjNoteFinal">
+                    <div class="note-label">Catatan di lantai interogasi</div>
+                    <p class="note-text">“This isn’t over, ${name}. I’ll be back.”</p>
+                    <div class="rj-slot"></div>
+                    <div class="flag-wrap">
+                        <button type="button" class="btn-paper" id="openFlagBtn"><i class="fa-solid fa-flag"></i>Open the Flag</button>
+                        <div class="flag" id="finalFlag" hidden>${flag || "flag{red_john_still_smiles}"}</div>
+                    </div>
+                </div>
+            `;
+            const slot = box.querySelector(".rj-slot");
+            appendRjFace(slot, instant);
+            if (!instant) playRjAudio();
+            const note = box.querySelector("#rjNoteFinal");
+            if (!instant) requestAnimationFrame(() => note.classList.add("is-shown"));
+            const btn = box.querySelector("#openFlagBtn");
+            const flagEl = box.querySelector("#finalFlag");
+            if (localStorage.getItem("mtr19b-flag-open") === "1") {
+                btn.style.display = "none";
+                flagEl.hidden = false;
+                flagEl.classList.add("is-shown");
+            }
+            btn.addEventListener("click", () => {
+                localStorage.setItem("mtr19b-flag-open", "1");
+                btn.style.display = "none";
+                flagEl.hidden = false;
+                requestAnimationFrame(() => flagEl.classList.add("is-shown"));
+            });
+        }
+
+        async function runL7WinDrama(box, flag) {
+            if (box.dataset.animating === "1") return;
+            box.dataset.animating = "1";
+            box.hidden = false;
+            unlockTypeAudio();
+            const name = detName();
+            box.innerHTML = `
+                <div class="doc drama-doc drama-clear" id="l7DramaMain">
+                    <div class="stamp"><i class="fa-solid fa-fingerprint"></i>Terungkap</div>
+                    <div class="drama-lines"></div>
+                </div>
+            `;
+            const linesWrap = box.querySelector(".drama-lines");
+            const h3 = document.createElement("h3");
+            linesWrap.appendChild(h3);
+            await typeLine(h3, "Nina Kartika.", 40);
+            await waitMs(450);
+            await typeParagraphs(linesWrap, [
+                "Dia tertangkap. RED JOHN punya wajah. Nama panggung itu milik kepala forensik yang selama ini membersihkan jejak sendiri.",
+                "Motif? Tidak ada. Tidak ada dendam yang rapi. Tidak ada uang. Dia murni monster—psikopat yang menikmati ketakutan orang lain.",
+                `Dan sekarang dia mengincar Anda, ${name}.`,
+                "Di ruang interogasi, lampu berkedip. Bau gas. Ledakan. Anda dan petugas keamanan jatuh.",
+                "Saat sadar: kursi kosong. Borgol terbuka. Nina pergi.",
+                "Di lantai, selembar catatan kecil—bahasa Inggris, tinta merah."
+            ], 34);
+            await waitMs(700);
+            const main = box.querySelector("#l7DramaMain");
+            main.classList.add("is-out");
+            await waitMs(750);
+            renderL7WinFinal(box, flag, false);
+            localStorage.setItem("mtr19b-rj-ending", "1");
+            box.dataset.animating = "0";
+        }
+
+        async function showL7Failed() {
+            document.getElementById("accusationForm7").style.display = "none";
+            const box = document.getElementById("resultBox7");
+            if (box.dataset.animating === "1") return;
+            box.dataset.animating = "1";
+            box.hidden = false;
+            unlockTypeAudio();
+            const name = detName();
+            box.innerHTML = `
+                <div class="doc drama-doc">
+                    <div class="stamp"><i class="fa-solid fa-ban"></i>Ditolak</div>
+                    <div class="drama-lines"></div>
+                </div>
+            `;
+            const linesWrap = box.querySelector(".drama-lines");
+            const h3 = document.createElement("h3");
+            linesWrap.appendChild(h3);
+            await typeLine(h3, "Anda salah.", 42);
+            await waitMs(500);
+            await typeParagraphs(linesWrap, [
+                `Dakwaan ${name} ditolak. Pintu berkas ditutup dari alamat ini—selamanya.`,
+                "Malam itu rumah Anda tenang. Lalu tidak.",
+                "Keluarga Anda ditemukan dengan senyum merah di dinding. Jejak yang sama. Bau yang sama.",
+                "Hidup Anda hancur pelan-pelan. Tidak ada yang percaya. Tidak ada yang selamat.",
+                "Di akhir, Anda tidak menunggu pengadilan. Anda mengakhiri semuanya sendiri—kotor, sunyi, mengenaskan.",
+                "Di cermin kamar mandi, ada yang tersenyum."
+            ], 34);
+            await waitMs(600);
+            appendRjFace(box.querySelector(".doc") || box, false);
+            playRjAudio();
+            localStorage.setItem("mtr19b-rj-ending", "1");
+            box.dataset.animating = "0";
         }
 
         app1.querySelector("nav").addEventListener("click", (e) => {
@@ -2549,10 +3421,22 @@
             showPageIn(app5, "l5-", btn.dataset.page);
         });
 
+        app6.querySelector("nav").addEventListener("click", (e) => {
+            const btn = e.target.closest(".navbtn");
+            if (!btn) return;
+            showPageIn(app6, "l6-", btn.dataset.page);
+        });
+
+        app7.querySelector("nav").addEventListener("click", (e) => {
+            const btn = e.target.closest(".navbtn");
+            if (!btn) return;
+            showPageIn(app7, "l7-", btn.dataset.page);
+        });
+
         document.getElementById("openBtn").addEventListener("click", () => openApp());
 
         const boot = location.hash.replace("#", "");
-        if (boot === "l2" || boot === "l3" || boot === "l4" || boot === "l5") {
+        if (boot === "l2" || boot === "l3" || boot === "l4" || boot === "l5" || boot === "l6" || boot === "l7") {
             /* dibuka sesudah cek status */
         } else if (boot && pages.includes(boot)) {
             openApp(boot);
@@ -2577,6 +3461,14 @@
         const notes5 = document.getElementById("notes5");
         notes5.value = localStorage.getItem("mtr52-notes") || "";
         notes5.addEventListener("input", () => localStorage.setItem("mtr52-notes", notes5.value));
+
+        const notes6 = document.getElementById("notes6");
+        notes6.value = localStorage.getItem("mtr67-notes") || "";
+        notes6.addEventListener("input", () => localStorage.setItem("mtr67-notes", notes6.value));
+
+        const notes7 = document.getElementById("notes7");
+        notes7.value = localStorage.getItem("mtr88-rj-notes") || "";
+        notes7.addEventListener("input", () => localStorage.setItem("mtr88-rj-notes", notes7.value));
 
         function setDrawerUnlocked5(ok) {
             document.getElementById("rekamanLocked5").hidden = ok;
@@ -2643,17 +3535,29 @@
             box.innerHTML = rejectedHtml;
         }
 
-        function lockDakwa() {
+        function lockDakwa(opts) {
             localStorage.setItem("mtr19b-dakwa-lock", "1");
             showBlockedOn("accusationForm", "resultBox");
             showBlockedOn("accusationForm2", "resultBox2");
             showBlockedOn("accusationForm3", "resultBox3");
             showBlockedOn("accusationForm4", "resultBox4");
             showBlockedOn("accusationForm5", "resultBox5");
+            showBlockedOn("accusationForm6", "resultBox6");
+            document.getElementById("accusationForm7").style.display = "none";
+            const box7 = document.getElementById("resultBox7");
+            if (opts && opts.instant) {
+                box7.hidden = false;
+                box7.innerHTML = rejectedHtml;
+                if (localStorage.getItem("mtr19b-rj-ending") === "1") appendRjFace(box7, true);
+            } else if (opts && opts.drama7) {
+                showL7Failed();
+            } else {
+                showBlockedOn("accusationForm7", "resultBox7");
+            }
         }
 
         if (localStorage.getItem("mtr19b-dakwa-lock") === "1") {
-            lockDakwa();
+            lockDakwa({ instant: true });
         }
 
         async function bindSubmit(btnId, selectId, warnId, boxId, formId, url, onOk) {
@@ -2714,6 +3618,49 @@
             showL4Solved(data.html);
         });
 
+        document.getElementById("submitBtn7").addEventListener("click", async () => {
+            unlockTypeAudio();
+            const who = document.getElementById("suspectSelect7").value;
+            const warn = document.getElementById("formWarn7");
+            const box = document.getElementById("resultBox7");
+            const btn = document.getElementById("submitBtn7");
+            if (!who) {
+                warn.hidden = false;
+                warn.textContent = "Pilih berkas terlebih dahulu.";
+                box.hidden = true;
+                return;
+            }
+            warn.hidden = true;
+            btn.disabled = true;
+            try {
+                const res = await fetch("api/dakwa7", {
+                    method: "POST",
+                    cache: "no-store",
+                    credentials: "same-origin",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ who })
+                });
+                const data = await res.json();
+                if (data.need) {
+                    btn.disabled = false;
+                    warn.hidden = false;
+                    warn.textContent = "Berkas ini belum dibuka.";
+                    return;
+                }
+                if (data.ok) {
+                    localStorage.setItem("mtr19b-l7-ok", "1");
+                    if (data.flag) localStorage.setItem("mtr19b-l7-flag", data.flag);
+                    showL7Solved(data.html, { flag: data.flag });
+                } else {
+                    lockDakwa({ drama7: true });
+                }
+            } catch (err) {
+                btn.disabled = false;
+                warn.hidden = false;
+                warn.textContent = "Berkas tidak terkirim.";
+            }
+        });
+
         document.getElementById("submitBtn5").addEventListener("click", async () => {
             const code = document.getElementById("codeInput5").value.trim();
             const warn = document.getElementById("formWarn5");
@@ -2757,14 +3704,59 @@
             }
         });
 
+        document.getElementById("submitBtn6").addEventListener("click", async () => {
+            const code = document.getElementById("codeInput6").value.trim();
+            const warn = document.getElementById("formWarn6");
+            const box = document.getElementById("resultBox6");
+            const btn = document.getElementById("submitBtn6");
+            if (!code) {
+                warn.hidden = false;
+                warn.textContent = "Isi kode terlebih dahulu.";
+                box.hidden = true;
+                return;
+            }
+            warn.hidden = true;
+            btn.disabled = true;
+            try {
+                const res = await fetch("api/dakwa6", {
+                    method: "POST",
+                    cache: "no-store",
+                    credentials: "same-origin",
+                    headers: { "Content-Type": "application/json" },
+                    body: JSON.stringify({ code })
+                });
+                const data = await res.json();
+                box.hidden = false;
+                if (data.need) {
+                    btn.disabled = false;
+                    warn.hidden = false;
+                    warn.textContent = "Berkas ini belum dibuka.";
+                    box.hidden = true;
+                    return;
+                }
+                if (data.ok) {
+                    localStorage.setItem("mtr19b-l6-ok", "1");
+                    showL6Solved(data.html);
+                } else {
+                    lockDakwa();
+                }
+            } catch (err) {
+                btn.disabled = false;
+                warn.hidden = false;
+                warn.textContent = "Berkas tidak terkirim.";
+            }
+        });
+
         (async () => {
             try {
-                const [r1, r2, r3, r4, r5, rn] = await Promise.all([
+                const [r1, r2, r3, r4, r5, r6, r7, rn] = await Promise.all([
                     fetch("api/dakwa", { method: "GET", cache: "no-store", credentials: "same-origin" }),
                     fetch("api/dakwa2", { method: "GET", cache: "no-store", credentials: "same-origin" }),
                     fetch("api/dakwa3", { method: "GET", cache: "no-store", credentials: "same-origin" }),
                     fetch("api/dakwa4", { method: "GET", cache: "no-store", credentials: "same-origin" }),
                     fetch("api/dakwa5", { method: "GET", cache: "no-store", credentials: "same-origin" }),
+                    fetch("api/dakwa6", { method: "GET", cache: "no-store", credentials: "same-origin" }),
+                    fetch("api/dakwa7", { method: "GET", cache: "no-store", credentials: "same-origin" }),
                     fetch("api/nama", { method: "GET", cache: "no-store", credentials: "same-origin" })
                 ]);
                 const data = await r1.json();
@@ -2772,12 +3764,14 @@
                 const data3 = await r3.json();
                 const data4 = await r4.json();
                 const data5 = await r5.json();
+                const data6 = await r6.json();
+                const data7 = await r7.json();
                 const dataN = await rn.json();
                 if (dataN.name) {
                     detectiveName = dataN.name;
                     localStorage.setItem("mtr19b-det-name", detectiveName);
                 }
-                if (data.blocked || data2.blocked || data3.blocked || data4.blocked || data5.blocked || dataN.blocked) lockDakwa();
+                if (data.blocked || data2.blocked || data3.blocked || data4.blocked || data5.blocked || data6.blocked || data7.blocked || dataN.blocked) lockDakwa();
                 if (data.l1 && data.html) {
                     localStorage.setItem("mtr19b-l1-ok", "1");
                     showL1Solved(data.html);
@@ -2786,8 +3780,27 @@
                     localStorage.setItem("mtr19b-l2-ok", "1");
                     showL2Solved(data2.html);
                 }
+                if (data7.l7 && data7.html) {
+                    if (data7.flag) localStorage.setItem("mtr19b-l7-flag", data7.flag);
+                    showL7Solved(data7.html, { instant: true, flag: data7.flag });
+                    openLevel7("putusan");
+                    return;
+                }
+                if (data6.l6 && data6.html) {
+                    showL6Solved(data6.html);
+                    if (localStorage.getItem("mtr19b-level") === "7" || boot === "l7") {
+                        openLevel7("laporan");
+                        return;
+                    }
+                    openLevel6("putusan");
+                    return;
+                }
                 if (data5.l5 && data5.html) {
                     showL5Solved(data5.html);
+                    if (localStorage.getItem("mtr19b-level") === "6" || boot === "l6") {
+                        openLevel6("laporan");
+                        return;
+                    }
                     openLevel5("putusan");
                     return;
                 }
@@ -2810,7 +3823,9 @@
                     return;
                 }
                 const lvl = localStorage.getItem("mtr19b-level");
-                if (data4.l4 && (lvl === "5" || boot === "l5")) openLevel5("laporan");
+                if (data6.l6 && (lvl === "7" || boot === "l7")) openLevel7("laporan");
+                else if (data5.l5 && (lvl === "6" || boot === "l6")) openLevel6("laporan");
+                else if (data4.l4 && (lvl === "5" || boot === "l5")) openLevel5("laporan");
                 else if (data3.l3 && detectiveName && (lvl === "4" || boot === "l4")) openLevel4("laporan");
                 else if (data2.l2 && (lvl === "3" || boot === "l3")) openLevel3("laporan");
                 else if (data2.l2 && (lvl === "2" || boot === "l2")) openLevel2("laporan");
