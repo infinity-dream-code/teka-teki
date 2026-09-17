@@ -693,91 +693,14 @@
             inset: 0;
             z-index: 9999;
             pointer-events: none;
-            overflow: hidden;
             opacity: 0;
-            transition: opacity 0.35s ease;
+            background: rgba(120, 0, 0, 0.42);
+            transition: opacity 1.4s ease;
         }
 
         #bloodOverlay.is-on {
             opacity: 1;
             pointer-events: auto;
-        }
-
-        #bloodOverlay .blood-sheet {
-            position: absolute;
-            inset: 0;
-            background:
-                radial-gradient(ellipse 90% 70% at 20% 0%, #6b0000 0%, transparent 55%),
-                radial-gradient(ellipse 80% 60% at 75% 5%, #5a0000 0%, transparent 50%),
-                radial-gradient(ellipse 100% 80% at 50% 110%, #1a0000 0%, #3a0000 40%, transparent 70%),
-                linear-gradient(180deg, #4a0505 0%, #2b0000 38%, #120000 100%);
-            opacity: 0;
-            transform: scaleY(0.15);
-            transform-origin: top center;
-            transition: opacity 0.6s ease, transform 2.6s cubic-bezier(0.22, 0.61, 0.36, 1);
-        }
-
-        #bloodOverlay.is-on .blood-sheet {
-            opacity: 0.92;
-            transform: scaleY(1);
-        }
-
-        #bloodOverlay .blood-drip {
-            position: absolute;
-            top: -8%;
-            width: var(--w, 18px);
-            height: var(--h, 55%);
-            border-radius: 50% 50% 45% 45% / 18% 18% 82% 82%;
-            background:
-                linear-gradient(180deg,
-                    #9a1212 0%,
-                    #7a0808 22%,
-                    #4e0101 70%,
-                    #2a0000 100%);
-            box-shadow:
-                inset -3px 0 6px rgba(0, 0, 0, 0.35),
-                inset 2px 0 4px rgba(180, 40, 40, 0.25),
-                0 0 14px rgba(80, 0, 0, 0.45);
-            opacity: 0;
-            transform: translateY(-20%) scaleY(0.4);
-            animation: blood-run var(--dur, 1.8s) var(--delay, 0s) cubic-bezier(0.33, 0.1, 0.25, 1) forwards;
-        }
-
-        #bloodOverlay .blood-drip::after {
-            content: "";
-            position: absolute;
-            left: 50%;
-            bottom: -10px;
-            width: calc(var(--w, 18px) * 1.35);
-            height: calc(var(--w, 18px) * 1.2);
-            transform: translateX(-50%);
-            border-radius: 50% 50% 48% 52% / 55% 55% 45% 45%;
-            background: radial-gradient(circle at 40% 35%, #8a1010 0%, #4a0000 55%, #1a0000 100%);
-            box-shadow: 0 4px 10px rgba(40, 0, 0, 0.5);
-        }
-
-        #bloodOverlay .blood-splat {
-            position: absolute;
-            width: var(--s, 40px);
-            height: var(--s, 40px);
-            border-radius: 58% 42% 63% 37% / 48% 55% 45% 52%;
-            background: radial-gradient(circle at 35% 30%, #a01818 0%, #5c0000 55%, #220000 100%);
-            opacity: 0;
-            transform: scale(0.2);
-            filter: blur(0.3px);
-            animation: blood-splat var(--dur, 0.7s) var(--delay, 0.4s) ease-out forwards;
-        }
-
-        @keyframes blood-run {
-            0% { opacity: 0; transform: translateY(-25%) scaleY(0.35); }
-            18% { opacity: 1; }
-            100% { opacity: 1; transform: translateY(42%) scaleY(1.15); }
-        }
-
-        @keyframes blood-splat {
-            0% { opacity: 0; transform: scale(0.15); }
-            60% { opacity: 0.95; transform: scale(1.08); }
-            100% { opacity: 0.85; transform: scale(1); }
         }
 
         .flag-wrap {
@@ -971,9 +894,7 @@
     </style>
 </head>
 <body>
-    <div id="bloodOverlay" aria-hidden="true">
-        <div class="blood-sheet"></div>
-    </div>
+    <div id="bloodOverlay" aria-hidden="true"></div>
     <div id="cover">
         <div class="cover-card">
             <i class="fa-solid fa-scale-balanced cover-icon"></i>
@@ -3492,64 +3413,10 @@ meta=vig_key!=GOLDARCH</div>
             box.dataset.animating = "0";
         }
 
-        function floodBlood(instant) {
+        function floodBlood() {
             const el = document.getElementById("bloodOverlay");
             if (!el) return;
-            el.querySelectorAll(".blood-drip, .blood-splat").forEach((n) => n.remove());
-
-            const drips = [
-                { left: "4%",  w: 14, h: "62%", delay: "0s",    dur: "1.7s" },
-                { left: "11%", w: 22, h: "78%", delay: "0.08s", dur: "2.1s" },
-                { left: "19%", w: 16, h: "55%", delay: "0.18s", dur: "1.6s" },
-                { left: "27%", w: 28, h: "88%", delay: "0.05s", dur: "2.35s" },
-                { left: "36%", w: 12, h: "48%", delay: "0.28s", dur: "1.5s" },
-                { left: "43%", w: 24, h: "72%", delay: "0.12s", dur: "2.0s" },
-                { left: "52%", w: 18, h: "65%", delay: "0.22s", dur: "1.85s" },
-                { left: "61%", w: 30, h: "92%", delay: "0.02s", dur: "2.5s" },
-                { left: "70%", w: 15, h: "58%", delay: "0.3s",  dur: "1.65s" },
-                { left: "78%", w: 26, h: "80%", delay: "0.1s",  dur: "2.2s" },
-                { left: "86%", w: 13, h: "52%", delay: "0.25s", dur: "1.55s" },
-                { left: "93%", w: 20, h: "70%", delay: "0.15s", dur: "1.95s" }
-            ];
-            const splats = [
-                { left: "8%",  top: "18%", s: 52, delay: "0.55s" },
-                { left: "22%", top: "41%", s: 38, delay: "0.75s" },
-                { left: "48%", top: "28%", s: 64, delay: "0.65s" },
-                { left: "63%", top: "52%", s: 44, delay: "0.9s" },
-                { left: "81%", top: "22%", s: 56, delay: "0.7s" },
-                { left: "35%", top: "68%", s: 72, delay: "1.05s" },
-                { left: "72%", top: "74%", s: 48, delay: "1.15s" },
-                { left: "14%", top: "78%", s: 36, delay: "1.2s" }
-            ];
-
-            drips.forEach((d) => {
-                const n = document.createElement("div");
-                n.className = "blood-drip";
-                n.style.left = d.left;
-                n.style.setProperty("--w", d.w + "px");
-                n.style.setProperty("--h", d.h);
-                n.style.setProperty("--delay", instant ? "0s" : d.delay);
-                n.style.setProperty("--dur", instant ? "0.01s" : d.dur);
-                el.appendChild(n);
-            });
-            splats.forEach((s) => {
-                const n = document.createElement("div");
-                n.className = "blood-splat";
-                n.style.left = s.left;
-                n.style.top = s.top;
-                n.style.setProperty("--s", s.s + "px");
-                n.style.setProperty("--delay", instant ? "0s" : s.delay);
-                n.style.setProperty("--dur", instant ? "0.01s" : "0.7s");
-                el.appendChild(n);
-            });
-
-            el.classList.remove("is-on");
-            void el.offsetWidth;
-            if (instant) el.style.transition = "none";
             el.classList.add("is-on");
-            if (instant) {
-                requestAnimationFrame(() => { el.style.transition = ""; });
-            }
         }
 
         app1.querySelector("nav").addEventListener("click", (e) => {
@@ -3720,7 +3587,7 @@ meta=vig_key!=GOLDARCH</div>
         if (localStorage.getItem("mtr19b-dakwa-lock") === "1") {
             lockDakwa({ instant: true });
             if (localStorage.getItem("mtr19b-blood") === "1") {
-                floodBlood(true);
+                floodBlood();
             }
         }
 
