@@ -580,9 +580,161 @@
             filter: sepia(0.25) contrast(1.05);
         }
 
-        .promo-block { margin-top: 20px; }
-        .promo-block .field { margin-top: 12px; }
-        #detectiveNameInput, #codeInput5, #codeInput6 {
+        .promo-block {
+            margin-top: 28px;
+            position: relative;
+            padding: 28px 26px 24px;
+            background:
+                linear-gradient(180deg, rgba(255,255,255,.18) 0%, transparent 28%),
+                linear-gradient(145deg, #efe6d4 0%, var(--paper) 42%, #e6ddc9 100%);
+            border: 1px solid rgba(26, 22, 18, 0.22);
+            box-shadow: 0 10px 28px rgba(0, 0, 0, 0.22);
+        }
+
+        .promo-block::before {
+            content: "";
+            position: absolute;
+            inset: 11px;
+            border: 1px solid rgba(106, 61, 54, 0.22);
+            pointer-events: none;
+        }
+
+        .promo-block > * { position: relative; z-index: 1; }
+
+        .promo-meta {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-2);
+            line-height: 1.7;
+            margin: -4px 0 16px;
+        }
+
+        .promo-block .stamp {
+            color: var(--rust);
+            margin-bottom: 16px;
+        }
+
+        .promo-block h3 {
+            font-family: "Newsreader", serif;
+            font-size: 28px;
+            font-weight: 600;
+            line-height: 1.2;
+            margin: 0 0 10px;
+            color: var(--ink);
+        }
+
+        .promo-block > p {
+            margin: 0;
+            max-width: 38em;
+        }
+
+        .promo-rule {
+            height: 1px;
+            background: rgba(26, 22, 18, 0.14);
+            margin: 18px 0 16px;
+            border: 0;
+        }
+
+        .promo-sign-label {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--rust);
+            margin-bottom: 6px;
+            display: block;
+        }
+
+        .promo-sign {
+            display: grid;
+            gap: 14px;
+        }
+
+        .promo-block #detectiveNameInput {
+            width: 100%;
+            max-width: none;
+            background: transparent;
+            border: none;
+            border-bottom: 2px solid rgba(26, 22, 18, 0.55);
+            border-radius: 0;
+            color: var(--ink);
+            padding: 10px 2px 8px;
+            margin: 0;
+            font-family: "Newsreader", serif;
+            font-size: 24px;
+            font-weight: 500;
+            letter-spacing: 0.01em;
+        }
+
+        .promo-block #detectiveNameInput::placeholder {
+            color: rgba(26, 22, 18, 0.35);
+            font-style: italic;
+            font-weight: 400;
+        }
+
+        .promo-block #detectiveNameInput:focus {
+            outline: none;
+            border-bottom-color: var(--rust);
+        }
+
+        .promo-block #saveNameBtn,
+        .promo-block #toLevel4 {
+            width: 100%;
+            justify-content: center;
+            margin-top: 4px;
+            background: var(--ink);
+            color: var(--paper);
+            border: 1px solid var(--ink);
+        }
+
+        .promo-block #saveNameBtn:hover,
+        .promo-block #toLevel4:hover {
+            background: #2a241e;
+        }
+
+        .promo-block .warn {
+            margin-top: 10px;
+        }
+
+        .promo-rank {
+            display: inline-block;
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 11px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            color: var(--rust);
+            margin: 0 0 12px;
+            padding-bottom: 2px;
+            border-bottom: 1px solid rgba(106, 61, 54, 0.35);
+        }
+
+        .promo-name-shown {
+            font-family: "Newsreader", serif;
+            font-size: 32px;
+            font-weight: 600;
+            line-height: 1.15;
+            margin: 0 0 14px;
+            color: var(--ink);
+        }
+
+        @media (min-width: 640px) {
+            .promo-sign {
+                grid-template-columns: 1fr auto;
+                align-items: end;
+            }
+            .promo-block #saveNameBtn {
+                width: auto;
+                min-width: 220px;
+                margin-top: 0;
+                align-self: end;
+                padding-left: 18px;
+                padding-right: 18px;
+            }
+        }
+
+        #codeInput5, #codeInput6 {
             width: 100%;
             max-width: 320px;
             background: var(--bg-2);
@@ -3077,6 +3229,14 @@ meta=vig_key!=GOLDARCH</div>
             box.appendChild(b);
         }
 
+        function escapeHtml(s) {
+            return String(s || "")
+                .replace(/&/g, "&amp;")
+                .replace(/</g, "&lt;")
+                .replace(/>/g, "&gt;")
+                .replace(/"/g, "&quot;");
+        }
+
         function addPromoAfterL3(box) {
             if (document.getElementById("promoBlock")) return;
             const wrap = document.createElement("div");
@@ -3084,10 +3244,13 @@ meta=vig_key!=GOLDARCH</div>
             wrap.className = "doc promo-block";
             if (detectiveName) {
                 wrap.innerHTML = `
-                    <div class="stamp"><i class="fa-solid fa-id-badge"></i>Surat tugas</div>
-                    <h3>${detectiveName}</h3>
-                    <p>Komandan mencoret status magang Anda pagi ini. Mulai sekarang Anda detektif tetap. Berkas Gudang Emas Utara sudah menunggu di meja.</p>
-                    <button type="button" class="btn-paper" id="toLevel4"><i class="fa-solid fa-arrow-right"></i>Buka berkas 41/GLD</button>
+                    <div class="stamp"><i class="fa-solid fa-id-badge"></i>Diangkat</div>
+                    <div class="promo-meta">Nomor ST/19/UTR · 16 September 2026<br>Dari: Kombes L. Prasetyo</div>
+                    <div class="promo-rank">Detektif tetap</div>
+                    <div class="promo-name-shown">${escapeHtml(detectiveName)}</div>
+                    <p>Komandan mencoret status magang Anda pagi ini. Berkas Gudang Emas Utara sudah menunggu di meja.</p>
+                    <hr class="promo-rule">
+                    <button type="button" class="btn-paper" id="toLevel4"><i class="fa-solid fa-folder-open"></i>Buka berkas 41/GLD</button>
                 `;
                 box.appendChild(wrap);
                 document.getElementById("toLevel4").addEventListener("click", () => openLevel4("laporan"));
@@ -3095,15 +3258,29 @@ meta=vig_key!=GOLDARCH</div>
             }
             wrap.innerHTML = `
                 <div class="stamp"><i class="fa-solid fa-id-badge"></i>Surat tugas</div>
+                <div class="promo-meta">Nomor ST/19/UTR · 16 September 2026<br>Dari: Kombes L. Prasetyo · Kepada: detektif magang</div>
                 <h3>Anda diangkat detektif tetap</h3>
-                <p>Berkas Pelabuhan Utara selesai. Komandan tidak lagi menyebut Anda magang. Tulis nama yang akan dipakai di laporan berikutnya. Nama ini tersimpan; jangan salah ketik.</p>
-                <label class="field" for="detectiveNameInput">Nama</label>
-                <input id="detectiveNameInput" type="text" maxlength="64" autocomplete="off" placeholder="Nama lengkap Anda">
-                <button type="button" id="saveNameBtn"><i class="fa-solid fa-floppy-disk"></i>Simpan, buka berkas berikutnya</button>
+                <p>Berkas Pelabuhan Utara selesai. Komandan tidak lagi menyebut Anda magang. Cantumkan nama yang dipakai di laporan berikutnya. Nama tersimpan; jangan salah ketik.</p>
+                <hr class="promo-rule">
+                <div class="promo-sign">
+                    <div>
+                        <label class="promo-sign-label" for="detectiveNameInput">Tanda tangan / nama</label>
+                        <input id="detectiveNameInput" type="text" maxlength="64" autocomplete="off" placeholder="Nama lengkap Anda">
+                    </div>
+                    <button type="button" id="saveNameBtn"><i class="fa-solid fa-floppy-disk"></i>Simpan &amp; lanjut</button>
+                </div>
                 <p class="warn" id="nameWarn" hidden></p>
             `;
             box.appendChild(wrap);
+            const input = document.getElementById("detectiveNameInput");
             document.getElementById("saveNameBtn").addEventListener("click", submitDetectiveName);
+            input.addEventListener("keydown", (e) => {
+                if (e.key === "Enter") {
+                    e.preventDefault();
+                    submitDetectiveName();
+                }
+            });
+            setTimeout(() => input.focus(), 80);
         }
 
         async function submitDetectiveName() {
