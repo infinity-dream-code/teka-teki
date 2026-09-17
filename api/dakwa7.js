@@ -4,7 +4,7 @@ const FLAG = "flag{red_john_still_smiles}";
 
 const htmlOk = `<div class="doc">
     <div class="stamp">Terungkap</div>
-    <h3>Nina Kartika.</h3>
+    <h3>Nugroho Kusuma.</h3>
     <p>RED JOHN tertangkap—lalu menghilang di asap. Catatan itu masih ada.</p>
 </div>`;
 
@@ -50,7 +50,7 @@ export default async function handler(req, res) {
 
     const body = parseBody(req);
     const who = String(body.who || "").toLowerCase();
-    if (who === "nina") {
+    if (who === "nugroho") {
         setCookies(res, ["mtr19_l7"]);
         res.status(200).json({ ok: true, blocked: false, html: htmlOk, flag: FLAG, name });
         return;

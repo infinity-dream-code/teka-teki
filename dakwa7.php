@@ -9,7 +9,7 @@ $flag = 'flag{red_john_still_smiles}';
 $html_ok = <<<'HTML'
 <div class="doc">
     <div class="stamp">Terungkap</div>
-    <h3>Nina Kartika.</h3>
+    <h3>Nugroho Kusuma.</h3>
     <p>RED JOHN tertangkap—lalu menghilang di asap. Catatan itu masih ada.</p>
 </div>
 HTML;
@@ -56,7 +56,7 @@ if (!$l6 || $name === '') {
 
 $in = json_decode(file_get_contents('php://input'), true) ?: [];
 $who = strtolower((string) ($in['who'] ?? ''));
-if ($who === 'nina') {
+if ($who === 'nugroho') {
     set_named_cookie('mtr19_l7');
     echo json_encode([
         'ok' => true,

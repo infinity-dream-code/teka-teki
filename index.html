@@ -688,6 +688,53 @@
             margin-top: 12px;
         }
 
+        #bloodOverlay {
+            position: fixed;
+            inset: 0;
+            z-index: 9999;
+            pointer-events: none;
+            opacity: 0;
+            background:
+                radial-gradient(ellipse at 18% 12%, rgba(120, 0, 0, 0.55) 0%, transparent 42%),
+                radial-gradient(ellipse at 82% 8%, rgba(90, 0, 0, 0.5) 0%, transparent 38%),
+                radial-gradient(ellipse at 50% 100%, rgba(70, 0, 0, 0.75) 0%, transparent 55%),
+                linear-gradient(180deg, rgba(90, 0, 0, 0.15) 0%, rgba(40, 0, 0, 0.55) 45%, rgba(20, 0, 0, 0.92) 100%);
+            transition: opacity 2.2s ease;
+        }
+
+        #bloodOverlay::before {
+            content: "";
+            position: absolute;
+            inset: 0;
+            background-image:
+                radial-gradient(circle at 12% 0%, rgba(160, 10, 10, 0.9) 0 3px, transparent 4px),
+                radial-gradient(circle at 28% 0%, rgba(140, 0, 0, 0.85) 0 5px, transparent 7px),
+                radial-gradient(circle at 47% 0%, rgba(170, 20, 20, 0.9) 0 4px, transparent 6px),
+                radial-gradient(circle at 63% 0%, rgba(130, 0, 0, 0.8) 0 6px, transparent 8px),
+                radial-gradient(circle at 81% 0%, rgba(150, 10, 10, 0.88) 0 3px, transparent 5px),
+                radial-gradient(circle at 91% 0%, rgba(120, 0, 0, 0.85) 0 5px, transparent 7px);
+            background-size: 100% 100%;
+            background-repeat: no-repeat;
+            mask-image: linear-gradient(180deg, #000 0%, #000 35%, transparent 75%);
+            -webkit-mask-image: linear-gradient(180deg, #000 0%, #000 35%, transparent 75%);
+            animation: blood-drip 2.8s ease-out forwards;
+            opacity: 0;
+        }
+
+        #bloodOverlay.is-on {
+            opacity: 1;
+            pointer-events: auto;
+        }
+
+        #bloodOverlay.is-on::before {
+            opacity: 1;
+        }
+
+        @keyframes blood-drip {
+            0% { transform: translateY(-8%); opacity: 0.4; }
+            100% { transform: translateY(18%); opacity: 1; }
+        }
+
         .flag-wrap {
             margin-top: 20px;
             text-align: center;
@@ -879,6 +926,7 @@
     </style>
 </head>
 <body>
+    <div id="bloodOverlay" aria-hidden="true"></div>
     <div id="cover">
         <div class="cover-card">
             <i class="fa-solid fa-scale-balanced cover-icon"></i>
@@ -1210,7 +1258,7 @@
                     <p class="lede">16 September 2026, 08.05 WIB · Kombes L. Prasetyo · dilimpahkan dari 27/YK/IX/26</p>
                     <div class="doc">
                         <div class="kicker"><i class="fa-solid fa-circle-exclamation"></i>Kejadian</div>
-                        <p>Empat perempuan di kawasan Pelabuhan Utara. Dua yang pertama sempat dianggap terpisah. Malam 15 September menambah dua peristiwa dalam lima puluh dua menit. Yang ketiga hidup. Yang keempat tidak. Surat atas nama Jack the Ripper sudah masuk ke redaksi sejak 12 September. Berkas Menteng dan Yogyakarta sudah dilimpahkan. Ini berkas terakhir.</p>
+                        <p>Empat perempuan di kawasan Pelabuhan Utara. Dua yang pertama sempat dianggap terpisah. Malam 15 September menambah dua peristiwa dalam lima puluh dua menit. Yang ketiga hidup. Yang keempat tidak. Surat atas nama Jack the Ripper sudah masuk ke redaksi sejak 12 September. Berkas Menteng dan Yogyakarta sudah dilimpahkan. Ini berkas pelabuhan—bukan yang terakhir di meja Anda.</p>
                         <p>Pola luka sama: dua sayatan dalam di leher, dari kiri. Perut dibuka pada yang pertama, kedua, dan keempat. Yang ketiga hanya leher; ada langkah orang lain di kerikil, lalu pelakunya pergi. Yang keempat kehilangan ginjal kiri. Selembar kain apronnya ditemukan di dinding gudang kapur, dengan kapur tulis.</p>
                         <p>Tidak ada saksi yang melihat wajah. Ada delapan orang yang berulang kali ada di kawasan itu malam hari, atau yang menulis tentang pola ini sebelum malam kelima belas.</p>
                         <p>Pola luka dan surat meniru Whitechapel 1888. Dua tanggal pertama sama dengan tahun itu. Malam 15 September menggantikan malam ganda. Ada nama kelima yang belum menjadi jenazah. Kapur di gudang bukan jenazah. Stempel peta dinas: tanpa putar. Rumus rotasi di makalah Anton jangan dipakai ke grid ini.</p>
@@ -1473,7 +1521,7 @@
                             <option value="budi">Budi Santoso</option>
                             <option value="joko">Joko Hartono</option>
                             <option value="agus">Agus Mahendra</option>
-                            <option value="nina">Nina Kartika</option>
+                            <option value="nugroho">Nugroho Kusuma</option>
                             <option value="hendra">Hendra Gunawan</option>
                             <option value="cain">Cain Wibowo</option>
                         </select>
@@ -1741,7 +1789,7 @@ meta=vig_key!=GOLDARCH</div>
         <header class="file">
             <div class="file-spine">
                 <div>
-                    <small>88/RJ/IX/26</small>
+                    <small>99/RJ/IX/26</small>
                     <strong>Dakwaan Akhir</strong>
                 </div>
             </div>
@@ -1769,7 +1817,7 @@ meta=vig_key!=GOLDARCH</div>
                     <div class="doc">
                         <div class="kicker"><i class="fa-solid fa-link"></i>Rantai</div>
                         <p>Foto laci 08 → Cain. Laci suara → RED JOHN. Dump tinta → SEVEN FORK.</p>
-                        <p>CCTV blur di simpul gang: mantel lab, tinggi ~167 cm, rambut diikat. Van forensik tercatat lewat 90 detik kemudian (R-12 di berkas 67).</p>
+                        <p>CCTV blur di simpul gang: mantel lab, postur laki-laki, tinggi ~172 cm. Van forensik tercatat lewat 90 detik kemudian (R-12 di berkas 67).</p>
                         <p>Yang punya akses membersihkan sampel, mengatur rantai barang bukti, dan “rutin” ke gang itu tanpa perintah tertulis: bukan satpam, bukan wartawan, bukan tahanan.</p>
                         <p>Cain: “Ia yang bilang kapan saya boleh bicara.” Ia tidak menyebut nama. Ia menunjuk profesi dengan mata ke koridor lab.</p>
                     </div>
@@ -2463,9 +2511,9 @@ meta=vig_key!=GOLDARCH</div>
                 ]
             },
             {
-                nama: "Nina Kartika",
+                nama: "Nugroho Kusuma",
                 umur: 44,
-                peran: "Dokter forensik · laporan awal",
+                peran: "Kepala forensik · laporan awal",
                 qa: [
                     ["Apakah Anda yakin ini bunuh diri?", "Saya menulis sementara begitu. Alur tali di leher naik ke balok. Tapi ada memar genggaman di lengan yang tidak cocok. Saya minta otopsi penuh. Komandan lokal menekan supaya berkas ditutup."],
                     ["Berapa perkiraan waktu kematiannya?", "Antara pukul 05.40 dan 06.00. Saat ditemukan pukul 06.18, kaku mayat belum penuh."],
@@ -2686,12 +2734,12 @@ meta=vig_key!=GOLDARCH</div>
                 qa: [
                     ["Pernah tulis soal gang itu?", "Saya tulis legenda urban ‘Cabang Tujuh’ tahun 2022. Nama Inggris muncul di komentar anonim. Saya tidak verifikasi."],
                     ["RED JOHN?", "Tokoh fiksi di kepala penonton. Kalau Anda tanya siapa orangnya, itu bukan berita saya."],
-                    ["Nina Kartika?", "Forensik. Ia melarang saya dekat CCTV blur. Alasan: kontaminasi."],
+                    ["Nugroho Kusuma?", "Forensik. Ia melarang saya dekat CCTV blur. Alasan: kontaminasi."],
                     ["Cain kasih tip lokasi?", "Tidak. Ia bilang ‘hitung’ kemarin. Hari ini ia bilang ‘bukan rumah’."]
                 ]
             },
             {
-                nama: "Nina Kartika",
+                nama: "Nugroho Kusuma",
                 umur: 44,
                 peran: "Kepala forensik",
                 qa: [
@@ -2706,7 +2754,7 @@ meta=vig_key!=GOLDARCH</div>
                 umur: 52,
                 peran: "Satpam Gudang Emas",
                 qa: [
-                    ["Van lab lewat dermaga?", "Saya dengar dari teman satpam dermaga. Mantel putih. Perempuan. Malam."],
+                    ["Van lab lewat dermaga?", "Saya dengar dari teman satpam dermaga. Mantel putih. Laki-laki. Malam."],
                     ["Cain bilang apa soal titik serah?", "Tidak ke saya. Ia diam sejak ditahan."],
                     ["Hendra?", "Di gudang. Bukan di gang."]
                 ]
@@ -2772,7 +2820,7 @@ meta=vig_key!=GOLDARCH</div>
             {
                 kode: "R-12",
                 judul: "CCTV blur · simpul gang",
-                isi: "16 Sep 21.14.\nFigur mantel lab, tinggi perkiraan 165–170.\nWajah tidak kebaca.\n90 detik kemudian van forensik lewat frame berikutnya.\nIni untuk berkas dakwaan orang—bukan untuk kode."
+                isi: "16 Sep 21.14.\nFigur mantel lab, postur laki-laki, tinggi perkiraan 170–175.\nWajah tidak kebaca.\n90 detik kemudian van forensik lewat frame berikutnya.\nIni untuk berkas dakwaan orang—bukan untuk kode."
             }
         ];
 
@@ -2813,10 +2861,10 @@ meta=vig_key!=GOLDARCH</div>
                 ringkas: "Gerbang Gudang Emas. Mencatat Cain masuk-keluar. Bukan di lab."
             },
             {
-                id: "nina",
-                nama: "Nina Kartika",
+                id: "nugroho",
+                nama: "Nugroho Kusuma",
                 meta: "44 · Kepala forensik",
-                foto: "assets/l7/nina.jpg",
+                foto: "assets/l7/nugroho.jpg",
                 ringkas: "Mengurus sampel dan dump tinta. Van lab di simpang; inisial N.K. di buku satpam."
             },
             {
@@ -3021,7 +3069,7 @@ meta=vig_key!=GOLDARCH</div>
         function openLevel7(page) {
             hideApps();
             app7.style.display = "block";
-            document.title = "88/RJ/IX/26";
+            document.title = "99/RJ/IX/26";
             localStorage.setItem("mtr19b-level", "7");
             showPageIn(app7, "l7-", page || "laporan");
         }
@@ -3299,7 +3347,7 @@ meta=vig_key!=GOLDARCH</div>
                     <div class="rj-slot"></div>
                     <div class="flag-wrap">
                         <button type="button" class="btn-paper" id="openFlagBtn"><i class="fa-solid fa-flag"></i>Open the Flag</button>
-                        <div class="flag" id="finalFlag" hidden>${flag || "flag{red_john_still_smiles}"}</div>
+                        <div class="flag" id="finalFlag" hidden></div>
                     </div>
                 </div>
             `;
@@ -3310,15 +3358,18 @@ meta=vig_key!=GOLDARCH</div>
             if (!instant) requestAnimationFrame(() => note.classList.add("is-shown"));
             const btn = box.querySelector("#openFlagBtn");
             const flagEl = box.querySelector("#finalFlag");
-            if (localStorage.getItem("mtr19b-flag-open") === "1") {
+            if (flag) flagEl.textContent = flag;
+            if (localStorage.getItem("mtr19b-flag-open") === "1" && flag) {
                 btn.style.display = "none";
                 flagEl.hidden = false;
                 flagEl.classList.add("is-shown");
             }
             btn.addEventListener("click", () => {
+                if (!flag) return;
                 localStorage.setItem("mtr19b-flag-open", "1");
                 btn.style.display = "none";
                 flagEl.hidden = false;
+                flagEl.textContent = flag;
                 requestAnimationFrame(() => flagEl.classList.add("is-shown"));
             });
         }
@@ -3338,14 +3389,14 @@ meta=vig_key!=GOLDARCH</div>
             const linesWrap = box.querySelector(".drama-lines");
             const h3 = document.createElement("h3");
             linesWrap.appendChild(h3);
-            await typeLine(h3, "Nina Kartika.", 40);
+            await typeLine(h3, "Nugroho Kusuma.", 40);
             await waitMs(450);
             await typeParagraphs(linesWrap, [
                 "Dia tertangkap. RED JOHN punya wajah. Nama panggung itu milik kepala forensik yang selama ini membersihkan jejak sendiri.",
                 "Motif? Tidak ada. Tidak ada dendam yang rapi. Tidak ada uang. Dia murni monster—psikopat yang menikmati ketakutan orang lain.",
                 `Dan sekarang dia mengincar Anda, ${name}.`,
                 "Di ruang interogasi, lampu berkedip. Bau gas. Ledakan. Anda dan petugas keamanan jatuh.",
-                "Saat sadar: kursi kosong. Borgol terbuka. Nina pergi.",
+                "Saat sadar: kursi kosong. Borgol terbuka. Nugroho pergi.",
                 "Di lantai, selembar catatan kecil—bahasa Inggris, tinta merah."
             ], 34);
             await waitMs(700);
@@ -3387,8 +3438,19 @@ meta=vig_key!=GOLDARCH</div>
             await waitMs(600);
             appendRjFace(box.querySelector(".doc") || box, false);
             playRjAudio();
+            await waitMs(1400);
+            floodBlood();
             localStorage.setItem("mtr19b-rj-ending", "1");
+            localStorage.setItem("mtr19b-blood", "1");
             box.dataset.animating = "0";
+        }
+
+        function floodBlood() {
+            const el = document.getElementById("bloodOverlay");
+            if (!el) return;
+            el.classList.remove("is-on");
+            void el.offsetWidth;
+            el.classList.add("is-on");
         }
 
         app1.querySelector("nav").addEventListener("click", (e) => {
@@ -3558,6 +3620,10 @@ meta=vig_key!=GOLDARCH</div>
 
         if (localStorage.getItem("mtr19b-dakwa-lock") === "1") {
             lockDakwa({ instant: true });
+            if (localStorage.getItem("mtr19b-blood") === "1") {
+                const el = document.getElementById("bloodOverlay");
+                if (el) el.classList.add("is-on");
+            }
         }
 
         async function bindSubmit(btnId, selectId, warnId, boxId, formId, url, onOk) {
