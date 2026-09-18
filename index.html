@@ -41,9 +41,10 @@
             display: flex;
             align-items: center;
             justify-content: center;
-            padding: 40px 22px;
+            padding: 28px 18px 40px;
             background:
-                radial-gradient(ellipse at 50% 42%, #161412 0%, #0c0b0a 62%);
+                radial-gradient(ellipse 120% 80% at 50% 100%, rgba(106, 61, 54, 0.14) 0%, transparent 45%),
+                radial-gradient(ellipse 90% 70% at 50% 30%, #1a1612 0%, #0c0b0a 55%, #070605 100%);
             position: relative;
             overflow: hidden;
         }
@@ -53,47 +54,286 @@
             position: absolute;
             inset: 0;
             background-image:
-                repeating-linear-gradient(0deg, rgba(228,216,196,0.015) 0px, rgba(228,216,196,0.015) 1px, transparent 1px, transparent 3px);
+                repeating-linear-gradient(0deg, rgba(228,216,196,0.02) 0px, rgba(228,216,196,0.02) 1px, transparent 1px, transparent 4px);
             pointer-events: none;
         }
 
-        .cover-card {
-            width: min(420px, 100%);
-            position: relative;
-            z-index: 1;
+        #cover::after {
+            content: "";
+            position: absolute;
+            inset: 14px;
+            border: 1px solid rgba(228, 216, 196, 0.07);
+            pointer-events: none;
         }
 
-        #cover.is-enter .cover-card {
+        .cover-stage {
+            position: relative;
+            z-index: 1;
+            width: min(520px, 100%);
+        }
+
+        .cover-sheet {
+            position: absolute;
+            left: 0;
+            right: 0;
+            top: 0;
+            bottom: 18px;
+            border: 1px solid rgba(26, 22, 18, 0.2);
+            background: #d2c6b0;
+            pointer-events: none;
+        }
+
+        .cover-sheet--back {
+            transform: rotate(-2.4deg) translate(-10px, 8px);
+            background: #b9ae98;
+            opacity: 0.7;
+        }
+
+        .cover-sheet--mid {
+            transform: rotate(1.6deg) translate(8px, 4px);
+            background: #cfc4ae;
+            opacity: 0.9;
+        }
+
+        .cover-card {
+            position: relative;
+            z-index: 2;
+            padding: 28px 28px 26px;
+            background:
+                linear-gradient(180deg, rgba(255,255,255,0.22) 0%, transparent 18%),
+                linear-gradient(145deg, #efe6d4 0%, var(--paper) 48%, #ddd2bc 100%);
+            border: 1px solid rgba(26, 22, 18, 0.28);
+            color: var(--ink);
+            box-shadow:
+                0 1px 0 rgba(255,255,255,0.35) inset,
+                0 18px 40px rgba(0, 0, 0, 0.5);
+        }
+
+        .cover-tab {
+            position: absolute;
+            top: -15px;
+            left: 22px;
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 0.14em;
+            text-transform: uppercase;
+            background: #6a3d36;
+            color: #efe6d4;
+            padding: 6px 12px 5px;
+            border: 1px solid #4a2a26;
+            box-shadow: 0 2px 0 rgba(0,0,0,0.2);
+        }
+
+        .cover-top {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 16px;
+            margin: 8px 0 18px;
+        }
+
+        .cover-badge {
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            width: 44px;
+            height: 44px;
+            border: 1px solid rgba(106, 61, 54, 0.45);
+            color: var(--rust);
+            font-size: 18px;
+            background: rgba(106, 61, 54, 0.08);
+        }
+
+        .cover-conf {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 0.18em;
+            text-transform: uppercase;
+            color: var(--rust);
+            border: 2px solid var(--rust);
+            padding: 6px 10px;
+            transform: rotate(4deg);
+            opacity: 0.92;
+            background: rgba(239, 230, 212, 0.65);
+        }
+
+        .cover-rule {
+            width: 42px;
+            height: 2px;
+            background: var(--rust);
+            margin-bottom: 16px;
+        }
+
+        .cover-kicker {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            color: var(--ink-2);
+            margin-bottom: 12px;
+            line-height: 1.55;
+            display: flex;
+            align-items: flex-start;
+            gap: 8px;
+        }
+
+        .cover-kicker i {
+            margin-top: 2px;
+            color: var(--rust);
+            flex-shrink: 0;
+        }
+
+        .cover-title {
+            font-family: "Newsreader", serif;
+            font-weight: 600;
+            font-size: clamp(30px, 6vw, 40px);
+            letter-spacing: -0.03em;
+            line-height: 1.1;
+            color: var(--ink);
+            margin-bottom: 8px;
+        }
+
+        .cover-sub {
+            font-family: "Newsreader", serif;
+            font-style: italic;
+            font-size: 16px;
+            color: var(--ink-2);
+            margin-bottom: 20px;
+            line-height: 1.4;
+        }
+
+        .cover-meta {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 12px;
+            margin-bottom: 24px;
+            display: grid;
+            gap: 0;
+            background: rgba(26, 22, 18, 0.04);
+            border: 1px solid rgba(26, 22, 18, 0.12);
+        }
+
+        .cover-meta-row {
+            display: grid;
+            grid-template-columns: 72px 1fr;
+            gap: 12px;
+            align-items: start;
+            padding: 11px 14px;
+            border-bottom: 1px solid rgba(26, 22, 18, 0.1);
+        }
+
+        .cover-meta-row:last-child {
+            border-bottom: none;
+        }
+
+        .cover-meta-row .lab {
+            color: var(--rust);
+            font-size: 9px;
+            letter-spacing: 0.12em;
+            text-transform: uppercase;
+            padding-top: 3px;
+            background: none;
+            padding-left: 0;
+            padding-right: 0;
+            margin: 0;
+            line-height: 1.4;
+        }
+
+        .cover-meta-row .val {
+            color: var(--ink);
+            line-height: 1.45;
+        }
+
+        .cover-actions {
+            display: flex;
+            flex-direction: column;
+            align-items: stretch;
+            gap: 12px;
+        }
+
+        #openBtn {
+            border: 1px solid var(--ink);
+            padding: 14px 18px;
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 11px;
+            letter-spacing: 0.16em;
+            text-transform: uppercase;
+            color: #efe6d4;
+            background: var(--ink);
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            gap: 10px;
+            width: 100%;
+            transition: background .18s ease, color .18s ease, transform .18s ease;
+        }
+
+        #openBtn:hover {
+            background: #2a241e;
+            transform: translateY(-1px);
+        }
+
+        .cover-foot {
+            font-family: "IBM Plex Mono", monospace;
+            font-size: 10px;
+            letter-spacing: 0.1em;
+            text-transform: uppercase;
+            color: var(--ink-2);
+            text-align: center;
+        }
+
+        #cover.is-enter .cover-stage {
             animation: cover-card-in 0.85s cubic-bezier(0.22, 0.8, 0.28, 1) forwards;
         }
 
-        #cover.is-enter .cover-icon {
-            animation: cover-fade-up 0.55s 0.08s ease both;
+        #cover.is-enter .cover-sheet--back {
+            animation: cover-sheet-in 0.7s 0.02s ease both;
+        }
+
+        #cover.is-enter .cover-sheet--mid {
+            animation: cover-sheet-in 0.7s 0.08s ease both;
+        }
+
+        #cover.is-enter .cover-tab {
+            animation: cover-fade-up 0.5s 0.12s ease both;
+        }
+
+        #cover.is-enter .cover-badge {
+            animation: cover-fade-up 0.55s 0.16s ease both;
+        }
+
+        #cover.is-enter .cover-conf {
+            animation: cover-fade-up 0.55s 0.2s ease both;
         }
 
         #cover.is-enter .cover-rule {
-            animation: cover-rule-in 0.5s 0.18s ease both;
+            animation: cover-rule-in 0.5s 0.26s ease both;
         }
 
         #cover.is-enter .cover-kicker {
-            animation: cover-fade-up 0.55s 0.22s ease both;
+            animation: cover-fade-up 0.55s 0.3s ease both;
         }
 
-        #cover.is-enter .cover-title {
-            animation: cover-fade-up 0.6s 0.32s ease both;
+        #cover.is-enter .cover-title,
+        #cover.is-enter .cover-sub {
+            animation: cover-fade-up 0.6s 0.38s ease both;
         }
 
         #cover.is-enter .cover-meta {
-            animation: cover-fade-up 0.6s 0.42s ease both;
+            animation: cover-fade-up 0.6s 0.48s ease both;
         }
 
-        #cover.is-enter #openBtn {
-            animation: cover-fade-up 0.55s 0.55s ease both;
+        #cover.is-enter .cover-actions {
+            animation: cover-fade-up 0.55s 0.58s ease both;
         }
 
         @keyframes cover-card-in {
-            from { opacity: 0; transform: translateY(22px); }
+            from { opacity: 0; transform: translateY(26px); }
             to { opacity: 1; transform: translateY(0); }
+        }
+
+        @keyframes cover-sheet-in {
+            from { opacity: 0; }
+            to { opacity: 0.85; }
         }
 
         @keyframes cover-fade-up {
@@ -106,68 +346,10 @@
             to { opacity: 1; transform: scaleX(1); transform-origin: left center; }
         }
 
-        .cover-icon {
-            font-size: 22px;
-            color: var(--rust);
-            margin-bottom: 18px;
-        }
-
-        .cover-rule {
-            width: 28px;
-            height: 1px;
-            background: var(--rust);
-            margin-bottom: 28px;
-        }
-
-        .cover-kicker {
-            font-family: "IBM Plex Mono", monospace;
-            font-size: 10px;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--mute);
-            margin-bottom: 16px;
-            line-height: 1.6;
-            display: flex;
-            align-items: center;
-            gap: 8px;
-        }
-
-        .cover-title {
-            font-family: "Newsreader", serif;
-            font-weight: 500;
-            font-size: 32px;
-            letter-spacing: -0.03em;
-            line-height: 1.12;
-            color: #efe6d4;
-            margin-bottom: 22px;
-        }
-
-        .cover-meta {
-            font-family: "IBM Plex Mono", monospace;
-            font-size: 12px;
-            color: var(--mute);
-            line-height: 1.9;
-            margin-bottom: 40px;
-        }
-
-        #openBtn {
-            border: 1px solid #6e675e;
-            padding: 9px 16px;
-            font-family: "IBM Plex Mono", monospace;
-            font-size: 11px;
-            letter-spacing: 0.18em;
-            text-transform: uppercase;
-            color: var(--paper);
-            display: inline-flex;
-            align-items: center;
-            gap: 9px;
-            transition: background .18s ease, color .18s ease, border-color .18s ease;
-        }
-
-        #openBtn:hover {
-            background: var(--paper);
-            color: var(--bg);
-            border-color: var(--paper);
+        @media (max-width: 520px) {
+            .cover-card { padding: 24px 18px 20px; }
+            .cover-meta-row { grid-template-columns: 60px 1fr; gap: 8px; padding: 10px 12px; }
+            .cover-tab { left: 14px; font-size: 9px; }
         }
 
         #app, #app2, #app3, #app4, #app5, #app6, #app7 {
@@ -355,13 +537,18 @@
                 opacity: 1;
                 transform: none;
             }
-            #cover.is-enter .cover-card,
-            #cover.is-enter .cover-icon,
+            #cover.is-enter .cover-stage,
+            #cover.is-enter .cover-sheet--back,
+            #cover.is-enter .cover-sheet--mid,
+            #cover.is-enter .cover-tab,
+            #cover.is-enter .cover-badge,
+            #cover.is-enter .cover-conf,
             #cover.is-enter .cover-rule,
             #cover.is-enter .cover-kicker,
             #cover.is-enter .cover-title,
+            #cover.is-enter .cover-sub,
             #cover.is-enter .cover-meta,
-            #cover.is-enter #openBtn {
+            #cover.is-enter .cover-actions {
                 animation: none !important;
             }
             #app.is-leaving,
@@ -1317,18 +1504,25 @@
         </div>
     </div>
     <div id="cover">
-        <div class="cover-card">
-            <i class="fa-solid fa-scale-balanced cover-icon"></i>
-            <div class="cover-rule"></div>
-            <p class="cover-kicker" id="coverKicker"><i class="fa-solid fa-shield-halved"></i><span id="coverUnit">Kepolisian Resor Jakarta Pusat · Unit Pidana</span></p>
-            <h1 class="cover-title" id="coverTitle">Berkas 19/MTR/IX/26</h1>
-            <p class="cover-meta" id="coverMeta">
-                Rumah Soerjo, Jl. Teuku Cik Ditiro 31, Gondangdia<br>
-                12 September 2026 · Sabtu malam<br>
-                Korban: Dr. Arief Soerjo, 64<br>
-                Status: belum dilimpahkan
-            </p>
-            <button id="openBtn" type="button"><i class="fa-solid fa-folder-open"></i>Buka berkas</button>
+        <div class="cover-stage">
+            <div class="cover-sheet cover-sheet--back" aria-hidden="true"></div>
+            <div class="cover-sheet cover-sheet--mid" aria-hidden="true"></div>
+            <div class="cover-card">
+                <div class="cover-tab" id="coverTab">19/MTR/IX/26</div>
+                <div class="cover-top">
+                    <div class="cover-badge" aria-hidden="true"><i class="fa-solid fa-scale-balanced"></i></div>
+                    <div class="cover-conf">Terbatas</div>
+                </div>
+                <div class="cover-rule"></div>
+                <p class="cover-kicker" id="coverKicker"><i class="fa-solid fa-shield-halved"></i><span id="coverUnit">Kepolisian Resor Jakarta Pusat · Unit Pidana</span></p>
+                <h1 class="cover-title" id="coverTitle">Berkas 19/MTR/IX/26</h1>
+                <p class="cover-sub" id="coverSub">Cik Ditiro 31 · Gondangdia</p>
+                <div class="cover-meta" id="coverMeta"></div>
+                <div class="cover-actions">
+                    <button id="openBtn" type="button"><i class="fa-solid fa-folder-open"></i>Buka berkas</button>
+                    <span class="cover-foot">Hanya petugas yang berwenang</span>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -3484,77 +3678,91 @@ meta=vig_key!=GOLDARCH</div>
                 unit: "Kepolisian Resor Jakarta Pusat · Unit Pidana",
                 title: "Berkas 19/MTR/IX/26",
                 docTitle: "19/MTR/IX/26",
+                sub: "Cik Ditiro 31 · Gondangdia",
+                labels: ["Lokasi", "Waktu", "Korban", "Status"],
                 meta: [
                     "Rumah Soerjo, Jl. Teuku Cik Ditiro 31, Gondangdia",
                     "12 September 2026 · Sabtu malam",
-                    "Korban: Dr. Arief Soerjo, 64",
-                    "Status: belum dilimpahkan"
+                    "Dr. Arief Soerjo, 64",
+                    "belum dilimpahkan"
                 ]
             },
             2: {
                 unit: "Kepolisian Resor Kota Yogyakarta · Unit Pidana",
                 title: "Berkas 27/YK/IX/26",
                 docTitle: "27/YK/IX/26",
+                sub: "Suryomentaraman 14 · Yogyakarta",
+                labels: ["Lokasi", "Waktu", "Korban", "Status"],
                 meta: [
                     "Rumah Adiwijaya, Jl. Suryomentaraman 14, Yogyakarta",
                     "13 September 2026 · Minggu malam",
-                    "Korban: Hartono Adiwijaya, 61",
-                    "Status: dilimpahkan dari 19/MTR/IX/26"
+                    "Hartono Adiwijaya, 61",
+                    "dilimpahkan dari 19/MTR/IX/26"
                 ]
             },
             3: {
                 unit: "Kepolisian Resor Jakarta Utara · Unit Pidana",
                 title: "Berkas 88/UTR/IX/26",
                 docTitle: "88/UTR/IX/26",
+                sub: "Pelabuhan Utara",
+                labels: ["Lokasi", "Waktu", "Korban", "Status"],
                 meta: [
                     "Kawasan Pelabuhan Utara",
                     "15 September 2026 · Senin malam",
-                    "Korban: empat perempuan · pola Whitechapel",
-                    "Status: dilimpahkan dari 27/YK/IX/26"
+                    "empat perempuan · pola Whitechapel",
+                    "dilimpahkan dari 27/YK/IX/26"
                 ]
             },
             4: {
                 unit: "Kepolisian Resor Jakarta Utara · Detektif Tetap",
                 title: "Berkas 41/GLD/IX/26",
                 docTitle: "41/GLD/IX/26",
+                sub: "Gudang Emas Utara",
+                labels: ["Lokasi", "Waktu", "Korban", "Status"],
                 meta: [
                     "Gudang Emas Utara · ruang arsip lantai dua",
                     "17 September 2026 · Rabu dini hari",
-                    "Korban: Rendra Halim, 51 · “Ren”",
-                    "Status: dilimpahkan dari 88/UTR/IX/26"
+                    "Rendra Halim, 51 · “Ren”",
+                    "dilimpahkan dari 88/UTR/IX/26"
                 ]
             },
             5: {
                 unit: "Kepolisian Resor Jakarta Pusat · Ruang Interogasi",
                 title: "Berkas 52/INT/IX/26",
                 docTitle: "52/INT/IX/26",
+                sub: "Ruang Interogasi B",
+                labels: ["Lokasi", "Waktu", "Sasaran", "Status"],
                 meta: [
                     "Ruang Interogasi B · Cain Wibowo",
                     "18–19 September 2026",
-                    "Sasaran: nama panggung di balik jaringan",
-                    "Status: dilimpahkan dari 41/GLD/IX/26"
+                    "nama panggung di balik jaringan",
+                    "dilimpahkan dari 41/GLD/IX/26"
                 ]
             },
             6: {
                 unit: "Kepolisian Resor Jakarta Utara · Unit Pidana",
                 title: "Berkas 67/RJ/IX/26",
                 docTitle: "67/RJ/IX/26",
+                sub: "Cabang Tujuh · dermaga lama",
+                labels: ["Lokasi", "Waktu", "Sasaran", "Status"],
                 meta: [
                     "Dermaga lama · persimpangan Cabang Tujuh",
                     "19 September 2026",
-                    "Sasaran: kode titik serah jaringan RED JOHN",
-                    "Status: dilimpahkan dari 52/INT/IX/26"
+                    "kode titik serah jaringan RED JOHN",
+                    "dilimpahkan dari 52/INT/IX/26"
                 ]
             },
             7: {
                 unit: "Kepolisian Resor Jakarta Pusat · Dakwaan Akhir",
                 title: "Berkas 99/RJ/IX/26",
                 docTitle: "99/RJ/IX/26",
+                sub: "Dakwaan akhir · RED JOHN",
+                labels: ["Pokok", "Waktu", "Sasaran", "Status"],
                 meta: [
                     "Siapa di balik nama panggung RED JOHN",
                     "19 September 2026 · malam",
-                    "Tersangka: satu nama dari daftar",
-                    "Status: satu kali. Salah = ditutup"
+                    "satu nama dari daftar",
+                    "satu kali. Salah = ditutup"
                 ]
             }
         };
@@ -3576,15 +3784,31 @@ meta=vig_key!=GOLDARCH</div>
             return [app1, app2, app3, app4, app5, app6, app7].find((a) => a.style.display === "block");
         }
 
-        function applyCoverContent(n) {
+        function fillCoverUI(n) {
             const info = CASE_COVERS[n] || CASE_COVERS[1];
+            document.getElementById("coverUnit").textContent = info.unit;
+            document.getElementById("coverTitle").textContent = info.title;
+            document.title = info.docTitle;
+            const tab = document.getElementById("coverTab");
+            if (tab) tab.textContent = info.docTitle || "";
+            const sub = document.getElementById("coverSub");
+            if (sub) sub.textContent = info.sub || "";
+            const labels = info.labels || ["Lokasi", "Waktu", "Subjek", "Status"];
+            const metaEl = document.getElementById("coverMeta");
+            metaEl.innerHTML = (info.meta || []).map((line, i) => {
+                const lab = labels[i] || "Info";
+                let val = String(line || "");
+                const stripped = val.replace(/^(Lokasi|Waktu|Korban|Subjek|Sasaran|Status)\s*:\s*/i, "");
+                if (stripped !== val) val = stripped;
+                return `<div class="cover-meta-row"><span class="lab">${lab}</span><span class="val">${val.replace(/</g, "&lt;")}</span></div>`;
+            }).join("");
+        }
+
+        function applyCoverContent(n) {
             pendingCoverLevel = n;
             localStorage.setItem("mtr19b-pending-cover", String(n));
             localStorage.setItem("mtr19b-level", String(n));
-            document.getElementById("coverUnit").textContent = info.unit;
-            document.getElementById("coverTitle").textContent = info.title;
-            document.getElementById("coverMeta").innerHTML = info.meta.join("<br>");
-            document.title = info.docTitle;
+            fillCoverUI(n);
         }
 
         function showCaseCover(level, opts) {
@@ -4209,6 +4433,8 @@ meta=vig_key!=GOLDARCH</div>
         });
 
         document.getElementById("openBtn").addEventListener("click", () => openPendingCover());
+
+        fillCoverUI(Number(localStorage.getItem("mtr19b-pending-cover")) || 1);
 
         const boot = location.hash.replace("#", "");
         if (boot === "l2" || boot === "l3" || boot === "l4" || boot === "l5" || boot === "l6" || boot === "l7") {
