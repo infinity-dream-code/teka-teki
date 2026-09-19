@@ -1,4 +1,4 @@
-import { blockIp, clientIp, cookieHas, isBlocked, parseBody, setCookies } from "../lib/lock.js";
+import { blockIp, bumpLevelTry, clientIp, cookieHas, isBlocked, parseBody, setCookies } from "../lib/lock.js";
 
 const htmlOk = `<div class="doc">
     <div class="stamp">Dilimpahkan</div>
@@ -9,6 +9,8 @@ const htmlOk = `<div class="doc">
     <p>Intan bilang adzan kira-kira jam enam lewat. Maghrib Yogyakarta 13 September 2026 sekitar 17.38. Ia bilang tidak ke kebun. Gunting pagar timur basah sesudah maghrib. Anjing tetangga tidak menyalak pada orang yang sudah menginap sejak Jumat. Bulan sabit dua persen terbenam sekitar 19.22; tidak ada cahaya bulan pukul 21.00.</p>
     <p>Senin pukul 10.30 redaksi jurnal akan menanyakan kemiripan paragraf dengan disertasi Intan Kusuma tahun 2019. Pukul 20.04 ia menulis bahwa naskah itu tidak akan ke redaksi.</p>
 </div>`;
+
+const MAX_TRIES = 3;
 
 export default async function handler(req, res) {
     res.setHeader("Cache-Control", "no-store");
@@ -53,6 +55,20 @@ export default async function handler(req, res) {
     if (who === "intan") {
         setCookies(res, ["mtr19_l2"]);
         res.status(200).json({ ok: true, blocked: false, next: true, html: htmlOk });
+        return;
+    }
+
+    const used = bumpLevelTry(req, res, ip, "l2", MAX_TRIES);
+    const left = Math.max(0, MAX_TRIES - used);
+    if (left > 0) {
+        res.status(200).json({
+            ok: false,
+            blocked: false,
+            retry: true,
+            tries: used,
+            left,
+            msg: "Salah. Sisa " + left + " kesempatan."
+        });
         return;
     }
 

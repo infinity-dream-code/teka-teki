@@ -170,8 +170,12 @@ function tries_path() {
     return $dir . '/tries.json';
 }
 
-function get_code_tries($ip, $level) {
-    $key = $level === 'l6' ? 'mtr19_l6_try' : 'mtr19_l5_try';
+function try_cookie_name($level) {
+    return 'mtr19_' . $level . '_try';
+}
+
+function get_level_tries($ip, $level) {
+    $key = try_cookie_name($level);
     $from_cookie = isset($_COOKIE[$key]) ? (int) $_COOKIE[$key] : 0;
     $file = tries_path();
     $from_file = 0;
@@ -185,9 +189,9 @@ function get_code_tries($ip, $level) {
     return max($from_cookie, $from_file, 0);
 }
 
-function bump_code_try($ip, $level) {
-    $key = $level === 'l6' ? 'mtr19_l6_try' : 'mtr19_l5_try';
-    $next = min(2, get_code_tries($ip, $level) + 1);
+function bump_level_try($ip, $level, $max_tries = 3) {
+    $key = try_cookie_name($level);
+    $next = min($max_tries, get_level_tries($ip, $level) + 1);
     $file = tries_path();
     $fp = @fopen($file, 'c+');
     if ($fp) {
@@ -211,4 +215,12 @@ function bump_code_try($ip, $level) {
     }
     set_named_cookie($key, (string) $next);
     return $next;
+}
+
+function get_code_tries($ip, $level) {
+    return get_level_tries($ip, $level);
+}
+
+function bump_code_try($ip, $level) {
+    return bump_level_try($ip, $level, 2);
 }

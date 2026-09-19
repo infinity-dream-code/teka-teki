@@ -1,4 +1,4 @@
-import { blockIp, clientIp, cookieHas, isBlocked, parseBody, setCookies } from "../lib/lock.js";
+import { blockIp, bumpLevelTry, clientIp, cookieHas, isBlocked, parseBody, setCookies } from "../lib/lock.js";
 
 const htmlOk = `<div class="doc">
     <div class="stamp">Dilimpahkan</div>
@@ -7,6 +7,8 @@ const htmlOk = `<div class="doc">
     <p>Pamflet yard dari Spitalfields, origin di bekas menara (4,10), satu kotak seratus meter, tanpa rotasi. Empat titik korban cocok. Titik kelima (4,9) adalah Gang Palang 13. Perintah kerja 25 Oktober 10.45 ada di nama Maryam. Matriks di makalah Anton memutar peta ke lodge dan ke kios daging; itu teori pentagram, bukan jejak ini.</p>
     <p>Alat TS-07 tercatat di setiap titik pada menit yang sama. Laporan hilang ditulis tinta yang sama dengan buku lapangan, sesudah jam yang ia sebut pencurian. Wira keluar lodge ke barat. Joko hanya menerima surat. Laras menemukan jenazah kedua. Budi berlumur darah hewan. Rudi menagih sewa. Hanif di gerbang selatan.</p>
 </div>`;
+
+const MAX_TRIES = 3;
 
 export default async function handler(req, res) {
     res.setHeader("Cache-Control", "no-store");
@@ -50,6 +52,20 @@ export default async function handler(req, res) {
     if (who === "yusuf") {
         setCookies(res, ["mtr19_l3"]);
         res.status(200).json({ ok: true, blocked: false, html: htmlOk });
+        return;
+    }
+
+    const used = bumpLevelTry(req, res, ip, "l3", MAX_TRIES);
+    const left = Math.max(0, MAX_TRIES - used);
+    if (left > 0) {
+        res.status(200).json({
+            ok: false,
+            blocked: false,
+            retry: true,
+            tries: used,
+            left,
+            msg: "Salah. Sisa " + left + " kesempatan."
+        });
         return;
     }
 

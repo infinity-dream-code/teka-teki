@@ -59,5 +59,19 @@ if ($ok) {
     exit;
 }
 
+$used = bump_level_try($ip, 'l3', 3);
+$left = max(0, 3 - $used);
+if ($left > 0) {
+    echo json_encode([
+        'ok' => false,
+        'blocked' => false,
+        'retry' => true,
+        'tries' => $used,
+        'left' => $left,
+        'msg' => 'Salah. Sisa ' . $left . ' kesempatan.',
+    ], JSON_UNESCAPED_UNICODE);
+    exit;
+}
+
 block_ip($ip);
 echo json_encode(['ok' => false, 'blocked' => true, 'html' => ''], JSON_UNESCAPED_UNICODE);

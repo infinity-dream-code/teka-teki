@@ -1643,7 +1643,7 @@
 
                 <section class="page" id="page-putusan">
                     <h2><i class="fa-solid fa-gavel"></i>Dakwaan</h2>
-                    <p class="lede">Pilih satu nama. Satu kali. Jika salah, dakwaan ditutup dan tidak dibuka lagi.</p>
+                    <p class="lede">Pilih satu nama. Tiga kesempatan. Salah tiga kali: dakwaan ditutup dan tidak dibuka lagi.</p>
                     <div id="accusationForm" style="margin-top:8px">
                         <label class="field" for="suspectSelect"><i class="fa-solid fa-fingerprint"></i>Nama</label>
                         <select id="suspectSelect">
@@ -1788,7 +1788,7 @@
 
                 <section class="page" id="l2-putusan">
                     <h2><i class="fa-solid fa-gavel"></i>Dakwaan</h2>
-                    <p class="lede">Pilih satu nama. Satu kali. Jika salah, dakwaan ditutup dan tidak dibuka lagi.</p>
+                    <p class="lede">Pilih satu nama. Tiga kesempatan. Salah tiga kali: dakwaan ditutup dan tidak dibuka lagi.</p>
                     <div id="accusationForm2" style="margin-top:8px">
                         <label class="field" for="suspectSelect2"><i class="fa-solid fa-fingerprint"></i>Nama</label>
                         <select id="suspectSelect2">
@@ -1956,7 +1956,7 @@
 
                 <section class="page" id="l3-putusan">
                     <h2><i class="fa-solid fa-gavel"></i>Dakwaan</h2>
-                    <p class="lede">Pilih satu nama. Satu kali. Jika salah, dakwaan ditutup dan tidak dibuka lagi.</p>
+                    <p class="lede">Pilih satu nama. Tiga kesempatan. Salah tiga kali: dakwaan ditutup dan tidak dibuka lagi.</p>
                     <div id="accusationForm3" style="margin-top:8px">
                         <label class="field" for="suspectSelect3"><i class="fa-solid fa-fingerprint"></i>Nama</label>
                         <select id="suspectSelect3">
@@ -2094,7 +2094,7 @@
 
                 <section class="page" id="l4-putusan">
                     <h2><i class="fa-solid fa-gavel"></i>Dakwaan</h2>
-                    <p class="lede">Pilih satu nama: orang yang memegang utas, bukan dalang. Satu kali. Jika salah, dakwaan ditutup.</p>
+                    <p class="lede">Pilih satu nama: orang yang memegang utas, bukan dalang. Tiga kesempatan. Salah tiga kali: dakwaan ditutup.</p>
                     <div id="accusationForm4" style="margin-top:8px">
                         <label class="field" for="suspectSelect4"><i class="fa-solid fa-fingerprint"></i>Nama</label>
                         <select id="suspectSelect4">
@@ -4596,7 +4596,12 @@ meta=vig_key!=GOLDARCH</div>
                         return;
                     }
                     if (data.ok) onOk(data);
-                    else lockDakwa();
+                    else if (data.retry) {
+                        btn.disabled = false;
+                        warn.hidden = false;
+                        warn.textContent = data.msg || ("Salah. Sisa " + (data.left || 1) + " kesempatan.");
+                        box.hidden = true;
+                    } else lockDakwa();
                 } catch (err) {
                     btn.disabled = false;
                     warn.hidden = false;

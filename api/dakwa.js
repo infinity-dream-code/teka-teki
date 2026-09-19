@@ -1,4 +1,4 @@
-import { blockIp, clientIp, cookieHas, isBlocked, parseBody, setCookies } from "../lib/lock.js";
+import { blockIp, bumpLevelTry, clientIp, cookieHas, isBlocked, parseBody, setCookies } from "../lib/lock.js";
 
 const htmlOk = `<div class="doc">
     <div class="stamp">Dilimpahkan</div>
@@ -8,6 +8,8 @@ const htmlOk = `<div class="doc">
     <p>Polis 184472 masih menunjuk Yoga sebagai ahli waris. Surat ganti ahli waris belum ditandatangani; janji di bank Senin pukul 10.30. Wasiat lama tidak memberinya apa-apa. Studio di draf Senin tidak membayar tunggakan BNI sebelum tanggal 20. Taksaka yang ia naiki berangkat pagi, bukan siang. Ia ke pengacara siang hari. Ia memotret pagar belakang pukul 17.51, padahal ia bilang tidak ke kebun karena nyamuk.</p>
     <p>Hana memotret draf wasiat lalu berbohong soal waktu adzan. Rina mengisi gula, memotong kamboja, dan memakai nama orang lain di jaminan bank. Mira sedang di kasir. Farhan salah menyangka serangan jantung. Lukman menelepon Bandung dari kebun yang sudah gelap. Itu perkara lain, bukan pembunuhan ini.</p>
 </div>`;
+
+const MAX_TRIES = 3;
 
 export default async function handler(req, res) {
     res.setHeader("Cache-Control", "no-store");
@@ -45,6 +47,20 @@ export default async function handler(req, res) {
     if (who === "yoga") {
         setCookies(res, ["mtr19_l1"]);
         res.status(200).json({ ok: true, blocked: false, l1: true, next: true, html: htmlOk });
+        return;
+    }
+
+    const used = bumpLevelTry(req, res, ip, "l1", MAX_TRIES);
+    const left = Math.max(0, MAX_TRIES - used);
+    if (left > 0) {
+        res.status(200).json({
+            ok: false,
+            blocked: false,
+            retry: true,
+            tries: used,
+            left,
+            msg: "Salah. Sisa " + left + " kesempatan."
+        });
         return;
     }
 
